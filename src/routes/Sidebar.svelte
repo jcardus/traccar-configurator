@@ -7,9 +7,14 @@
         GridPlusOutline,
         MessagesOutline,
     } from "flowbite-svelte-icons";
-    let drawerHidden = false;
+
+    export let drawerHidden = false;
     let mainSidebarUrl = $page.url.pathname;
     let activeMainSidebar;
+
+    const closeDrawer = () => {
+        drawerHidden = true;
+    };
 
     let iconClass =
         'flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white';
@@ -19,7 +24,7 @@
 
 
     let items = [
-        { name: 'Devices', icon: GridPlusOutline, href: '/' },
+        { name: 'Devices', icon: GridPlusOutline, href: '/devices' },
         { name: 'SMS', icon: MessagesOutline, href: '/sms' }
     ];
     let dropdowns = Object.fromEntries(Object.keys(items).map((x) => [x, false]));
@@ -70,3 +75,10 @@
         </nav>
     </SidebarWrapper>
 </Sidebar>
+<div
+        hidden={drawerHidden}
+        class="fixed inset-0 z-20 bg-gray-900/50 dark:bg-gray-900/60"
+        on:click={closeDrawer}
+        on:keydown={closeDrawer}
+        role="presentation"
+/>

@@ -18,7 +18,7 @@
         />
         <NavBrand href="/" class="lg:w-60">
             <img
-                    src="https://fleetmap.io/img/logos/fleetmap.io.png"
+                    src="/logo.png"
                     class="me-2.5 h-6 sm:h-8"
                     alt="Logo"
             />
