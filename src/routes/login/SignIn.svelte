@@ -3,13 +3,7 @@
     import {writable} from "svelte/store";
     import { setError, session } from '$lib/store';
     import {goto} from "$app/navigation";
-    export let title = 'Sign in to platform';
-    export let site = {
-        name: 'Configurator',
-        img: '/logo.png',
-        link: '/',
-        imgAlt: 'Logo'
-    };
+    export let title = 'Sign in to Configurator';
     export let rememberMe = true;
     export let lostPassword = true;
     export let createAccount = true;
@@ -21,9 +15,6 @@
     export let mainClass = 'bg-gray-50 dark:bg-gray-900 w-full';
     export let mainDivClass =
         'flex flex-col items-center justify-center px-6 pt-8 mx-auto md:h-screen pt:mt-0 dark:bg-gray-900';
-    export let siteLinkClass =
-        'flex items-center justify-center mb-8 text-2xl font-semibold lg:mb-10 dark:text-white';
-    export let siteImgClass = 'mr-4 h-11';
     export let cardH1Class = 'text-2xl font-bold text-gray-900 dark:text-white';
 
     let error = writable('');
@@ -54,10 +45,6 @@
 
 <main class={mainClass}>
     <div class={mainDivClass}>
-        <a href={site.link} class={siteLinkClass}>
-            <img width="100" src={site.img} class={siteImgClass} alt={site.imgAlt} />
-            <span>{site.name}</span>
-        </a>
         <!-- Card -->
         <Card class="w-full" size="md" border={false}>
             <h1 class={cardH1Class}>
