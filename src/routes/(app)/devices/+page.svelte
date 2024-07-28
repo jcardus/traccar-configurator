@@ -103,6 +103,7 @@
                         </div>
                     </TableBodyCell>
                     <TableBodyCell class="space-x-2 p-4">
+                        <div class="flex justify-center gap-2">
                         <Button
                                 size="sm"
                                 class="gap-2 px-3"
@@ -118,6 +119,7 @@
                         >
                             <TrashBinSolid size="sm" /> Delete device
                         </Button>
+                        </div>
                     </TableBodyCell>
                 </TableBodyRow>
             {/each}
