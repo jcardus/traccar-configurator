@@ -41,8 +41,7 @@
                 body
             });
             if (response.ok) {
-                const user = await response.json();
-                session.set({ user });
+                session.set(await response.json());
                 await goto('/devices')
             } else {
                 setError(await response.text());

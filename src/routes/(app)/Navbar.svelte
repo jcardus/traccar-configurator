@@ -6,6 +6,7 @@
         NavHamburger,
         DarkMode
     } from 'flowbite-svelte';
+    import UserMenu from "./UserMenu.svelte";
 
     export let drawerHidden=false;
     export let fluid=true
@@ -30,6 +31,7 @@
         </NavBrand>
         <div class="ms-auto flex items-center text-gray-500 dark:text-gray-400 sm:order-2">
             <DarkMode />
+            <UserMenu />
         </div>
     </NavContainer>
 </Navbar>
