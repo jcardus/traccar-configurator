@@ -1,5 +1,5 @@
 <script>
-    import '../app.css';
+    import '../../app.css';
     import Navbar from './Navbar.svelte';
     import Sidebar from './Sidebar.svelte';
     let drawerHidden = false;
@@ -11,6 +11,10 @@
 <div class="overflow-hidden lg:flex">
     <Sidebar bind:drawerHidden />
     <div class="relative h-full w-full overflow-y-auto lg:ml-64 pt-[70px]">
-        <slot />
+        <main class="p-4">
+            <div class="text-lg font-semibold text-gray-900 dark:text-white">
+                <slot />
+            </div>
+        </main>
     </div>
 </div>
