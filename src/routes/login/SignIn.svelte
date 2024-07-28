@@ -1,11 +1,14 @@
 <script >
-    import { Checkbox, A, Button, Card } from 'flowbite-svelte';
+    import {Checkbox, A, Button, Card } from 'flowbite-svelte';
+    import {writable} from "svelte/store";
+    import { setError, session } from '$lib/store';
+    import {goto} from "$app/navigation";
     export let title = 'Sign in to platform';
     export let site = {
-        name: 'Flowbite',
+        name: 'Configurator',
         img: '/logo.png',
         link: '/',
-        imgAlt: 'FlowBite Logo'
+        imgAlt: 'Logo'
     };
     export let rememberMe = true;
     export let lostPassword = true;
@@ -22,6 +25,32 @@
         'flex items-center justify-center mb-8 text-2xl font-semibold lg:mb-10 dark:text-white';
     export let siteImgClass = 'mr-4 h-11';
     export let cardH1Class = 'text-2xl font-bold text-gray-900 dark:text-white';
+
+    let error = writable('');
+
+    const handlePasswordLogin = async (event) => {
+        event.preventDefault();
+        const formData = new FormData(event.target);
+        const body = new URLSearchParams();
+        for (const pair of formData.entries()) {
+            body.append(pair[0], pair[1]);
+        }
+        try {
+            const response = await fetch('/api/session', {
+                method: 'POST',
+                body
+            });
+            if (response.ok) {
+                const user = await response.json();
+                session.set({ user });
+                await goto('/devices')
+            } else {
+                setError(await response.text());
+            }
+        } catch (e) {
+            error.set(e.message);
+        }
+    }
 </script>
 
 <main class={mainClass}>
@@ -35,7 +64,7 @@
             <h1 class={cardH1Class}>
                 {title}
             </h1>
-            <form class="mt-8 space-y-6" on:submit|preventDefault>
+            <form class="mt-8 space-y-6" on:submit|preventDefault={handlePasswordLogin}>
                 <slot />
                 {#if rememberMe || lostPassword}
                     <div class="flex items-start">

@@ -45,7 +45,7 @@
     <div>
         <Label for="email" class="mb-2 dark:text-white">Your email</Label>
         <Input
-                type="email"
+                type="text"
                 name="email"
                 id="email"
                 placeholder="name@company.com"
