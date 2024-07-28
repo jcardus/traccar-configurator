@@ -25,5 +25,8 @@ export async function forwardRequest({ request, platform }) {
     url.port = 80
     const response = await fetch(new Request(url, request))
     const t = await response.text();
-    return new Response(t);
+    return new Response(t, {
+        headers: {'set-cookie': response.headers.getSetCookie() || ''},
+        status: response.status
+    })
 }
