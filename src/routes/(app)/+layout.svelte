@@ -20,11 +20,7 @@
 </header>
 <div class="overflow-hidden lg:flex">
     <Sidebar bind:drawerHidden />
-    <div class="relative h-full w-full overflow-y-auto lg:ml-64 pt-[70px]">
-        <main class="p-4">
-            <div class="text-lg font-semibold text-gray-900 dark:text-white">
-                <slot />
-            </div>
-        </main>
+    <div class="relative h-full w-full overflow-y-auto lg:ml-64 pt-[60px]">
+        <slot />
     </div>
 </div>
