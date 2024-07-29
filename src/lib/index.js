@@ -19,14 +19,18 @@ export async function logout() {
 }
 
 export async function forwardRequest({ request, platform }) {
-    const host = (platform && platform.env.TRACCAR_SERVER) || import.meta.env.VITE_TRACCAR_SERVER
-    const url = new URL(request.url.replace('https://', 'http://'))
-    url.host = host
-    url.port = 80
-    const response = await fetch(new Request(url, request))
-    const t = await response.text();
-    return new Response(t, {
-        headers: {'set-cookie': response.headers.getSetCookie() || ''},
-        status: response.status
-    })
+    try {
+        const host = (platform && platform.env.TRACCAR_SERVER) || import.meta.env.VITE_TRACCAR_SERVER
+        const url = new URL(request.url.replace('https://', 'http://'))
+        url.host = host
+        url.port = 80
+        const response = await fetch(new Request(url, request))
+        const t = await response.text();
+        return new Response(t, {
+            headers: {'set-cookie': response.headers.getSetCookie() || ''},
+            status: response.status
+        })
+    } catch (e) {
+        return new Response(e, {status: 500})
+    }
 }

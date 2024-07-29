@@ -7,7 +7,7 @@
         name: 'Configurator',
         img: '/logo.png',
         link: '/',
-        imgAlt: 'FlowBite Logo'
+        imgAlt: 'Logo'
     };
     let rememberMe = true;
     let lostPassword = true;
@@ -25,7 +25,6 @@
             const [key, value] = field;
             data[key] = value;
         }
-        console.log(data);
     };
 
 </script>
