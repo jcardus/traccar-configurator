@@ -1,3 +1,5 @@
+import {setError} from "$lib/store.js";
+
 export const ssr = false
 
 export async function load() {
@@ -6,6 +8,6 @@ export async function load() {
     if (response.ok) {
         return {devices: devices.slice(0, 500)}
     } else {
-        throw Error(await response.text());
+        setError(await response.text())
     }
 }
