@@ -9,13 +9,13 @@ export async function logout() {
         });
         if (response.ok) {
             session.set({});
-            await goto('/login')
         } else {
             setError(await response.text());
         }
     } catch (e) {
         error.set(e.message);
     }
+    await goto('/login')
 }
 
 export async function forwardRequest({ request, platform }) {
