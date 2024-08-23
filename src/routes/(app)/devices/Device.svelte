@@ -1,5 +1,5 @@
 <script>
-    import { Button, Input, Label, Modal } from 'flowbite-svelte';
+    import {Button, Checkbox, Input, Label, Modal} from 'flowbite-svelte';
     import { createEventDispatcher } from 'svelte';
     export let open = false; // modal control
 
@@ -37,11 +37,10 @@
 
 <Modal
         bind:open
-        title={Object.keys(data).length ? 'Edit user' : 'Add new user'}
+        title={Object.keys(data).length ? 'Edit device' : 'Add new device'}
         size="md"
         class="m-4"
 >
-    <!-- Modal body -->
     <div class="space-y-6 p-0">
         <form action="#" use:init>
             <div class="grid grid-cols-6 gap-6">
@@ -63,19 +62,8 @@
                     />
                 </Label>
                 <Label class="col-span-6 space-y-2 sm:col-span-3">
-                    <span>Position</span>
-                    <Input
-                            name="position"
-                            class="border outline-none"
-                            placeholder="e.g. React Developer"
-                            required
-                    />
-                </Label>
-
-
-                <Label class="col-span-6 space-y-2">
-                    <span>Image</span>
-
+                    <span>Disabled</span>
+                    <Checkbox id="checkbox2" bind:checked={data.disabled} />
                 </Label>
             </div>
         </form>
