@@ -1,15 +1,17 @@
-<script lang="ts">
+<script>
     import { Button, Input, Label, Modal } from 'flowbite-svelte';
-    export let open: boolean = false; // modal control
+    import { createEventDispatcher } from 'svelte';
+    export let open = false; // modal control
 
     export let data = {};
 
-    function init(form: HTMLFormElement) {
+    function init(form) {
         for (const key in data) {
             const el = form.elements.namedItem(key);
             if (el) el.value = data[key];
         }
     }
+    const dispatch = createEventDispatcher();
     const handleSave = async () => {
         let url = `/api/devices`;
         let id = data.id
@@ -24,6 +26,7 @@
         });
 
         if (response.ok) {
+            dispatch('updateDevice', data); // Dispatch event to parent
             open=false
         } else {
             throw Error(await response.text());
@@ -44,11 +47,11 @@
             <div class="grid grid-cols-6 gap-6">
                 <Label class="col-span-6 space-y-2 sm:col-span-3">
                     <span>Name</span>
-                    <Input name="name" class="border outline-none" placeholder="e.g. Bonnie" required />
+                    <Input name="name" class="border outline-none" placeholder="e.g. My device" required />
                 </Label>
                 <Label class="col-span-6 space-y-2 sm:col-span-3">
                     <span>Imei</span>
-                    <Input name="uniqueId" class="border outline-none" placeholder="e.g. Green" required />
+                    <Input name="uniqueId" class="border outline-none" placeholder="e.g. 123456789" required />
                 </Label>
                 <Label class="col-span-6 space-y-2 sm:col-span-3">
                     <span>Phone</span>

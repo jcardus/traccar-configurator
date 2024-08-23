@@ -22,6 +22,15 @@
 
     let current_device = {};
     export let data;
+    function handleUpdateDevice(event) {
+        const updatedDevice = event.detail;
+        const index = data.devices.findIndex(device => device.id === updatedDevice.id);
+        if (index !== -1) {
+            data.devices[index] = updatedDevice; // Update the existing device
+        } else {
+            data.devices.push(updatedDevice); // Add new device if it doesn't exist
+        }
+    }
 </script>
 
 <main class="relative h-full w-full overflow-y-auto bg-white dark:bg-gray-800">
@@ -76,7 +85,7 @@
         <TableHead class="border-y border-gray-200 bg-gray-100 dark:border-gray-700">
             <TableHeadCell class="w-4 p-4"><Checkbox /></TableHeadCell>
             <TableHeadCell class="p-4 font-medium">Name</TableHeadCell>
-            {#each ['Phone', 'Position', 'Status', 'Actions'] as title}
+            {#each ['Phone', 'Last Update', 'Status', 'Actions'] as title}
                 <TableHeadCell class="text-center p-4 font-medium">{title}</TableHeadCell>
             {/each}
         </TableHead>
@@ -84,7 +93,7 @@
             {#each data.devices as device}
                 <TableBodyRow class="text-base">
                     <TableBodyCell class="w-4 p-4"><Checkbox /></TableBodyCell>
-                    <TableBodyCell class="max-w-64 mr-12 flex items-center space-x-6 whitespace-nowrap p-4">
+                    <TableBodyCell class="max-w-64 flex items-center space-x-6 whitespace-nowrap p-4">
                         <div class="text-sm font-normal text-gray-500 dark:text-gray-400">
                             <div class="text-base font-semibold text-gray-900 dark:text-white">{device.name}</div>
                             <div class="text-sm font-normal text-gray-500 dark:text-gray-400">{device.uniqueId}</div>
@@ -95,7 +104,7 @@
                     >
                         {device.phone}
                     </TableBodyCell>
-                    <TableBodyCell class="p-4">{device.position}</TableBodyCell>
+                    <TableBodyCell class="p-4">{new Date(device.lastUpdate).toLocaleString()}</TableBodyCell>
                     <TableBodyCell class="p-4 font-normal">
                         <div class="flex items-center gap-2">
                             <Indicator color={device.status === 'Active' ? 'green' : 'red'} />
@@ -109,7 +118,7 @@
                                 class="gap-2 px-3"
                                 on:click={() => ((current_device = device), (openDevice = true))}
                         >
-                            <EditOutline size="sm" /> Edit device
+                            <EditOutline size="sm" /> Edit
                         </Button>
                         <Button
                                 color="red"
@@ -117,7 +126,7 @@
                                 class="gap-2 px-3"
                                 on:click={() => ((current_device = device), (openDelete = true))}
                         >
-                            <TrashBinSolid size="sm" /> Delete device
+                            <TrashBinSolid size="sm" /> Delete
                         </Button>
                         </div>
                     </TableBodyCell>
@@ -128,5 +137,5 @@
 </main>
 
 
-<Device bind:open={openDevice} data={current_device} />
+<Device bind:open={openDevice} data={current_device} on:updateDevice={handleUpdateDevice} />
 <Delete bind:open={openDelete} />
