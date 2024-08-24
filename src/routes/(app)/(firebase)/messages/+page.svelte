@@ -9,6 +9,7 @@
 
     const {firestore} = getFirebaseContext();
     const messages = collectionStore(firestore, 'messages');
+    import { fade } from 'svelte/transition';
 
 </script>
 
@@ -32,10 +33,10 @@
                         {new Date(message.timestamp).toLocaleString()}
                     </TableBodyCell>
                     <TableBodyCell class="text-center p-4" >
-                        <span>{message.message}</span>
+                        <span transition:fade>{message.message || ''}</span>
                     </TableBodyCell>
                     <TableBodyCell class="text-center p-4">
-                        {message.state}
+                        {message.state || ''}
                     </TableBodyCell>
                     <TableBodyCell class="text-center p-4">
                         {message['last-update'] && new Date(message['last-update']).toLocaleString()}
