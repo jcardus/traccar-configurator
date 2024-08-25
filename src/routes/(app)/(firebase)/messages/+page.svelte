@@ -22,7 +22,7 @@
     </div>
     <Table>
         <TableHead class="border-y border-gray-200 bg-gray-100 dark:border-gray-700">
-            {#each ['Date', 'Message', 'State', 'Last update'] as title}
+            {#each ['Date', 'Phone', 'Message', 'State', 'Last update'] as title}
                 <TableHeadCell class="text-center p-4 font-medium">{title}</TableHeadCell>
             {/each}
         </TableHead>
@@ -31,6 +31,9 @@
                 <TableBodyRow class="text-base">
                     <TableBodyCell class="text-center p-4">
                         {new Date(message.timestamp).toLocaleString()}
+                    </TableBodyCell>
+                    <TableBodyCell class="text-center p-4" >
+                        {message.phone}
                     </TableBodyCell>
                     <TableBodyCell class="text-center p-4" >
                         <span transition:fade>{message.message || ''}</span>
