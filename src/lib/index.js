@@ -1,5 +1,5 @@
 // place files you want to import through the `$lib` alias in this folder.
-import {error, session, setError} from "$lib/store.js";
+import {error, session, setAlert, setError} from "$lib/store.js";
 import {goto} from "$app/navigation";
 
 export async function logout() {
@@ -33,4 +33,12 @@ export async function forwardRequest({ request, platform }) {
     } catch (e) {
         return new Response(e, {status: 500})
     }
+}
+
+export function copyToClipboard(message) {
+    navigator.clipboard.writeText(message).then(() => {
+        setAlert(`${message} copied to clipboard!`);
+    }).catch(err => {
+        console.error(err);
+    });
 }

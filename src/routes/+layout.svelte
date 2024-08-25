@@ -1,22 +1,33 @@
 <script>
-    import { error, clearError } from '$lib/store';
+    import { error, clearError, alert, clearAlert } from '$lib/store';
     import { onMount } from 'svelte';
     import {Alert} from "flowbite-svelte";
 
     let errorMessage = '';
+    let alertMessage = '';
 
     const unsubscribe = error.subscribe(value => {
         errorMessage = value;
         if (value) {
             setTimeout(() => {
                 clearError();
-            }, 5000); // Clear error after 5 seconds
+            }, 5000);
+        }
+    });
+
+    const unsubscribeAlert = alert.subscribe(value => {
+        alertMessage = value;
+        if (value) {
+            setTimeout(() => {
+                clearAlert();
+            }, 5000);
         }
     });
 
     onMount(() => {
         return () => {
             unsubscribe();
+            unsubscribeAlert();
         };
     });
     const appVersion = import.meta.env.VITE_APP_VERSION;
@@ -31,5 +42,12 @@
     <Alert>
         {errorMessage}
     </Alert>
+    </div>
+{/if}
+{#if alertMessage}
+    <div class="fixed top-4 left-1/2 transform -translate-x-1/2 z-50">
+        <Alert border>
+            <span class="font-medium">{alertMessage}</span>
+        </Alert>
     </div>
 {/if}

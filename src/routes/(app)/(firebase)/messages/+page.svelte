@@ -1,15 +1,21 @@
 <script>
     import {
-        Heading, Table, TableBody, TableBodyCell, TableBodyRow,
+        Heading,
+        Table,
+        TableBody,
+        TableBodyCell,
+        TableBodyRow,
         TableHead,
         TableHeadCell
     } from "flowbite-svelte";
 
     import {collectionStore, getFirebaseContext} from 'sveltefire';
+    import {copyToClipboard} from "$lib";
 
     const {firestore} = getFirebaseContext();
     const messages = collectionStore(firestore, 'messages');
-    import { fade } from 'svelte/transition';
+
+
 
 </script>
 
@@ -35,8 +41,10 @@
                     <TableBodyCell class="text-center p-4" >
                         {message.phone}
                     </TableBodyCell>
-                    <TableBodyCell class="text-center p-4" >
-                        <span transition:fade>{message.message || ''}</span>
+                    <TableBodyCell class="text-center p-4 max-w-40 truncate" >
+                        <button on:click={() => copyToClipboard(message.message)}
+                                title="{message.message || ''}">{message.message || ''}
+                        </button>
                     </TableBodyCell>
                     <TableBodyCell class="text-center p-4">
                         {message.state || ''}
