@@ -1,5 +1,5 @@
 <script>
-    import {Sidebar, SidebarDropdownWrapper, SidebarGroup, SidebarItem, SidebarWrapper} from "flowbite-svelte";
+    import {Sidebar, SidebarDropdownWrapper, SidebarGroup, SidebarItem, SidebarWrapper, Tooltip} from "flowbite-svelte";
     import { page } from '$app/stores';
     import { afterNavigate } from '$app/navigation';
     import {
@@ -7,6 +7,9 @@
         GridPlusOutline,
         MessagesOutline,
     } from "flowbite-svelte-icons";
+    import config from 'tailwindcss/defaultTheme';
+    import {onMount} from "svelte";
+
 
     export let drawerHidden = false;
     $: mainSidebarUrl = $page.url.pathname;
@@ -38,6 +41,17 @@
             }
         }
     ];
+
+    let lg;
+    const checkLg = () => {lg = window.matchMedia(`(min-width: ${config.screens.lg})`).matches}
+    onMount(() => {
+        checkLg()
+        window.addEventListener('resize', checkLg);
+        return () => {
+            window.removeEventListener('resize', checkLg);
+        };
+    })
+
 </script>
 
 <Sidebar
@@ -53,7 +67,7 @@
             <SidebarGroup ulClass={groupClass} class="mb-3">
                 {#each items as { name, icon, children, href } (name)}
                     {#if children}
-                        <SidebarDropdownWrapper label={name} class="pr-3">
+                        <SidebarDropdownWrapper label={lg ? name : ''} class="pr-3">
                             <AngleDownOutline slot="arrowdown" strokeWidth="3.3" size="sm" />
                             <AngleUpOutline slot="arrowup" strokeWidth="3.3" size="sm" />
                             <svelte:component this={icon} slot="icon" class={iconClass} />
@@ -70,7 +84,7 @@
                         </SidebarDropdownWrapper>
                     {:else}
                         <SidebarItem
-                                label={name}
+                                label={lg ? name : ''}
                                 {href}
                                 spanClass="ml-3"
                                 class={itemClass}
@@ -78,6 +92,9 @@
                         >
                             <svelte:component this={icon} slot="icon" class={iconClass} />
                         </SidebarItem>
+                        {#if (!lg)}
+                            <Tooltip placement="right" arrow={false}>{name}</Tooltip>
+                        {/if}
                     {/if}
                 {/each}
             </SidebarGroup>
