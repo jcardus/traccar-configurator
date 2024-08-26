@@ -1,4 +1,5 @@
 import {setError} from "$lib/store.js";
+import {goto} from "$app/navigation";
 
 export const ssr = false
 
@@ -9,7 +10,8 @@ export async function load({fetch}) {
             const devices = await response.json()
             return {devices: devices.slice(0, 500)}
         } else {
-            setError(await response.text())
+            if (response.status === 401) { await goto('/login') }
+            else { setError(await response.text()) }
         }
     } catch (e) {
         setError(e.message)
