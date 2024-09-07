@@ -19,6 +19,7 @@
 
     let openDevice = false; // modal control
     let openDelete = false; // modal control
+    let filter = ''
 
     let current_device = {};
     export let data;
@@ -39,7 +40,7 @@
             Devices
         </Heading>
         <Toolbar embedded class="w-full py-4 text-gray-500  dark:text-gray-400">
-            <Input placeholder="Search for devices" class="me-4 w-80 border xl:w-96" />
+            <Input placeholder="Search for devices" class="me-4 w-80 border xl:w-96" bind:value={filter}  />
             <div class="border-l border-gray-100 pl-2 dark:border-gray-700">
                 <ToolbarButton
                         color="dark"
@@ -90,7 +91,7 @@
             {/each}
         </TableHead>
         <TableBody>
-            {#each data.devices as device}
+            {#each data.devices.filter(d => !filter || d.name.includes(filter)) as device}
                 <TableBodyRow class="text-base">
                     <TableBodyCell class="w-4 p-4"><Checkbox /></TableBodyCell>
                     <TableBodyCell class="max-w-64 flex items-center space-x-6 whitespace-nowrap p-4">
