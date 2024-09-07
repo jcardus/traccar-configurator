@@ -33,7 +33,7 @@
             {/each}
         </TableHead>
         <TableBody>
-            {#each $messages as message}
+            {#each $messages.sort((a, b) => b.timestamp - a.timestamp) as message}
                 <TableBodyRow class="text-base">
                     <TableBodyCell class="text-center p-4">
                         {new Date(message.timestamp).toLocaleString()}
