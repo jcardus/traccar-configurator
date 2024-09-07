@@ -7,7 +7,11 @@
     } from 'flowbite-svelte';
     import { Input, Table, TableBody, TableBodyCell, TableBodyRow, TableHead } from 'flowbite-svelte';
     import { TableHeadCell, Toolbar, ToolbarButton } from 'flowbite-svelte';
-    import { CogSolid, DotsVerticalOutline, DownloadSolid } from 'flowbite-svelte-icons';
+    import {
+        CogSolid,
+        DotsVerticalOutline,
+        DownloadSolid
+    } from 'flowbite-svelte-icons';
     import {
         EditOutline,
         ExclamationCircleSolid,
@@ -16,9 +20,11 @@
     } from 'flowbite-svelte-icons';
     import Delete from "./Delete.svelte";
     import Device from "./Device.svelte";
+    import SendConfig from "./SendConfig.svelte";
 
     let openDevice = false; // modal control
     let openDelete = false; // modal control
+    let sendConfig = false; // modal control
     let filter = ''
     let selected = []
 
@@ -33,6 +39,10 @@
             data.devices.push(updatedDevice); // Add new device if it doesn't exist
         }
     }
+
+    function deviceSelected(device) {
+        selected = selected.includes(device.id) ? selected.filter(d => d !== device.id) : selected.concat([device.id])
+    }
 </script>
 
 <main class="relative h-full w-full overflow-y-auto bg-white dark:bg-gray-800">
@@ -43,7 +53,10 @@
         <Toolbar embedded class="w-full py-4 text-gray-500  dark:text-gray-400">
             <Input placeholder="Search for devices" class="me-4 w-80 border xl:w-96" bind:value={filter}  />
             <div class="border-l border-gray-100 pl-2 dark:border-gray-700">
-                <ToolbarButton on:click={() => alert(JSON.stringify(selected))}
+                <ToolbarButton on:click={() => {
+                    selected.length ?
+                    sendConfig = true : alert('Please select a device')
+                }}
                         color="dark"
                         class="m-0 rounded p-1 hover:bg-gray-100 focus:ring-0 dark:hover:bg-gray-700"
                 >
@@ -72,7 +85,10 @@
                 <Button
                         size="sm"
                         class="gap-2 whitespace-nowrap px-3"
-                        on:click={() => ((current_device = {}), (openDevice = true))}
+                        on:click={() => {
+                            current_device = {}
+                            openDevice = true
+                        }}
                 >
                     <PlusOutline size="sm" />Add device
                 </Button>
@@ -96,7 +112,7 @@
             {#each data.devices.filter(d => !filter || d.name.includes(filter)) as device}
                 <TableBodyRow class="text-base">
                     <TableBodyCell class="w-4 p-4"><Checkbox checked="{selected.includes(device.id)}" on:change={() => {
-                        selected = selected.includes(device.id) ? selected.filter(d => d !== device.id) : selected.concat([device.id])
+                        deviceSelected(device);
                     }}  /></TableBodyCell>
                     <TableBodyCell class="max-w-64 flex items-center space-x-6 whitespace-nowrap p-4">
                         <div class="text-sm font-normal text-gray-500 dark:text-gray-400">
@@ -144,3 +160,4 @@
 
 <Device bind:open={openDevice} data={current_device} on:updateDevice={handleUpdateDevice} />
 <Delete bind:open={openDelete} />
+<SendConfig bind:open={sendConfig} data="{selected}"/>
