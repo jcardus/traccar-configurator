@@ -20,6 +20,7 @@
     let openDevice = false; // modal control
     let openDelete = false; // modal control
     let filter = ''
+    let selected = []
 
     let current_device = {};
     export let data;
@@ -42,7 +43,7 @@
         <Toolbar embedded class="w-full py-4 text-gray-500  dark:text-gray-400">
             <Input placeholder="Search for devices" class="me-4 w-80 border xl:w-96" bind:value={filter}  />
             <div class="border-l border-gray-100 pl-2 dark:border-gray-700">
-                <ToolbarButton
+                <ToolbarButton on:click={() => alert(JSON.stringify(selected))}
                         color="dark"
                         class="m-0 rounded p-1 hover:bg-gray-100 focus:ring-0 dark:hover:bg-gray-700"
                 >
@@ -67,7 +68,6 @@
                     <DotsVerticalOutline size="lg" />
                 </ToolbarButton>
             </div>
-
             <div slot="end" class="flex items-center space-x-2">
                 <Button
                         size="sm"
@@ -84,7 +84,9 @@
     </div>
     <Table>
         <TableHead class="border-y border-gray-200 bg-gray-100 dark:border-gray-700">
-            <TableHeadCell class="w-4 p-4"><Checkbox /></TableHeadCell>
+            <TableHeadCell class="w-4 p-4"><Checkbox checked="{selected.length === data.devices.length}" on:change={() => {
+                selected = selected.length === data.devices.length ? [] : data.devices.map(d => d.id)
+            }} /></TableHeadCell>
             <TableHeadCell class="p-4 font-medium">Name</TableHeadCell>
             {#each ['Phone', 'Last Update', 'Status', 'Actions'] as title}
                 <TableHeadCell class="text-center p-4 font-medium">{title}</TableHeadCell>
@@ -93,7 +95,9 @@
         <TableBody>
             {#each data.devices.filter(d => !filter || d.name.includes(filter)) as device}
                 <TableBodyRow class="text-base">
-                    <TableBodyCell class="w-4 p-4"><Checkbox /></TableBodyCell>
+                    <TableBodyCell class="w-4 p-4"><Checkbox checked="{selected.includes(device.id)}" on:change={() => {
+                        selected = selected.includes(device.id) ? selected.filter(d => d !== device.id) : selected.concat([device.id])
+                    }}  /></TableBodyCell>
                     <TableBodyCell class="max-w-64 flex items-center space-x-6 whitespace-nowrap p-4">
                         <div class="text-sm font-normal text-gray-500 dark:text-gray-400">
                             <div class="text-base font-semibold text-gray-900 dark:text-white">{device.name}</div>
@@ -101,7 +105,7 @@
                         </div>
                     </TableBodyCell>
                     <TableBodyCell
-                            class="text-center max-w-sm overflow-hidden truncate p-4 text-base font-normal text-gray-500 dark:text-gray-400 xl:max-w-xs"
+                            class="text-center max-w-sm overflow-hidden truncate p-4 px-8 text-base font-normal text-gray-500 dark:text-gray-400 xl:max-w-xs"
                     >
                         {device.phone}
                     </TableBodyCell>
