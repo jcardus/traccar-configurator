@@ -2,11 +2,10 @@
     import {Button, Input, Label, Modal, Select} from "flowbite-svelte";
 import {sendCommand} from "$lib";
 import {setError} from "$lib/store.js";
-import {getData} from "$lib/commands.js";
+import {getData, deviceTypes} from "$lib/commands.js";
 export let open = false
 export let selected = [];
 export let devices = [];
-const deviceTypes = ['Suntech', 'Aovx'].sort().map(d => ({name: d, value: d}))
 let deviceType = 'Aovx'
 let apn=''
 
