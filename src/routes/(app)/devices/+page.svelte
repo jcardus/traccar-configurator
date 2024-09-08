@@ -98,7 +98,7 @@
             </div>
         </Toolbar>
     </div>
-    <Table>
+    <Table hoverable="true" >
         <TableHead class="border-y border-gray-200 bg-gray-100 dark:border-gray-700">
             <TableHeadCell class="w-4 p-4"><Checkbox checked="{selected.length === data.devices.length}" on:change={() => {
                 selected = selected.length === data.devices.length ? [] : data.devices.map(d => d.id)
@@ -110,7 +110,7 @@
         </TableHead>
         <TableBody>
             {#each data.devices.filter(d => !filter || d.name.includes(filter)) as device}
-                <TableBodyRow class="text-base">
+                <TableBodyRow class="text-base" on:click={() => deviceSelected(device)}>
                     <TableBodyCell class="w-4 p-4"><Checkbox checked="{selected.includes(device.id)}" on:change={() => {
                         deviceSelected(device);
                     }}  /></TableBodyCell>
@@ -137,7 +137,10 @@
                         <Button
                                 size="sm"
                                 class="gap-2 px-3"
-                                on:click={() => ((current_device = device), (openDevice = true))}
+                                on:click={() => {
+                                    current_device = device
+                                    openDevice = true
+                                }}
                         >
                             <EditOutline size="sm" /> Edit
                         </Button>
@@ -160,4 +163,4 @@
 
 <Device bind:open={openDevice} data={current_device} on:updateDevice={handleUpdateDevice} />
 <Delete bind:open={openDelete} />
-<SendConfig bind:open={sendConfig} data="{selected}"/>
+<SendConfig bind:open={sendConfig} selected ="{selected}"/>
