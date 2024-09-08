@@ -13,14 +13,12 @@ async function sendConfiguration() {
     try {
         for (const deviceId of selected) {
             for (const data of getData(devices.find(device => device.id === deviceId), deviceType, apn)) {
-                for (const textChannel of [true, false]) {
-                    await sendCommand({
-                        type: 'custom',
-                        attributes: {data},
-                        textChannel,
-                        deviceId
-                    })
-                }
+                await sendCommand({
+                    type: 'custom',
+                    attributes: {data},
+                    textChannel: true,
+                    deviceId
+                })
             }
         }
     } catch (e) {
