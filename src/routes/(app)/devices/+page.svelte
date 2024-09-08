@@ -114,16 +114,16 @@
                     <TableBodyCell class="w-4 p-4"><Checkbox checked="{selected.includes(device.id)}" on:change={() => {
                         deviceSelected(device);
                     }}  /></TableBodyCell>
-                    <TableBodyCell class="max-w-64 flex items-center space-x-6 whitespace-nowrap p-4">
+                    <TableBodyCell class="max-w-64 flex items-center space-x-6 whitespace-nowrap p-4  overflow-hidden truncate">
                         <div class="text-sm font-normal text-gray-500 dark:text-gray-400">
                             <div class="text-base font-semibold text-gray-900 dark:text-white">{device.name}</div>
                             <div class="text-sm font-normal text-gray-500 dark:text-gray-400">{device.uniqueId}</div>
                         </div>
                     </TableBodyCell>
-                    <TableBodyCell class="text-center max-w-sm overflow-hidden truncate p-4 px-8 text-base font-normal text-gray-500 dark:text-gray-400 xl:max-w-xs">
+                    <TableBodyCell class="text-center max-w-sm overflow-hidden truncate p-4 text-base font-normal text-gray-500 dark:text-gray-400 xl:max-w-xs">
                         {device.phone}
                     </TableBodyCell>
-                    <TableBodyCell class="text-center max-w-sm overflow-hidden truncate p-4 px-8 text-base font-normal text-gray-500 dark:text-gray-400 xl:max-w-xs">
+                    <TableBodyCell class="text-center max-w-sm overflow-hidden truncate p-4 text-base font-normal text-gray-500 dark:text-gray-400 xl:max-w-xs">
                         {device.model}
                     </TableBodyCell>
                     <TableBodyCell class="p-4">{new Date(device.lastUpdate).toLocaleString()}</TableBodyCell>
