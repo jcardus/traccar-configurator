@@ -65,7 +65,7 @@
                 </Label>
                 <Label class="col-span-6 space-y-2 sm:col-span-3">
                     <span>Model</span>
-                    <Select items="{deviceTypes}" bind:value={data.model} name="model" class="border outline-none" placeholder="ST300NTW" required />
+                    <Select items="{deviceTypes}" bind:value={data.model} name="model" class="border outline-none" required />
                 </Label>
                 <Label class="col-span-6 space-y-2 sm:col-span-3">
                     <span>Disabled</span>
