@@ -48,11 +48,11 @@
             <div class="grid grid-cols-6 gap-6">
                 <Label class="col-span-6 space-y-2 sm:col-span-3">
                     <span>Name</span>
-                    <Input name="name" class="border outline-none" placeholder="e.g. My device" required />
+                    <Input name="name" bind:value={data.name} class="border outline-none" placeholder="e.g. My device" required />
                 </Label>
                 <Label class="col-span-6 space-y-2 sm:col-span-3">
                     <span>Imei</span>
-                    <Input name="uniqueId" class="border outline-none" placeholder="e.g. 123456789" required />
+                    <Input name="uniqueId" bind:value={data.uniqueId} class="border outline-none" placeholder="e.g. 123456789" required />
                 </Label>
                 <Label class="col-span-6 space-y-2 sm:col-span-3">
                     <span>Phone</span>
