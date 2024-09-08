@@ -111,9 +111,7 @@
         <TableBody>
             {#each data.devices.filter(d => !filter || d.name.includes(filter)) as device}
                 <TableBodyRow class="text-base" on:click={() => deviceSelected(device)}>
-                    <TableBodyCell class="w-4 p-4"><Checkbox checked="{selected.includes(device.id)}" on:change={() => {
-                        deviceSelected(device);
-                    }}  /></TableBodyCell>
+                    <TableBodyCell class="w-4 p-4"><Checkbox checked="{selected.includes(device.id)}"/></TableBodyCell>
                     <TableBodyCell class="max-w-64 flex items-center space-x-6 whitespace-nowrap p-4  overflow-hidden truncate">
                         <div class="text-sm font-normal text-gray-500 dark:text-gray-400">
                             <div class="text-base font-semibold text-gray-900 dark:text-white">{device.name}</div>
