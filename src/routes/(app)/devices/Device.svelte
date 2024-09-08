@@ -1,6 +1,8 @@
 <script>
-    import {Button, Checkbox, Input, Label, Modal} from 'flowbite-svelte';
+    import {Button, Checkbox, Input, Label, Modal, Select} from 'flowbite-svelte';
     import { createEventDispatcher } from 'svelte';
+    import {deviceTypes} from "$lib/devices.js";
+
     export let open = false; // modal control
 
     export let data = {};
@@ -63,7 +65,7 @@
                 </Label>
                 <Label class="col-span-6 space-y-2 sm:col-span-3">
                     <span>Model</span>
-                    <Input bind:value={data.model} name="model" class="border outline-none" placeholder="ST300NTW" required />
+                    <Select items="{deviceTypes}" bind:value={data.model} name="model" class="border outline-none" placeholder="ST300NTW" required />
                 </Label>
                 <Label class="col-span-6 space-y-2 sm:col-span-3">
                     <span>Disabled</span>

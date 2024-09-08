@@ -17,4 +17,10 @@ export const getData = (device, deviceType, apn='allcom.vivo.com.br') => ({
     Suntech: ({model, uniqueId}) => [`${model};${uniqueId};02;0;${apn};allcom;allcom;${host};5011;;;;`],
 }[deviceType](device, apn))
 
-export const deviceTypes = ['Concox', 'Suntech', 'Aovx', 'Teltonika'].sort().map(d => ({name: d, value: d}))
+export const deviceTypes = [
+        {name: 'Concox', value: 'concox'},
+        {name: 'Suntech ST310u', value:'ST300CMD'},
+        {name: 'Aovx GL100', value: 'aovx'},
+        {name: 'Aovx VL100', value: 'aovx'},
+        {name: 'Teltonika', value: 'teltonika'}
+    ].sort((a, b) => a.name.localeCompare(b.name))
