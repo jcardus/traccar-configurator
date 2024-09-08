@@ -7,7 +7,7 @@ export let open = false
 export let selected = [];
 export let devices = [];
 let deviceType = 'Aovx'
-let apn=''
+let apn
 
 async function sendConfiguration() {
     try {
