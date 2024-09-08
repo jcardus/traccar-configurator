@@ -18,6 +18,20 @@ export async function logout() {
     await goto('/login')
 }
 
+export async function sendCommand(command) {
+    const response = await fetch('/api/commands/send', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(command),
+    });
+
+    if (response.ok) {
+        setAlert(`${command.attributes.data} sent to device ${command.deviceId}`)
+    } else {
+        throw Error(await response.text());
+    }
+}
+
 export async function forwardRequest({ request, platform }) {
     try {
         const host = (platform && platform.env.TRACCAR_SERVER) || import.meta.env.VITE_TRACCAR_SERVER

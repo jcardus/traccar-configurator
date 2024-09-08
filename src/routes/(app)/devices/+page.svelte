@@ -104,7 +104,7 @@
                 selected = selected.length === data.devices.length ? [] : data.devices.map(d => d.id)
             }} /></TableHeadCell>
             <TableHeadCell class="p-4 font-medium">Name</TableHeadCell>
-            {#each ['Phone', 'Last Update', 'Status', 'Actions'] as title}
+            {#each ['Phone', 'Model', 'Last Update', 'Status', 'Actions'] as title}
                 <TableHeadCell class="text-center p-4 font-medium">{title}</TableHeadCell>
             {/each}
         </TableHead>
@@ -120,10 +120,11 @@
                             <div class="text-sm font-normal text-gray-500 dark:text-gray-400">{device.uniqueId}</div>
                         </div>
                     </TableBodyCell>
-                    <TableBodyCell
-                            class="text-center max-w-sm overflow-hidden truncate p-4 px-8 text-base font-normal text-gray-500 dark:text-gray-400 xl:max-w-xs"
-                    >
+                    <TableBodyCell class="text-center max-w-sm overflow-hidden truncate p-4 px-8 text-base font-normal text-gray-500 dark:text-gray-400 xl:max-w-xs">
                         {device.phone}
+                    </TableBodyCell>
+                    <TableBodyCell class="text-center max-w-sm overflow-hidden truncate p-4 px-8 text-base font-normal text-gray-500 dark:text-gray-400 xl:max-w-xs">
+                        {device.model}
                     </TableBodyCell>
                     <TableBodyCell class="p-4">{new Date(device.lastUpdate).toLocaleString()}</TableBodyCell>
                     <TableBodyCell class="p-4 font-normal">
@@ -166,4 +167,4 @@
 
 <Device bind:open={openDevice} data={current_device} on:updateDevice={handleUpdateDevice} />
 <Delete bind:open={openDelete} />
-<SendConfig bind:open={sendConfig} selected ="{selected}"/>
+<SendConfig bind:open={sendConfig} selected="{selected}" devices="{data.devices}"/>

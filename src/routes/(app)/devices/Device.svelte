@@ -62,6 +62,10 @@
                     />
                 </Label>
                 <Label class="col-span-6 space-y-2 sm:col-span-3">
+                    <span>Model</span>
+                    <Input bind:value={data.model} name="model" class="border outline-none" placeholder="ST300NTW" required />
+                </Label>
+                <Label class="col-span-6 space-y-2 sm:col-span-3">
                     <span>Disabled</span>
                     <Checkbox id="checkbox2" bind:checked={data.disabled} />
                 </Label>
