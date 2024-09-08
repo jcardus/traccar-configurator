@@ -148,7 +148,10 @@
                                 color="red"
                                 size="sm"
                                 class="gap-2 px-3"
-                                on:click={() => ((current_device = device), (openDelete = true))}
+                                on:click={() => {
+                                    current_device = device
+                                    openDelete = true
+                                }}
                         >
                             <TrashBinSolid size="sm" /> Delete
                         </Button>
