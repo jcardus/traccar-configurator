@@ -28,15 +28,7 @@ export const getData = (device, apn='allcom.vivo.com.br') => {
     return messages[device.model](device, apn)
 }
 
-/*?
-const teltonikaDevices = () => {
-    for (const model of ['001', '120', '130', '140', '920'])
-}*/
+import devices from './devices.json'
 
-export const deviceTypes = [
-        {name: 'Concox', value: 'concox'},
-        {name: 'Suntech ST310u', value:'ST300CMD'},
-        {name: 'Aovx GL100', value: 'gl100'},
-        {name: 'Aovx VL100', value: 'vl100'},
-        {name: 'Teltonika FMB920', value: 'fmb920'},
-    ].sort((a, b) => a.name.localeCompare(b.name))
+export const deviceTypes = devices.map(d => ({name: d.Device + ` (${d.Protocol})`, value: d.Device}))
+    .sort((a, b) => a.name.localeCompare(b.name))
