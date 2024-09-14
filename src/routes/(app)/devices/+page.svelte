@@ -3,7 +3,7 @@
         Button,
         Checkbox,
         Heading,
-        Indicator
+        Indicator, Tooltip
     } from 'flowbite-svelte';
     import { Input, Table, TableBody, TableBodyCell, TableBodyRow, TableHead } from 'flowbite-svelte';
     import { TableHeadCell, Toolbar, ToolbarButton } from 'flowbite-svelte';
@@ -38,6 +38,12 @@
         } else {
             data.devices.push(updatedDevice); // Add new device if it doesn't exist
         }
+    }
+
+    function handleDeleteDevice(event) {
+        const updatedDevice = event.detail;
+        const index = data.devices.findIndex(device => device.id === updatedDevice.id);
+        if (index !== -1) { data.devices.splice(index, 1) }
     }
 
     function deviceSelected(device) {
@@ -98,15 +104,16 @@
             </div>
         </Toolbar>
     </div>
-    <Table hoverable="true" >
+    <Table hoverable="true" class="table-fixed">
         <TableHead class="border-y border-gray-200 bg-gray-100 dark:border-gray-700">
             <TableHeadCell class="w-4 p-4"><Checkbox checked="{selected.length === data.devices.length}" on:change={() => {
                 selected = selected.length === data.devices.length ? [] : data.devices.map(d => d.id)
             }} /></TableHeadCell>
-            <TableHeadCell class="p-4 font-medium">Name</TableHeadCell>
-            {#each ['Phone', 'Model', 'Last Update', 'Status', 'Actions'] as title}
-                <TableHeadCell class="text-center p-4 font-medium">{title}</TableHeadCell>
+            <TableHeadCell class="font-medium">Name</TableHeadCell>
+            {#each ['Phone', 'Model', 'Last Update', 'Status'] as title}
+                <TableHeadCell class="text-center font-medium">{title}</TableHeadCell>
             {/each}
+            <TableHeadCell class="text-center font-medium w-40">Actions</TableHeadCell>
         </TableHead>
         <TableBody>
             {#each data.devices.filter(d => !filter || d.name.includes(filter)) as device}
@@ -117,42 +124,47 @@
                             <div class="text-base font-semibold text-gray-900 dark:text-white">{device.name}</div>
                             <div class="text-sm font-normal text-gray-500 dark:text-gray-400">{device.uniqueId}</div>
                         </div>
+                        <Tooltip class="lg:hidden"><div class="text-base font-semibold text-gray-900 dark:text-white">{device.name}</div>
+                            <div class="text-sm font-normal text-gray-500 dark:text-gray-400">{device.uniqueId}</div></Tooltip>
                     </TableBodyCell>
                     <TableBodyCell class="text-center max-w-sm overflow-hidden truncate p-4 text-base font-normal text-gray-500 dark:text-gray-400 xl:max-w-xs">
-                        {device.phone}
+                        <span>{device.phone}</span>
+                        <Tooltip class="lg:hidden">{device.phone}</Tooltip>
                     </TableBodyCell>
                     <TableBodyCell class="text-center max-w-sm overflow-hidden truncate p-4 text-base font-normal text-gray-500 dark:text-gray-400 xl:max-w-xs">
-                        {device.model}
+                        <span>{device.model}</span>
+                        <Tooltip class="lg:hidden">{device.model}</Tooltip>
                     </TableBodyCell>
-                    <TableBodyCell class="p-4">{new Date(device.lastUpdate).toLocaleString()}</TableBodyCell>
-                    <TableBodyCell class="p-4 font-normal">
+                    <TableBodyCell class="p-1 overflow-ellipsis overflow-hidden">
+                        <span>{new Date(device.lastUpdate).toLocaleString()}</span>
+                        <Tooltip class="lg:hidden">{new Date(device.lastUpdate).toLocaleString()}</Tooltip>
+                    </TableBodyCell>
+                    <TableBodyCell class="p-1 font-normal overflow-ellipsis overflow-hidden">
                         <div class="flex items-center gap-2">
                             <Indicator color={device.status === 'Active' ? 'green' : 'red'} />
                             {device.status}
                         </div>
                     </TableBodyCell>
-                    <TableBodyCell class="space-x-2 p-4">
+                    <TableBodyCell>
                         <div class="flex justify-center gap-2">
                         <Button
-                                size="sm"
-                                class="gap-2 px-3"
+                                size="xs"
                                 on:click={() => {
                                     current_device = device
                                     openDevice = true
                                 }}
                         >
-                            <EditOutline size="sm" /> Edit
+                            <EditOutline size="xs" /> Edit
                         </Button>
                         <Button
                                 color="red"
-                                size="sm"
-                                class="gap-2 px-3"
+                                size="xs"
                                 on:click={() => {
                                     current_device = device
                                     openDelete = true
                                 }}
                         >
-                            <TrashBinSolid size="sm" /> Delete
+                            <TrashBinSolid size="xs" /> Delete
                         </Button>
                         </div>
                     </TableBodyCell>
@@ -164,5 +176,5 @@
 
 
 <Device bind:open={openDevice} data={current_device} on:updateDevice={handleUpdateDevice} />
-<Delete bind:open={openDelete} />
+<Delete bind:open={openDelete} data={current_device} on:updateDevice={handleDeleteDevice}/>
 <SendConfig bind:open={sendConfig} selected="{selected}" devices="{data.devices}"/>

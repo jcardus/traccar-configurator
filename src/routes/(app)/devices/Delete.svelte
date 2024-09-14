@@ -1,7 +1,20 @@
 <script lang="ts">
     import { Button, Modal } from 'flowbite-svelte';
     import { ExclamationCircleOutline } from 'flowbite-svelte-icons';
+    import {createEventDispatcher} from "svelte";
     export let open: boolean = false; // modal control
+    const dispatch = createEventDispatcher();
+    async function deleteDevice(data) {
+        let id = data.id
+        const url = `/api/devices/${id}`;
+        const response = await fetch(url, {method: 'DELETE'});
+        if (response.ok) {
+            dispatch('deleteDevice', data); // Dispatch event to parent
+            open=false
+        } else {
+            throw Error(await response.text());
+        }
+    }
 </script>
 
 <Modal bind:open size="sm">
@@ -12,7 +25,7 @@
     </h3>
 
     <div class="flex items-center justify-center">
-        <Button href="/devices" color="red" class="mr-2">Yes, I'm sure</Button>
+        <Button color="red" class="mr-2" on:click={deleteDevice}>Yes, I'm sure</Button>
         <Button color="alternative" on:click={() => (open = false)}>No, cancel</Button>
     </div>
 </Modal>
