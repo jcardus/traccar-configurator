@@ -4,9 +4,9 @@
     import { setError, session } from '$lib/store';
     import {goto} from "$app/navigation";
     export let title = 'Sign in to Configurator';
-    export let rememberMe = true;
-    export let lostPassword = true;
-    export let createAccount = true;
+    export let rememberMe = false;
+    export let lostPassword = false;
+    export let createAccount = false;
     export let lostPasswordLink = '';
     export let loginTitle = 'Login to your account';
     export let registerLink = '';

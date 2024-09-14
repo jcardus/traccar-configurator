@@ -10,12 +10,9 @@
         imgAlt: 'Logo'
     };
     let rememberMe = true;
-    let lostPassword = true;
     let createAccount = true;
     let lostPasswordLink = 'forgot-password';
     let loginTitle = 'Login to your account';
-    let registerLink = 'sign-up';
-    let createAccountTitle = 'Create account';
 
     const onSubmit = (e) => {
         const formData = new FormData(e.target);
@@ -33,12 +30,9 @@
         {title}
         {site}
         {rememberMe}
-        {lostPassword}
         {createAccount}
         {lostPasswordLink}
         {loginTitle}
-        {registerLink}
-        {createAccountTitle}
         on:submit={onSubmit}
 >
     <div>
@@ -47,7 +41,6 @@
                 type="text"
                 name="email"
                 id="email"
-                placeholder="name@company.com"
                 required
                 class="border outline-none dark:border-gray-600 dark:bg-gray-700"
         />
@@ -58,7 +51,6 @@
                 type="password"
                 name="password"
                 id="password"
-                placeholder="••••••••"
                 required
                 class="border outline-none dark:border-gray-600 dark:bg-gray-700"
         />
