@@ -5635,6 +5635,11 @@
     "Port":"5011"
   },
   {
+    "Device":"ST310",
+    "Protocol":"suntech",
+    "Port":"5011"
+  },
+  {
     "Device":"ST215",
     "Protocol":"suntech",
     "Port":"5011"
