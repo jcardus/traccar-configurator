@@ -50,8 +50,8 @@
     <Modal
             bind:open
             title={data.id ? 'Edit device' : 'Add new device'}
-            size="md"
-            class="m-4"
+            size="sm"
+            class="m-4 h-[calc(100vh-5rem)] sm:h-max"
     >
         <div class="space-y-6 p-0">
             <div class="grid grid-cols-6 gap-6">

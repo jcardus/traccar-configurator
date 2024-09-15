@@ -106,7 +106,7 @@
                         size="sm"
                         class="gap-2 whitespace-nowrap px-3"
                         on:click={() => {
-                            current_device = {}
+                            current_device = {attributes: {apn: ''}}
                             openDevice = true
                         }}
                 >

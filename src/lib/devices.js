@@ -21,11 +21,14 @@ const messages = {
 }
 
 export const getData = (device, apn='allcom.vivo.com.br') => {
-    if (!messages[device.model]) {
-        alert('invalid device model ' + device.model);
-        return
+    if (!messages[getProtocol(device.model)]) {
+        return []
     }
-    return messages[device.model](device, apn)
+    return messages[getProtocol(device.model)](device, apn)
+}
+
+function getProtocol(model) {
+    return devices.find(d => d.Device === model).Protocol
 }
 
 import devices from './devices.json'
