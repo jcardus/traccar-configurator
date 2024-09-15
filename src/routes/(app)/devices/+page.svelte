@@ -57,6 +57,22 @@
     function deviceSelected(device) {
         selected = selected.includes(device.id) ? selected.filter(d => d !== device.id) : selected.concat([device.id])
     }
+    const socket = new WebSocket('/api/socket')
+    socket.onmessage = (event) => {
+        const _data = JSON.parse(event.data);
+        if (_data.devices) {
+            _data.devices.forEach(detail => handleUpdateDevice({detail}))
+        }
+        if (data.positions) {
+
+        }
+        if (data.events) {
+
+        }
+        if (data.logs) {
+
+        }
+    }
 </script>
 
 <main class="relative h-full w-full overflow-y-auto bg-white dark:bg-gray-800">
@@ -97,13 +113,16 @@
     </div>
     <Table hoverable="true" class="table-fixed">
         <TableHead class="border-y border-gray-200 bg-gray-100 dark:border-gray-700">
-            <TableHeadCell class="w-4 p-4"><Checkbox checked="{selected.length === data.devices.length}" on:change={() => {
-                selected = selected.length === data.devices.length ? [] : data.devices.map(d => d.id)
-            }} /></TableHeadCell>
+            <TableHeadCell class="w-4 p-4">
+                <Checkbox checked="{selected.length === data.devices.length}" on:change={() => {
+                    selected = selected.length === data.devices.length ? [] : data.devices.map(d => d.id)
+                }} />
+            </TableHeadCell>
             <TableHeadCell class="font-medium">Name</TableHeadCell>
-            {#each ['Phone', 'Model', 'Last Update', 'Status'] as title}
+            {#each ['Phone', 'Model', 'Last Update'] as title}
                 <TableHeadCell class="text-center font-medium">{title}</TableHeadCell>
             {/each}
+            <TableHeadCell class="text-center font-medium w-24">Actions</TableHeadCell>
             <TableHeadCell class="text-center font-medium w-40">Actions</TableHeadCell>
         </TableHead>
         <TableBody>
@@ -131,9 +150,9 @@
                         <span>{new Date(device.lastUpdate).toLocaleString()}</span>
                         <Tooltip class="lg:hidden">{new Date(device.lastUpdate).toLocaleString()}</Tooltip>
                     </TableBodyCell>
-                    <TableBodyCell class="p-1 font-normal overflow-ellipsis overflow-hidden">
+                    <TableBodyCell class="p-1 font-normal">
                         <div class="flex items-center gap-2">
-                            <Indicator color={device.status === 'Active' ? 'green' : 'red'} />
+                            <Indicator color={device.status === 'online' ? 'green' : 'red'} />
                             {device.status}
                         </div>
                     </TableBodyCell>
