@@ -5,7 +5,7 @@
     import SendConfig from "./SendConfig.svelte";
     import {
         ArrowUpRightFromSquareOutline,
-        FloppyDiskAltOutline,
+        FloppyDiskAltOutline, MapPinAltOutline,
         TrashBinSolid
     } from "flowbite-svelte-icons";
     import Delete from "./Delete.svelte";
@@ -98,22 +98,38 @@
         <!-- Modal footer -->
         <div slot="footer" class="w-full">
             <div class="flex justify-between ">
-            {#if data.id}
-                <Button color="alternative" on:click="{()=>{sendConfig = true}}" class="{data.id?'':'hidden'}">
+                <Button color="alternative" size="sm" on:click="{()=>{sendConfig = true}}" class="{data.id?'':'hidden'}">
                     <ArrowUpRightFromSquareOutline/>
                     Send config
                 </Button>
-            {/if}
-            <Button type="submit">
-                <FloppyDiskAltOutline size="sm"/>
-                Save
-            </Button>
+                <Button color="alternative" size="sm" on:click="{async () => {
+    const expirationTime = new Date(new Date().getTime() + 7 * 24 * 60 * 60 * 1000).toISOString();
+    const response = await fetch('/api/devices/share', {
+      method: 'POST',
+      body: new URLSearchParams(`deviceId=${data.id}&expiration=${expirationTime}`),
+    });
+    if (response.ok) {
+      const token = await response.text();
+      const url = `https://${import.meta.env.VITE_TRACCAR_WEB_SERVER}?token=${token}`
+      window.open(url)
+    } else {
+      alert(await response.text());
+    }
+                }}" class="{data.id?'':'hidden'}">
+                    <MapPinAltOutline/>
+                    Location
+                </Button>
             </div>
             <div class="flex justify-between py-4">
                 <Button color="red" on:click={() => openDelete=true}>
                     <TrashBinSolid size="sm" />
                     Delete
                 </Button>
+                <Button type="submit">
+                    <FloppyDiskAltOutline size="sm"/>
+                    Save
+                </Button>
+
             </div>
         </div>
     </Modal>
