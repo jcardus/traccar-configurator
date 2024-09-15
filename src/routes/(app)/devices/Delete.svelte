@@ -1,10 +1,14 @@
-<script lang="ts">
-    import { Button, Modal } from 'flowbite-svelte';
+<script>
+    import {Button, Modal, Spinner} from 'flowbite-svelte';
     import { ExclamationCircleOutline } from 'flowbite-svelte-icons';
     import {createEventDispatcher} from "svelte";
-    export let open: boolean = false; // modal control
+    export let open = false; // modal control
+    export let data
+    let loading = false
     const dispatch = createEventDispatcher();
-    async function deleteDevice(data) {
+    async function deleteDevice() {
+        loading = true
+        try {
         let id = data.id
         const url = `/api/devices/${id}`;
         const response = await fetch(url, {method: 'DELETE'});
@@ -12,8 +16,12 @@
             dispatch('deleteDevice', data); // Dispatch event to parent
             open=false
         } else {
-            throw Error(await response.text());
+            alert(await response.text())
         }
+        } catch(e) {
+            console.error(e)
+        }
+        loading = false
     }
 </script>
 
@@ -25,7 +33,14 @@
     </h3>
 
     <div class="flex items-center justify-center">
-        <Button color="red" class="mr-2" on:click={deleteDevice}>Yes, I'm sure</Button>
+        <Button color="red" class="mr-2" on:click={deleteDevice} disabled="{loading}">
+            {#if loading}
+            <Spinner size={5} class="mr-2"></Spinner>
+            Deleting...
+            {:else}
+                Yes, I'm sure
+            {/if}
+        </Button>
         <Button color="alternative" on:click={() => (open = false)}>No, cancel</Button>
     </div>
 </Modal>

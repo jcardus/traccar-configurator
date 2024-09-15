@@ -5,22 +5,21 @@
         Heading,
         Indicator, Tooltip
     } from 'flowbite-svelte';
-    import { Input, Table, TableBody, TableBodyCell, TableBodyRow, TableHead } from 'flowbite-svelte';
+    import { Input, Table, TableBody, TableBodyCell, TableHead } from 'flowbite-svelte';
     import { TableHeadCell, Toolbar, ToolbarButton } from 'flowbite-svelte';
     import {
         CogSolid,
-        DotsVerticalOutline,
         DownloadSolid
     } from 'flowbite-svelte-icons';
     import {
         EditOutline,
-        ExclamationCircleSolid,
         PlusOutline,
         TrashBinSolid
     } from 'flowbite-svelte-icons';
     import Delete from "./Delete.svelte";
     import Device from "./Device.svelte";
     import SendConfig from "./SendConfig.svelte";
+    import {slide} from 'svelte/transition'
 
     let openDevice = false; // modal control
     let openDelete = false; // modal control
@@ -32,18 +31,27 @@
     export let data;
     function handleUpdateDevice(event) {
         const updatedDevice = event.detail;
-        const index = data.devices.findIndex(device => device.id === updatedDevice.id);
+        let {devices} = data
+        const index = devices.findIndex(device => device.id === updatedDevice.id);
         if (index !== -1) {
-            data.devices[index] = updatedDevice; // Update the existing device
+            devices[index] = updatedDevice;
         } else {
-            data.devices.push(updatedDevice); // Add new device if it doesn't exist
+            devices.push(updatedDevice)
         }
+        data = {devices}
     }
 
     function handleDeleteDevice(event) {
-        const updatedDevice = event.detail;
-        const index = data.devices.findIndex(device => device.id === updatedDevice.id);
-        if (index !== -1) { data.devices.splice(index, 1) }
+        const {id} = event.detail;
+        let {devices} = data
+        const index = devices.findIndex(device => device.id === id);
+        if (index !== -1) {
+            devices.splice(index, 1)
+            data = {devices}
+        }
+        else {
+            console.error('deviceId', id, 'not found:', index)
+        }
     }
 
     function deviceSelected(device) {
@@ -67,24 +75,7 @@
                         class="m-0 rounded p-1 hover:bg-gray-100 focus:ring-0 dark:hover:bg-gray-700"
                 >
                     <CogSolid size="lg" />
-                </ToolbarButton>
-                <ToolbarButton
-                        color="dark"
-                        class="m-0 rounded p-1 hover:bg-gray-100 focus:ring-0 dark:hover:bg-gray-700"
-                >
-                    <TrashBinSolid size="lg" />
-                </ToolbarButton>
-                <ToolbarButton
-                        color="dark"
-                        class="m-0 rounded p-1 hover:bg-gray-100 focus:ring-0 dark:hover:bg-gray-700"
-                >
-                    <ExclamationCircleSolid size="lg" />
-                </ToolbarButton>
-                <ToolbarButton
-                        color="dark"
-                        class="m-0 rounded p-1 hover:bg-gray-100 focus:ring-0 dark:hover:bg-gray-700"
-                >
-                    <DotsVerticalOutline size="lg" />
+                    <Tooltip>Send config</Tooltip>
                 </ToolbarButton>
             </div>
             <div slot="end" class="flex items-center space-x-2">
@@ -116,16 +107,17 @@
             <TableHeadCell class="text-center font-medium w-40">Actions</TableHeadCell>
         </TableHead>
         <TableBody>
-            {#each data.devices.filter(d => !filter || d.name.includes(filter)) as device}
-                <TableBodyRow class="text-base" on:click={() => deviceSelected(device)}>
+            {#each data.devices.filter(d => !filter || d.name.toLowerCase().includes(filter.toLowerCase())).sort((a,b)=>a.name.localeCompare(b.name)) as device}
+                <tr transition:slide class="text-base" on:click={() => deviceSelected(device)}>
                     <TableBodyCell class="w-4 p-4"><Checkbox checked="{selected.includes(device.id)}"/></TableBodyCell>
                     <TableBodyCell class="max-w-64 flex items-center space-x-6 whitespace-nowrap p-4  overflow-hidden truncate">
                         <div class="text-sm font-normal text-gray-500 dark:text-gray-400">
                             <div class="text-base font-semibold text-gray-900 dark:text-white">{device.name}</div>
                             <div class="text-sm font-normal text-gray-500 dark:text-gray-400">{device.uniqueId}</div>
                         </div>
-                        <Tooltip class="lg:hidden"><div class="text-base font-semibold text-gray-900 dark:text-white">{device.name}</div>
-                            <div class="text-sm font-normal text-gray-500 dark:text-gray-400">{device.uniqueId}</div></Tooltip>
+                        <Tooltip class="lg:hidden" placement="top" arrow="{false}">
+                            {device.name} - {device.uniqueId}
+                        </Tooltip>
                     </TableBodyCell>
                     <TableBodyCell class="text-center max-w-sm overflow-hidden truncate p-4 text-base font-normal text-gray-500 dark:text-gray-400 xl:max-w-xs">
                         <span>{device.phone}</span>
@@ -168,7 +160,7 @@
                         </Button>
                         </div>
                     </TableBodyCell>
-                </TableBodyRow>
+                </tr>
             {/each}
         </TableBody>
     </Table>
@@ -176,5 +168,5 @@
 
 
 <Device bind:open={openDevice} data={current_device} on:updateDevice={handleUpdateDevice} />
-<Delete bind:open={openDelete} data={current_device} on:updateDevice={handleDeleteDevice}/>
+<Delete bind:open={openDelete} data={current_device} on:deleteDevice={handleDeleteDevice}/>
 <SendConfig bind:open={sendConfig} selected="{selected}" devices="{data.devices}"/>

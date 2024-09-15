@@ -1,6 +1,30 @@
 [
   {
-    "Device":"250 TMT",
+    "Brand": "apple",
+    "Device":"iphone",
+    "Protocol":"osmand",
+    "Port":"5055"
+  },
+  {
+    "Brand": "aovx",
+    "Device":"VL100",
+    "Protocol":"huabao",
+    "Port":"5015"
+  },
+  {
+    "Brand": "aovx",
+    "Device":"VL300",
+    "Protocol":"huabao",
+    "Port":"5015"
+  },
+  {
+    "Device": "GL100",
+    "Brand": "aovx",
+    "Protocol":"huabao",
+    "Port":"5015"
+  },
+  {
+    "Device":"TMT250",
     "Protocol":"teltonika",
     "Port":"5027"
   },
@@ -2312,7 +2336,8 @@
   {
     "Device":"GL100",
     "Protocol":"gl100",
-    "Port":"5003"
+    "Port":"5003",
+    "Brand": "queclink"
   },
   {
     "Device":"GL100M",

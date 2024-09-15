@@ -30,5 +30,5 @@ export const getData = (device, apn='allcom.vivo.com.br') => {
 
 import devices from './devices.json'
 
-export const deviceTypes = devices.map(d => ({name: d.Device + ` (${d.Protocol})`, value: d.Device}))
+export const deviceTypes = devices.map(d => ({name: `${d.Device} (${d.Brand || d.Protocol})`, value: d.Device}))
     .sort((a, b) => a.name.localeCompare(b.name))
