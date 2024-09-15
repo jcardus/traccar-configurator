@@ -57,7 +57,7 @@ export function copyToClipboard(message) {
     });
 }
 
-export function forward ({request, env}, cf) {
+export function forward ({request, platform}, cf) {
     const url = new URL(request.url)
     url.host = (platform && platform.env.TRACCAR_SERVER) || import.meta.env.VITE_TRACCAR_SERVER
     url.protocol = 'http:'
