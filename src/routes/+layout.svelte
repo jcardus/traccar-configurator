@@ -58,9 +58,9 @@
     </div>
 {/if}
 {#if alertMessage}
-    <div class="fixed top-4 left-1/2 transform -translate-x-1/2 z-50">
+    <div class="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 w-[calc(100%-2rem)]">
         <Alert border>
-            <span class="font-medium">{alertMessage}</span>
+            <span class="font-medium break-words">{alertMessage}</span>
         </Alert>
     </div>
 {/if}

@@ -3,6 +3,11 @@
     import { createEventDispatcher } from 'svelte';
     import { deviceTypes } from "$lib/devices.js";
     import SendConfig from "./SendConfig.svelte";
+    import {
+        ArrowUpRightFromSquareOutline,
+        FloppyDiskAltOutline,
+        TrashBinSolid
+    } from "flowbite-svelte-icons";
 
     export let open = false; // Modal control
     export let data = {}; // Default empty object
@@ -89,9 +94,22 @@
         </div>
 
         <!-- Modal footer -->
-        <div slot="footer" class="flex justify-between w-full">
-            <Button color="alternative" on:click="{()=>{sendConfig = true}}" class="self-end">Send config</Button>
-            <Button type="submit">{data.id ? 'Save' : 'Save'}</Button>
+        <div slot="footer" class="w-full">
+            <div class="flex justify-between ">
+            {#if data.id}
+                <Button color="alternative" on:click="{()=>{sendConfig = true}}" class="{data.id?'':'hidden'}">
+                    <ArrowUpRightFromSquareOutline></ArrowUpRightFromSquareOutline>
+                    Send config</Button>
+            {/if}
+            <Button type="submit">
+                <FloppyDiskAltOutline size="sm"/>
+                Save</Button>
+            </div>
+            <div class="flex justify-between py-4">
+                <Button color="red">
+                    <TrashBinSolid size="sm" /> Delete</Button>
+            </div>
+
         </div>
 
     </Modal>

@@ -32,7 +32,8 @@ async function sendConfiguration() {
 }
 </script>
 
-<Modal bind:open title="Send configuration to {selected.length} devices">
+<Modal bind:open title="Send configuration" class="w-96">
+    <div>Send to {selected.length} device{selected.length>1?'s':''}?</div>
     <div class="flex items-center justify-center">
         <Button color="red" class="mr-2" on:click={sendConfiguration}>Yes</Button>
         <Button color="alternative" on:click={() => (open = false)}>No, cancel</Button>
