@@ -2,10 +2,12 @@
     import { Button, Checkbox, Input, Label, Modal, Select } from 'flowbite-svelte';
     import { createEventDispatcher } from 'svelte';
     import { deviceTypes } from "$lib/devices.js";
+    import SendConfig from "./SendConfig.svelte";
 
     export let open = false; // Modal control
     export let data = {}; // Default empty object
-
+    export let devices
+    let sendConfig = false
     const dispatch = createEventDispatcher();
 
     function init(form) {
@@ -75,6 +77,11 @@
                     <Select items="{deviceTypes}" bind:value={data.model} name="model" class="border outline-none" required />
                 </Label>
                 <Label class="col-span-6 space-y-2 sm:col-span-3">
+                    <span>APN</span>
+                    <Input bind:value="{data.attributes.apn}" name="apn" class="border outline-none" />
+                </Label>
+
+                <Label class="col-span-6 space-y-2 sm:col-span-3">
                     <span>Disabled</span>
                     <Checkbox id="checkbox2" bind:checked={data.disabled} />
                 </Label>
@@ -82,8 +89,12 @@
         </div>
 
         <!-- Modal footer -->
-        <div slot="footer">
+        <div slot="footer" class="flex justify-between w-full">
+            <Button color="alternative" on:click="{()=>{sendConfig = true}}" class="self-end">Send config</Button>
             <Button type="submit">{data.id ? 'Save' : 'Save'}</Button>
         </div>
+
     </Modal>
 </form>
+
+<SendConfig bind:open={sendConfig} selected="{[data.id]}" devices="{devices}"/>

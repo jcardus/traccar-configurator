@@ -20,6 +20,7 @@
     import Device from "./Device.svelte";
     import SendConfig from "./SendConfig.svelte";
     import {slide} from 'svelte/transition'
+    import config from "tailwindcss/defaultTheme.js";
 
     let openDevice = false; // modal control
     let openDelete = false; // modal control
@@ -55,7 +56,13 @@
     }
 
     function deviceSelected(device) {
-        selected = selected.includes(device.id) ? selected.filter(d => d !== device.id) : selected.concat([device.id])
+        if (!window.matchMedia(`(min-width: ${config.screens.sm})`).matches) {
+            current_device = device
+            selected = [device.id]
+            openDevice = true
+        } else {
+            selected = selected.includes(device.id) ? selected.filter(d => d !== device.id) : selected.concat([device.id])
+        }
     }
     const socket = new WebSocket('/api/socket')
     socket.onmessage = (event) => {
@@ -188,6 +195,6 @@
 </main>
 
 
-<Device bind:open={openDevice} data={current_device} on:updateDevice={handleUpdateDevice} />
+<Device bind:open={openDevice} data={current_device} on:updateDevice={handleUpdateDevice} devices={data.devices}/>
 <Delete bind:open={openDelete} data={current_device} on:deleteDevice={handleDeleteDevice}/>
 <SendConfig bind:open={sendConfig} selected="{selected}" devices="{data.devices}"/>
