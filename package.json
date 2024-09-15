@@ -5,13 +5,15 @@
 	"scripts": {
 		"dev": "vite dev --host",
 		"build": "VITE_APP_VERSION=$npm_package_version vite build",
-		"preview": "vite preview"
+		"preview": "vite preview",
+		"prebuild": "pwa-assets-generator --preset minimal static/logo.png"
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "^3.0.0",
 		"@sveltejs/adapter-cloudflare": "^4.7.0",
 		"@sveltejs/kit": "^2.0.0",
 		"@sveltejs/vite-plugin-svelte": "^3.0.0",
+		"@vite-pwa/assets-generator": "^0.2.6",
 		"@vite-pwa/sveltekit": "^0.6.5",
 		"autoprefixer": "^10.4.19",
 		"postcss": "^8.4.38",
