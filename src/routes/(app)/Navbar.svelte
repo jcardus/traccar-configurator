@@ -19,7 +19,7 @@
         />
         <NavBrand href="/" class="lg:w-60">
             <img
-                    src="/logo.png"
+                    src="/logo.svg"
                     class="me-2.5 h-6 sm:h-8"
                     alt="Logo"
             />

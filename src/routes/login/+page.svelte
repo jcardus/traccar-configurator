@@ -5,7 +5,7 @@
     let title = 'Sign in to Configurator';
     let site = {
         name: 'Configurator',
-        img: '/logo.png',
+        img: '/logo.svg',
         link: '/',
         imgAlt: 'Logo'
     };
