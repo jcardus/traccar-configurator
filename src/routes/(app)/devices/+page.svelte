@@ -195,6 +195,6 @@
 </main>
 
 
-<Device bind:open={openDevice} data={current_device} on:updateDevice={handleUpdateDevice} devices={data.devices}/>
+<Device bind:open={openDevice} data={current_device} on:deleteDevice={handleDeleteDevice} on:updateDevice={handleUpdateDevice} devices={data.devices}/>
 <Delete bind:open={openDelete} data={current_device} on:deleteDevice={handleDeleteDevice}/>
 <SendConfig bind:open={sendConfig} selected="{selected}" devices="{data.devices}"/>

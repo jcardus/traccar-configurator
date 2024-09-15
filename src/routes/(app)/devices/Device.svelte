@@ -8,12 +8,18 @@
         FloppyDiskAltOutline,
         TrashBinSolid
     } from "flowbite-svelte-icons";
+    import Delete from "./Delete.svelte";
 
     export let open = false; // Modal control
     export let data = {}; // Default empty object
     export let devices
     let sendConfig = false
+    let openDelete = false
     const dispatch = createEventDispatcher();
+    function handleDeleteDevice(event) {
+        open=false
+        dispatch('deleteDevice', event.detail)
+    }
 
     function init(form) {
         if (data) {
@@ -43,11 +49,7 @@
         if (response.ok) {
             dispatch('updateDevice', await response.json()); // Dispatch event to parent
             open = false; // Close modal
-        } else {
-            // Handle errors
-            console.error(await response.text());
-            alert("An error occurred while saving the device.");
-        }
+        } else { alert(await response.text()) }
     };
 </script>
 
@@ -98,21 +100,24 @@
             <div class="flex justify-between ">
             {#if data.id}
                 <Button color="alternative" on:click="{()=>{sendConfig = true}}" class="{data.id?'':'hidden'}">
-                    <ArrowUpRightFromSquareOutline></ArrowUpRightFromSquareOutline>
-                    Send config</Button>
+                    <ArrowUpRightFromSquareOutline/>
+                    Send config
+                </Button>
             {/if}
             <Button type="submit">
                 <FloppyDiskAltOutline size="sm"/>
-                Save</Button>
+                Save
+            </Button>
             </div>
             <div class="flex justify-between py-4">
-                <Button color="red">
-                    <TrashBinSolid size="sm" /> Delete</Button>
+                <Button color="red" on:click={() => openDelete=true}>
+                    <TrashBinSolid size="sm" />
+                    Delete
+                </Button>
             </div>
-
         </div>
-
     </Modal>
 </form>
 
 <SendConfig bind:open={sendConfig} selected="{[data.id]}" devices="{devices}"/>
+<Delete bind:open={openDelete} data={data} on:deleteDevice={handleDeleteDevice}/>
