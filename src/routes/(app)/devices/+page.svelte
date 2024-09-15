@@ -81,7 +81,7 @@
             Devices
         </Heading>
         <Toolbar embedded class="w-full py-4 text-gray-500  dark:text-gray-400">
-            <Input placeholder="Search for devices" class="me-4 w-80 border xl:w-96" bind:value={filter}  />
+            <Input placeholder="Search for devices" class="me-4 w-40 border xl:w-96" bind:value={filter}  />
             <div class="border-l border-gray-100 pl-2 dark:border-gray-700">
                 <ToolbarButton on:click={() => {
                     selected.length ?
@@ -105,49 +105,51 @@
                 >
                     <PlusOutline size="sm" />Add device
                 </Button>
-                <Button size="sm" color="alternative" class="gap-2 px-3">
+                <Button size="sm" color="alternative" class="hidden sm:block gap-2 px-3">
                     <DownloadSolid size="md" class="-ml-1" />Export
                 </Button>
             </div>
         </Toolbar>
     </div>
-    <Table hoverable="true" class="table-fixed">
+    <Table hoverable="true" class="table-auto sm:table-fixed">
         <TableHead class="border-y border-gray-200 bg-gray-100 dark:border-gray-700">
-            <TableHeadCell class="w-4 p-4">
+            <TableHeadCell class="w-4 p-4 hidden sm:table-cell">
                 <Checkbox checked="{selected.length === data.devices.length}" on:change={() => {
                     selected = selected.length === data.devices.length ? [] : data.devices.map(d => d.id)
                 }} />
             </TableHeadCell>
             <TableHeadCell class="font-medium">Name</TableHeadCell>
-            {#each ['Phone', 'Model', 'Last Update'] as title}
-                <TableHeadCell class="text-center font-medium">{title}</TableHeadCell>
-            {/each}
-            <TableHeadCell class="text-center font-medium w-24">Actions</TableHeadCell>
-            <TableHeadCell class="text-center font-medium w-40">Actions</TableHeadCell>
+            <TableHeadCell class="text-center font-medium hidden sm:table-cell">Phone</TableHeadCell>
+            <TableHeadCell class="text-center font-medium hidden sm:table-cell">Model</TableHeadCell>
+            <TableHeadCell class="text-center font-medium">Last Update</TableHeadCell>
+            <TableHeadCell class="text-center font-medium w-24">Status</TableHeadCell>
+            <TableHeadCell class="text-center font-medium w-40 hidden sm:table-cell">Actions</TableHeadCell>
         </TableHead>
         <TableBody>
             {#each data.devices.filter(d => !filter || d.name.toLowerCase().includes(filter.toLowerCase())).sort((a,b)=>a.name.localeCompare(b.name)) as device}
                 <tr transition:slide class="text-base" on:click={() => deviceSelected(device)}>
-                    <TableBodyCell class="w-4 p-4"><Checkbox checked="{selected.includes(device.id)}"/></TableBodyCell>
-                    <TableBodyCell class="max-w-64 flex items-center space-x-6 whitespace-nowrap p-4  overflow-hidden truncate">
+                    <TableBodyCell class="w-4 p-4 hidden sm:table-cell">
+                        <Checkbox checked="{selected.includes(device.id)}"/>
+                    </TableBodyCell>
+                    <TableBodyCell class="space-x-6 p-4">
                         <div class="text-sm font-normal text-gray-500 dark:text-gray-400">
-                            <div class="text-base font-semibold text-gray-900 dark:text-white">{device.name}</div>
+                            <div class="whitespace-normal text-base font-semibold text-gray-900 dark:text-white">{device.name}</div>
                             <div class="text-sm font-normal text-gray-500 dark:text-gray-400">{device.uniqueId}</div>
                         </div>
                         <Tooltip class="lg:hidden" placement="top" arrow="{false}">
                             {device.name} - {device.uniqueId}
                         </Tooltip>
                     </TableBodyCell>
-                    <TableBodyCell class="text-center max-w-sm overflow-hidden truncate p-4 text-base font-normal text-gray-500 dark:text-gray-400 xl:max-w-xs">
+                    <TableBodyCell class="hidden sm:table-cell text-center max-w-sm overflow-hidden truncate p-4 text-base font-normal text-gray-500 dark:text-gray-400 xl:max-w-xs">
                         <span>{device.phone}</span>
                         <Tooltip class="lg:hidden">{device.phone}</Tooltip>
                     </TableBodyCell>
-                    <TableBodyCell class="text-center max-w-sm overflow-hidden truncate p-4 text-base font-normal text-gray-500 dark:text-gray-400 xl:max-w-xs">
+                    <TableBodyCell class="text-center p-4 text-gray-500 dark:text-gray-400 hidden sm:table-cell">
                         <span>{device.model}</span>
                         <Tooltip class="lg:hidden">{device.model}</Tooltip>
                     </TableBodyCell>
-                    <TableBodyCell class="p-1 overflow-ellipsis overflow-hidden">
-                        <span>{new Date(device.lastUpdate).toLocaleString()}</span>
+                    <TableBodyCell class="p-1 overflow-ellipsis overflow-hidden text-center">
+                        <span>{new Date(device.lastUpdate).toLocaleDateString()}<br>{new Date(device.lastUpdate).toLocaleTimeString()}</span>
                         <Tooltip class="lg:hidden">{new Date(device.lastUpdate).toLocaleString()}</Tooltip>
                     </TableBodyCell>
                     <TableBodyCell class="p-1 font-normal">
@@ -156,8 +158,8 @@
                             {device.status}
                         </div>
                     </TableBodyCell>
-                    <TableBodyCell>
-                        <div class="flex justify-center gap-2">
+                    <TableBodyCell class="hidden sm:table-cell">
+                        <div class="flex justify-center gap-2 ">
                         <Button
                                 size="xs"
                                 on:click={() => {
