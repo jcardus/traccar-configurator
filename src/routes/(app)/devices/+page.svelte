@@ -70,15 +70,6 @@
         if (_data.devices) {
             _data.devices.forEach(detail => handleUpdateDevice({detail}))
         }
-        if (data.positions) {
-
-        }
-        if (data.events) {
-
-        }
-        if (data.logs) {
-
-        }
     }
 </script>
 

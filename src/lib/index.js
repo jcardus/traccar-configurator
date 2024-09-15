@@ -56,3 +56,11 @@ export function copyToClipboard(message) {
         console.error(err);
     });
 }
+
+export function forward ({request, env}, cf) {
+    const url = new URL(request.url)
+    url.host = (platform && platform.env.TRACCAR_SERVER) || import.meta.env.VITE_TRACCAR_SERVER
+    url.protocol = 'http:'
+    url.port = 80
+    return fetch(new Request(url, request), cf)
+}
