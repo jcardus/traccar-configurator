@@ -9,10 +9,7 @@
         link: '/',
         imgAlt: 'Logo'
     };
-    let rememberMe = true;
-    let createAccount = true;
-    let lostPasswordLink = 'forgot-password';
-    let loginTitle = 'Login to your account';
+    let loginTitle = 'Login';
 
     const onSubmit = (e) => {
         const formData = new FormData(e.target);
@@ -29,9 +26,6 @@
 <SignIn
         {title}
         {site}
-        {rememberMe}
-        {createAccount}
-        {lostPasswordLink}
         {loginTitle}
         on:submit={onSubmit}
 >
