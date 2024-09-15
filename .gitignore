@@ -20,3 +20,14 @@ Thumbs.db
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 .wrangler
+/static/apple-touch-icon-180x180.png
+/static/favicon.ico
+/static/logo.svg
+/static/maskable-icon-512x512.png
+/static/pwa-64x64.png
+/static/pwa-192x192.png
+/static/pwa-512x512.png
+/.idea/.gitignore
+/.idea/modules.xml
+/.idea/traccar-configurator.iml
+/.idea/vcs.xml
