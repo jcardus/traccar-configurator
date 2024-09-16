@@ -111,7 +111,10 @@
     if (response.ok) {
       const token = await response.text();
       const url = `https://${import.meta.env.VITE_TRACCAR_WEB_SERVER}?token=${token}`
-      window.open(url)
+      await navigator.share({
+        title: data.name,
+        url
+    })
     } else {
       alert(await response.text());
     }
@@ -129,7 +132,6 @@
                     <FloppyDiskAltOutline size="sm"/>
                     Save
                 </Button>
-
             </div>
         </div>
     </Modal>
