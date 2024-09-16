@@ -24,6 +24,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@sentry/sveltekit": "^8.30.0",
 		"firebase": "^9.23.0",
 		"flowbite": "^2.4.1",
 		"flowbite-svelte": "^0.46.15",

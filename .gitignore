@@ -31,3 +31,6 @@ vite.config.ts.timestamp-*
 /.idea/modules.xml
 /.idea/traccar-configurator.iml
 /.idea/vcs.xml
+
+# Sentry Config File
+.sentryclirc
