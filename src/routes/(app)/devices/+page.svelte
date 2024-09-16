@@ -3,7 +3,7 @@
         Button,
         Checkbox,
         Heading,
-        Indicator, Tooltip
+        Indicator, TableBodyRow, Tooltip
     } from 'flowbite-svelte';
     import { Input, Table, TableBody, TableBodyCell, TableHead } from 'flowbite-svelte';
     import { TableHeadCell, Toolbar, ToolbarButton } from 'flowbite-svelte';
@@ -19,7 +19,6 @@
     import Delete from "./Delete.svelte";
     import Device from "./Device.svelte";
     import SendConfig from "./SendConfig.svelte";
-    import {slide} from 'svelte/transition'
     import config from "tailwindcss/defaultTheme.js";
 
     let openDevice = false; // modal control
@@ -126,7 +125,7 @@
         </TableHead>
         <TableBody>
             {#each data.devices.filter(d => !filter || d.name.toLowerCase().includes(filter.toLowerCase())).sort((a,b)=>a.name.localeCompare(b.name)) as device}
-                <tr transition:slide class="text-base" on:click={() => deviceSelected(device)}>
+                <TableBodyRow class="text-base" on:click={() => deviceSelected(device)}>
                     <TableBodyCell class="w-4 p-4 hidden sm:table-cell">
                         <Checkbox checked="{selected.includes(device.id)}"/>
                     </TableBodyCell>
@@ -184,7 +183,7 @@
                         </Button>
                         </div>
                     </TableBodyCell>
-                </tr>
+                </TableBodyRow>
             {/each}
         </TableBody>
     </Table>
