@@ -30,6 +30,9 @@ importers:
       '@sveltejs/adapter-cloudflare':
         specifier: ^4.7.0
         version: 4.7.0(@sveltejs/kit@2.5.18(@sveltejs/vite-plugin-svelte@3.1.1(svelte@4.2.18)(vite@5.3.5(@types/node@20.14.12)(terser@5.32.0)))(svelte@4.2.18)(vite@5.3.5(@types/node@20.14.12)(terser@5.32.0)))(wrangler@3.67.1(@cloudflare/workers-types@4.20240725.0))
+      '@sveltejs/adapter-static':
+        specifier: ^3.0.4
+        version: 3.0.4(@sveltejs/kit@2.5.18(@sveltejs/vite-plugin-svelte@3.1.1(svelte@4.2.18)(vite@5.3.5(@types/node@20.14.12)(terser@5.32.0)))(svelte@4.2.18)(vite@5.3.5(@types/node@20.14.12)(terser@5.32.0)))
       '@sveltejs/kit':
         specifier: ^2.0.0
         version: 2.5.18(@sveltejs/vite-plugin-svelte@3.1.1(svelte@4.2.18)(vite@5.3.5(@types/node@20.14.12)(terser@5.32.0)))(svelte@4.2.18)(vite@5.3.5(@types/node@20.14.12)(terser@5.32.0))
@@ -1400,6 +1403,11 @@ packages:
     peerDependencies:
       '@sveltejs/kit': ^2.0.0
       wrangler: ^3.28.4
+
+  '@sveltejs/adapter-static@3.0.4':
+    resolution: {integrity: sha512-Qm4GAHCnRXwfWG9/AtnQ7mqjyjTs7i0Opyb8H2KH9rMR7fLxqiPx/tXeoE6HHo66+72CjyOb4nFH3lrejY4vzA==}
+    peerDependencies:
+      '@sveltejs/kit': ^2.0.0
 
   '@sveltejs/kit@2.5.18':
     resolution: {integrity: sha512-+g06hvpVAnH7b4CDjhnTDgFWBKBiQJpuSmQeGYOuzbO3SC3tdYjRNlDCrafvDtKbGiT2uxY5Dn9qdEUGVZdWOQ==}
@@ -4783,6 +4791,10 @@ snapshots:
       esbuild: 0.21.5
       worktop: 0.8.0-next.18
       wrangler: 3.67.1(@cloudflare/workers-types@4.20240725.0)
+
+  '@sveltejs/adapter-static@3.0.4(@sveltejs/kit@2.5.18(@sveltejs/vite-plugin-svelte@3.1.1(svelte@4.2.18)(vite@5.3.5(@types/node@20.14.12)(terser@5.32.0)))(svelte@4.2.18)(vite@5.3.5(@types/node@20.14.12)(terser@5.32.0)))':
+    dependencies:
+      '@sveltejs/kit': 2.5.18(@sveltejs/vite-plugin-svelte@3.1.1(svelte@4.2.18)(vite@5.3.5(@types/node@20.14.12)(terser@5.32.0)))(svelte@4.2.18)(vite@5.3.5(@types/node@20.14.12)(terser@5.32.0))
 
   '@sveltejs/kit@2.5.18(@sveltejs/vite-plugin-svelte@3.1.1(svelte@4.2.18)(vite@5.3.5(@types/node@20.14.12)(terser@5.32.0)))(svelte@4.2.18)(vite@5.3.5(@types/node@20.14.12)(terser@5.32.0))':
     dependencies:
