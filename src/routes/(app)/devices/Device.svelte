@@ -1,15 +1,16 @@
 <script>
-    import { Button, Checkbox, Input, Label, Modal, Select } from 'flowbite-svelte';
+    import {Button, Checkbox, Input, Label, Modal, Select, Spinner} from 'flowbite-svelte';
     import { createEventDispatcher } from 'svelte';
     import { deviceTypes } from "$lib/devices.js";
     import SendConfig from "./SendConfig.svelte";
     import {
         ArrowUpRightFromSquareOutline,
-        FloppyDiskAltOutline, MapPinAltOutline,
+        FloppyDiskAltOutline,
         TrashBinSolid
     } from "flowbite-svelte-icons";
     import Delete from "./Delete.svelte";
-
+    import ShareLocation from "./ShareLocation.svelte";
+    let url
     export let open = false; // Modal control
     export let data = {}; // Default empty object
     export let devices
@@ -51,6 +52,7 @@
             open = false; // Close modal
         } else { alert(await response.text()) }
     };
+    let openShareLocation = false;
 </script>
 
 <form action="#" use:init on:submit={handleSave}>
@@ -102,26 +104,7 @@
                     <ArrowUpRightFromSquareOutline/>
                     Send config
                 </Button>
-                <Button color="alternative" size="sm" on:click="{async () => {
-    const expirationTime = new Date(new Date().getTime() + 7 * 24 * 60 * 60 * 1000).toISOString();
-    const response = await fetch('/api/devices/share', {
-      method: 'POST',
-      body: new URLSearchParams(`deviceId=${data.id}&expiration=${expirationTime}`),
-    });
-    if (response.ok) {
-      const token = await response.text();
-      const url = `https://${import.meta.env.VITE_TRACCAR_WEB_SERVER}?token=${token}`
-      await navigator.share({
-        title: data.name,
-        url
-    })
-    } else {
-      alert(await response.text());
-    }
-                }}" class="{data.id?'':'hidden'}">
-                    <MapPinAltOutline/>
-                    Location
-                </Button>
+                <ShareLocation bind:open={openShareLocation} {url} {data} class="{data.id?'':'hidden'}"/>
             </div>
             <div class="flex justify-between py-4">
                 <Button color="red" on:click={() => openDelete=true}>
