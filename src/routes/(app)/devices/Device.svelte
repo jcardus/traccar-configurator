@@ -1,6 +1,6 @@
 <script>
-    import {Button, Checkbox, Input, Label, Modal, Select, Spinner} from 'flowbite-svelte';
-    import { createEventDispatcher } from 'svelte';
+    import {Button, Checkbox, Input, Label, Modal, Select} from 'flowbite-svelte';
+    import {createEventDispatcher, onMount} from 'svelte';
     import { deviceTypes } from "$lib/devices.js";
     import SendConfig from "./SendConfig.svelte";
     import {
@@ -53,6 +53,8 @@
         } else { alert(await response.text()) }
     };
     let openShareLocation = false;
+
+    onMount(() => data.attributes ||= {apn: ''})
 </script>
 
 <form action="#" use:init on:submit={handleSave}>
@@ -104,7 +106,7 @@
                     <ArrowUpRightFromSquareOutline/>
                     Send config
                 </Button>
-                <ShareLocation bind:open={openShareLocation} {url} {data} class="{data.id?'':'hidden'}"/>
+                <ShareLocation bind:open={openShareLocation} {url} {data} />
             </div>
             <div class="flex justify-between py-4">
                 <Button color="red" on:click={() => openDelete=true}>
