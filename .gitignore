@@ -35,3 +35,4 @@ vite.config.ts.timestamp-*
 # Sentry Config File
 .sentryclirc
 /.idea/
+/.idea
