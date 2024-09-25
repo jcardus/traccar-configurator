@@ -16,7 +16,7 @@ async function sendConfiguration() {
             if (!device.model) {
                 setAlert('Please select model for ' + device.name)
             } else {
-                for (const data of getData(device, apn)) {
+                for (const data of getData(device)) {
                     await sendCommand({
                         type: 'custom',
                         attributes: {data},

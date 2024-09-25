@@ -148,7 +148,7 @@
                     </TableBodyCell>
                     <TableBodyCell class="text-center p-4 text-gray-500 dark:text-gray-400 hidden sm:table-cell">
                         <span>{device.attributes.apn || ''}</span>
-                        <Tooltip class="lg:hidden">{device.attribtues.apn || ''}</Tooltip>
+                        <Tooltip class="lg:hidden">{device.attributes.apn || ''}</Tooltip>
                     </TableBodyCell>
                     <TableBodyCell class="p-1 overflow-ellipsis overflow-hidden text-center">
                         <span>{new Date(device.lastUpdate).toLocaleDateString()}<br>{new Date(device.lastUpdate).toLocaleTimeString()}</span>

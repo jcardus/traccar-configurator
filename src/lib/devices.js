@@ -13,18 +13,19 @@ const teltonika = ({uniqueId}, apn) => [
 ]
 
 const messages = {
+    huabao: ({attributes}) => ['IP=0,gps.rastreosat.com.br,5015', `APN=${attributes.apn}`],
     concox,
     teltonika,
     fmb920: teltonika,
-    gl100: () => ['config aovx'],
+    GL100: () => ['config aovx'],
     ST300CMD: ({model, uniqueId}) => [`${model};${uniqueId};02;0;${apn};allcom;allcom;${host};5011;;;;`],
 }
 
-export const getData = (device, apn='allcom.vivo.com.br') => {
+export const getData = (device) => {
     if (!messages[getProtocol(device.model)]) {
         return []
     }
-    return messages[getProtocol(device.model)](device, apn)
+    return messages[getProtocol(device.model)](device)
 }
 
 function getProtocol(model) {
