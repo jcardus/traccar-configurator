@@ -28,10 +28,10 @@
             >
 				Configurator
 			</span>
+            <div class="ms-auto flex items-center text-gray-500 dark:text-gray-400 sm:order-2">
+                <DarkMode />
+                <UserMenu />
+            </div>
         </NavBrand>
-        <div class="ms-auto flex items-center text-gray-500 dark:text-gray-400 sm:order-2">
-            <DarkMode />
-            <UserMenu />
-        </div>
     </NavContainer>
 </Navbar>
