@@ -18,6 +18,12 @@
     "Port":"5015"
   },
   {
+    "Brand": "aovx",
+    "Device":"AL300",
+    "Protocol":"huabao",
+    "Port":"5015"
+  },
+  {
     "Device": "GL100",
     "Brand": "aovx",
     "Protocol":"huabao",
