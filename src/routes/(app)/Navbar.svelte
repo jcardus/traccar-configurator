@@ -7,12 +7,13 @@
         DarkMode
     } from 'flowbite-svelte';
     import UserMenu from "./UserMenu.svelte";
+    import NavContainer from "flowbite-svelte/NavContainer.svelte";
 
     export let drawerHidden=false;
     export let fluid=true
 </script>
-<Navbar {fluid} class="text-black" color="default" let:NavContainer>
-    <NavContainer class="mb-px mt-px px-1" {fluid}>
+<Navbar>
+    <NavContainer>
         <NavHamburger
                 onClick={() => (drawerHidden = !drawerHidden)}
                 class="m-0 me-3 md:block lg:hidden"
