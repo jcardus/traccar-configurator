@@ -1,6 +1,6 @@
 const host = 'gps.rastreosat.com.br'
 
-const concox =  ({}, apn) => [
+const gt06 =  ({}, apn) => [
     `SERVER,0,${host},5023,0#`,
     `SERVER,1,${host},5023,0#`,
     `APN,${apn}#`
@@ -14,11 +14,9 @@ const teltonika = ({uniqueId}, apn) => [
 
 const messages = {
     huabao: ({attributes}) => ['IP=0,gps.rastreosat.com.br,5015', `APN=${attributes.apn}`],
-    concox,
+    gt06,
     teltonika,
-    fmb920: teltonika,
-    GL100: () => ['config aovx'],
-    ST300CMD: ({model, uniqueId}) => [`${model};${uniqueId};02;0;${apn};allcom;allcom;${host};5011;;;;`],
+    suntech: ({model, uniqueId}) => [`${model};${uniqueId};02;0;${apn};allcom;allcom;${host};5011;;;;`],
 }
 
 export const getData = (device) => {
