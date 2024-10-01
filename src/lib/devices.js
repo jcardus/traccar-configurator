@@ -1,9 +1,9 @@
 const host = 'gps.rastreosat.com.br'
 
-const gt06 =  ({apn}) => [
+const gt06 =  ({attributes}) => [
     `SERVER,0,${host},5023,0#`,
     `SERVER,1,${host},5023,0#`,
-    `APN,${apn}#`
+    `APN,${attributes.apn}#`
 ]
 
 const teltonika = ({uniqueId}, apn) => [
