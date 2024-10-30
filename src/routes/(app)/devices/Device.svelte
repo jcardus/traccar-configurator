@@ -54,7 +54,7 @@
     };
     let openShareLocation = false;
 
-    onMount(() => data.attributes ||= {apn: ''})
+    onMount(() => data.attributes ||= {apn: '', password: ''})
 </script>
 
 <form action="#" use:init on:submit={handleSave}>
@@ -90,6 +90,10 @@
                 <Label class="col-span-6 space-y-2 sm:col-span-3">
                     <span>APN</span>
                     <Input bind:value="{data.attributes.apn}" name="apn" class="border outline-none" />
+                </Label>
+                <Label class="col-span-6 space-y-2 sm:col-span-3">
+                    <span>Password</span>
+                    <Input bind:value="{data.attributes.password}" name="apn" class="border outline-none" />
                 </Label>
 
                 <Label class="col-span-6 space-y-2 sm:col-span-3">
