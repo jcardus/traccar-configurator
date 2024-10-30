@@ -4411,6 +4411,11 @@
     "Port":"5005"
   },
   {
+    "Device":"MV66",
+    "Protocol":"huabao",
+    "Port":"5015"
+  },
+  {
     "Device":"MV720",
     "Protocol":"h02",
     "Port":"5013"
