@@ -4413,7 +4413,8 @@
   {
     "Device":"MV66",
     "Protocol":"huabao",
-    "Port":"5015"
+    "Port":"5015",
+    "SmsProtocol": "gt06"
   },
   {
     "Device":"MV720",

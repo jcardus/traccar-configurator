@@ -1,8 +1,8 @@
 const host = 'gps.rastreosat.com.br'
 
-const gt06 =  ({attributes}) => [
-    `SERVER,0,${host},5023,0#`,
-    `SERVER,1,${host},5023,0#`,
+const gt06 =  ({attributes}, port) => [
+    `SERVER,0,${host},${port},0#`,
+    `SERVER,1,${host},${port},0#`,
     `APN,${attributes.apn}#`
 ]
 
@@ -23,11 +23,19 @@ export const getData = (device) => {
     if (!messages[getProtocol(device.model)]) {
         return []
     }
-    return messages[getProtocol(device.model)](device)
+    return messages[getProtocol(device.model)](device, getPort(device.model))
 }
 
 function getProtocol(model) {
-    return devices.find(d => d.Device === model).Protocol
+    const device = devices.find(d => d.Device === model)
+    if (device) {
+        return device.SmsProtocol || device.Protocol
+    }
+}
+
+function getPort(model) {
+    const device = devices.find(d => d.Device === model)
+    return device && device.Port
 }
 
 import devices from './devices.json'
