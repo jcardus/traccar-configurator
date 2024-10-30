@@ -1,7 +1,8 @@
 const host = 'gps.rastreosat.com.br'
+const ip = '178.156.132.140'
 
 const gt06 =  ({attributes}, port) => [
-    `SERVER,0,${host},${port},0#`,
+    `SERVER,0,${ip},${port},0#`,
     `SERVER,1,${host},${port},0#`,
     `APN,${attributes.apn}#`
 ]
