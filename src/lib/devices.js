@@ -7,6 +7,13 @@ const gt06 =  ({attributes}, port) => [
     `APN,${attributes.apn}#`
 ]
 
+const topin =  ({attributes}, port) => [
+    `DOMAIN#${host}#${port}#`,
+    `SERVER#${ip}#${port}#`,
+    `APN#${attributes.apn}#`
+]
+
+
 const teltonika = ({uniqueId}, apn) => [
     `  setparam 2001:${apn}`,
     `  setparam 2004:${host};2005:5027;50190:2;50191:5`,
@@ -16,6 +23,7 @@ const teltonika = ({uniqueId}, apn) => [
 const messages = {
     huabao: ({attributes}) => ['IP=0,gps.rastreosat.com.br,5015', `APN=${attributes.apn}`],
     gt06,
+    topin,
     teltonika,
     suntech: ({model, uniqueId}) => [`${model};${uniqueId};02;0;${apn};allcom;allcom;${host};5011;;;;`],
 }
