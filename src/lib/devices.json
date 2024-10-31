@@ -1,5 +1,10 @@
 [
   {
+    "Device": "G51",
+    "Protocol": "topin",
+    "Port": "5199"
+  },
+  {
     "Brand": "apple",
     "Device":"iphone",
     "Protocol":"osmand",
