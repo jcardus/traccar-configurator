@@ -23,6 +23,7 @@ async function sendConfiguration() {
                         textChannel: true,
                         deviceId
                     })
+                    await new Promise(res => setTimeout(res, 3000))
                 }
             }
         }
