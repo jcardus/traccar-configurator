@@ -7672,6 +7672,11 @@
     "Port":"5199"
   },
   {
+    "Device":"G51",
+    "Protocol":"topin",
+    "Port":"5199"
+  },
+  {
     "Device":"ZoomBox",
     "Protocol":"mta6",
     "Port":"5028"
