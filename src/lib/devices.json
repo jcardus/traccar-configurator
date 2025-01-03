@@ -1215,6 +1215,12 @@
     "Port":"5023"
   },
   {
+    "Brand": "x3tech",
+    "Device":" NT20",
+    "Protocol":"gt06",
+    "Port":"5023"
+  },
+  {
     "Device":"Concox GK301",
     "Protocol":"gt06",
     "Port":"5023"

@@ -5,7 +5,7 @@ export const ssr = false
 
 export async function load({fetch}) {
     try {
-        const response = await fetch('/api/devices');
+        const response = await fetch('/api/devices?all=true');
         if (response.ok) {
             const devices = await response.json()
             return {devices: devices.slice(0, 500)}
