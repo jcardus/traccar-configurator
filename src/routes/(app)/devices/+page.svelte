@@ -20,10 +20,12 @@
     import Device from "./Device.svelte";
     import SendConfig from "./SendConfig.svelte";
     import config from "tailwindcss/defaultTheme.js";
+    import LinkUser from "../../../lib/components/LinkUser.svelte";
 
     let openDevice = false; // modal control
     let openDelete = false; // modal control
     let sendConfig = false; // modal control
+    let linkUser = false; // modal control
     let filter = ''
     let selected = []
 
@@ -38,7 +40,7 @@
         } else {
             devices.push(updatedDevice)
         }
-        data = {devices}
+        data.devices = devices
     }
 
     function handleDeleteDevice(event) {
@@ -92,6 +94,13 @@
                 </ToolbarButton>
             </div>
             <div slot="end" class="flex items-center space-x-2">
+                <Button disabled="{!selected.length}"
+                        size="sm"
+                        class="gap-2 whitespace-nowrap px-3"
+                        on:click={() => (linkUser = true)}
+                >
+                    Link user
+                </Button>
                 <Button
                         size="sm"
                         class="gap-2 whitespace-nowrap px-3"
@@ -107,6 +116,7 @@
                 </Button>
             </div>
         </Toolbar>
+        <span class="text-gray-900 dark:text-white">Total: {data.devices.length} devices.</span>
     </div>
     <Table hoverable="true" class="table-auto sm:table-fixed">
         <TableHead class="border-y border-gray-200 bg-gray-100 dark:border-gray-700">
@@ -193,3 +203,4 @@
 <Device bind:open={openDevice} data={current_device} on:deleteDevice={handleDeleteDevice} on:updateDevice={handleUpdateDevice} devices={data.devices}/>
 <Delete bind:open={openDelete} data={current_device} on:deleteDevice={handleDeleteDevice}/>
 <SendConfig bind:open={sendConfig} selected="{selected}" devices="{data.devices}"/>
+<LinkUser bind:open={linkUser} selected="{selected}" users="{data.users}" devices="{data.devices}"/>

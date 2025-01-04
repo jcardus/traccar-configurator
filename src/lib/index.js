@@ -32,6 +32,21 @@ export async function sendCommand(command) {
     }
 }
 
+
+export async function addPermission(permission) {
+    const response = await fetch('/api/permissions', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(permission),
+    });
+
+    if (response.ok) {
+        setAlert(`User ${permission.userId} linked to device ${permission.deviceId}`)
+    } else {
+        throw Error(await response.text());
+    }
+}
+
 export async function forwardRequest({ request, platform }) {
     try {
         const host = (platform && platform.env.TRACCAR_SERVER) || import.meta.env.VITE_TRACCAR_SERVER
