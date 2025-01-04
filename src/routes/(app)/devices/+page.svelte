@@ -116,7 +116,7 @@
                 </Button>
             </div>
         </Toolbar>
-        <span class="text-gray-900 dark:text-white">Total: {data.devices.length} devices.</span>
+        <span class="text-gray-900 dark:text-white">Selected {selected.length} of {data.devices.length} devices.</span>
     </div>
     <Table hoverable="true" class="table-auto sm:table-fixed">
         <TableHead class="border-y border-gray-200 bg-gray-100 dark:border-gray-700">

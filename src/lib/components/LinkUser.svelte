@@ -6,6 +6,7 @@ import {setError} from "$lib/store.js";
 export let open = false
 export let selected = [];
 export let users = [];
+export let devices = [];
 let linking=false
 
 async function link() {
@@ -26,14 +27,14 @@ async function link() {
 
 <Modal bind:open title="Link user" class="w-96">
 
-    <div>Link user to {selected.length} device{selected.length>1?'s':''}?</div>
     <Label class="col-span-6 space-y-2 sm:col-span-3">
-        <span>Model</span>
+        <span>Link user</span>
         <Select items="{users.map(u => ({name: u.name.trim(), value: u.id})).sort((a,b)=>a.name.localeCompare(b.name))}"
                 class="border outline-none" required
                 bind:value={userId}
         />
     </Label>
+    <div>to {devices.filter(d => selected.includes(d.id)).map(d => d.name).join(', ')}?</div>
     <div class="flex items-center justify-center">
         <Button color="red" class="m-2" on:click={link} disabled="{linking}">
             <Spinner class="{linking || 'hidden'}" size="{4}"></Spinner>
