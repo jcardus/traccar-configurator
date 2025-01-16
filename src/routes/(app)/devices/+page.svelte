@@ -134,7 +134,12 @@
             <TableHeadCell class="text-center font-medium w-40 hidden sm:table-cell">Actions</TableHeadCell>
         </TableHead>
         <TableBody>
-            {#each data.devices.filter(d => !filter || d.name.toLowerCase().includes(filter.toLowerCase())).sort((a,b)=>a.name.localeCompare(b.name)) as device}
+            {#each data.devices.filter(d =>
+                    !filter ||
+                    d.name.toLowerCase().includes(filter.toLowerCase()) ||
+                    (d.phone && d.phone.includes(filter)) ||
+                    (d.uniqueId && d.uniqueId.includes(filter))
+                ).sort((a,b)=>a.name.localeCompare(b.name)) as device}
                 <TableBodyRow class="text-base" on:click={() => deviceSelected(device)}>
                     <TableBodyCell class="w-4 p-4 hidden sm:table-cell">
                         <Checkbox checked="{selected.includes(device.id)}"/>
