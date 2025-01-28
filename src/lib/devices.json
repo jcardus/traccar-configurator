@@ -5723,7 +5723,7 @@
     "Port":"5011"
   },
   {
-    "Device":"ST430",
+    "Device":"ST4305",
     "Protocol":"suntech",
     "Port":"5011"
   },
