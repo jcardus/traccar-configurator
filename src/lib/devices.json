@@ -5723,6 +5723,11 @@
     "Port":"5011"
   },
   {
+    "Device":"ST430",
+    "Protocol":"suntech",
+    "Port":"5011"
+  },
+  {
     "Device":"ST7200",
     "Protocol":"xirgo",
     "Port":"5081"
