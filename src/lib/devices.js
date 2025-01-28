@@ -32,7 +32,7 @@ const messages = {
     gt06,
     topin,
     teltonika,
-    suntech: ({model, uniqueId}) => [`${model};${uniqueId};02;0;${apn};allcom;allcom;${host};5011;;;;`],
+    suntech: ({model, uniqueId, attributes}) => [`${model};${uniqueId};02;0;${attributes.apn};;;${host};5011;;;;`],
 }
 
 export const getData = (device) => {
