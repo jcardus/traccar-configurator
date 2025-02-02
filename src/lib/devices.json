@@ -3582,87 +3582,87 @@
     "Port":"5002"
   },
   {
-    "Device":"Kingwo LT01",
+    "Brand": "kingwo", "Device":"LT01",
     "Protocol":"upro",
     "Port":"5095"
   },
   {
-    "Device":"Kingwo LT03",
+    "Brand": "kingwo", "Device":"LT03",
     "Protocol":"upro",
     "Port":"5095"
   },
   {
-    "Device":"Kingwo LT12",
+    "Brand": "kingwo", "Device":"LT12",
     "Protocol":"upro",
     "Port":"5095"
   },
   {
-    "Device":"Kingwo MT01",
+    "Brand": "kingwo", "Device":"MT01",
     "Protocol":"upro",
     "Port":"5095"
   },
   {
-    "Device":"Kingwo MT02S",
+    "Brand": "kingwo", "Device":"MT02S",
     "Protocol":"upro",
     "Port":"5095"
   },
   {
-    "Device":"Kingwo MT03",
+    "Brand": "kingwo", "Device":"MT03",
     "Protocol":"upro",
     "Port":"5095"
   },
   {
-    "Device":"Kingwo MT06",
+    "Brand": "kingwo", "Device":"MT06",
     "Protocol":"upro",
     "Port":"5095"
   },
   {
-    "Device":"Kingwo MT07",
+    "Brand": "kingwo", "Device":"MT07",
     "Protocol":"upro",
     "Port":"5095"
   },
   {
-    "Device":"Kingwo MT08",
+    "Brand": "kingwo", "Device":"MT08",
     "Protocol":"upro",
     "Port":"5095"
   },
   {
-    "Device":"Kingwo MT09",
+    "Brand": "kingwo", "Device":"MT09",
     "Protocol":"upro",
     "Port":"5095"
   },
   {
-    "Device":"Kingwo MT100",
+    "Brand": "kingwo", "Device":"MT100",
     "Protocol":"upro",
     "Port":"5095"
   },
   {
-    "Device":"Kingwo MT13",
+    "Brand": "kingwo", "Device":"MT13",
     "Protocol":"upro",
     "Port":"5095"
   },
   {
-    "Device":"Kingwo NT01",
+    "Brand": "kingwo", "Device":"NT01",
     "Protocol":"upro",
     "Port":"5095"
   },
   {
-    "Device":"Kingwo NT06E",
+    "Brand": "kingwo", "Device":"NT06E",
     "Protocol":"upro",
     "Port":"5095"
   },
   {
-    "Device":"Kingwo WT01",
+    "Brand": "kingwo", "Device":"WT01",
     "Protocol":"upro",
     "Port":"5095"
   },
   {
-    "Device":"Kingwo WT26",
+    "Brand": "kingwo", "Device":"WT26",
     "Protocol":"upro",
     "Port":"5095"
   },
   {
-    "Device":"Kingwo WT27",
+    "Brand": "kingwo", "Device":"WT27",
     "Protocol":"upro",
     "Port":"5095"
   },

@@ -13,6 +13,12 @@ const topin =  ({attributes}, port) => [
     `APN#${attributes.apn}#`
 ]
 
+const upro = ({attributes}) => [
+    `IP,${host},5095,1#`,
+    `APN,${attributes.apn}#`,
+    'GMT,+0:00#'
+]
+
 const easytrack = ({attributes}) => [
     'REG000000#',
     'SMS1',
@@ -30,6 +36,7 @@ const messages = {
     huabao: ({attributes}) => ['IP=0,gps.rastreosat.com.br,5015', `APN=${attributes.apn}`],
     easytrack,
     gt06,
+    upro,
     topin,
     teltonika,
     suntech: ({model, uniqueId, attributes}) => [
