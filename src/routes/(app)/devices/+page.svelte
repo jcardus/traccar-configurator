@@ -129,6 +129,7 @@
             <TableHeadCell class="text-center font-medium hidden sm:table-cell">Phone</TableHeadCell>
             <TableHeadCell class="text-center font-medium hidden sm:table-cell">Model</TableHeadCell>
             <TableHeadCell class="text-center font-medium hidden sm:table-cell">APN</TableHeadCell>
+            <TableHeadCell class="text-center font-medium hidden sm:table-cell">Protocol</TableHeadCell>
             <TableHeadCell class="text-center font-medium">Last Update</TableHeadCell>
             <TableHeadCell class="text-center font-medium w-24">Status</TableHeadCell>
             <TableHeadCell class="text-center font-medium w-40 hidden sm:table-cell">Actions</TableHeadCell>
@@ -164,6 +165,9 @@
                     <TableBodyCell class="text-center p-4 text-gray-500 dark:text-gray-400 hidden sm:table-cell">
                         <span>{device.attributes.apn || ''}</span>
                         <Tooltip class="lg:hidden">{device.attributes.apn || ''}</Tooltip>
+                    </TableBodyCell>
+                    <TableBodyCell class="text-center p-4 text-gray-500 dark:text-gray-400 hidden sm:table-cell">
+                        <span>{(data.positions.find(p => p.deviceId === device.id) && data.positions.find(p => p.deviceId === device.id).protocol) || ''}</span>
                     </TableBodyCell>
                     <TableBodyCell class="p-1 overflow-ellipsis overflow-hidden text-center">
                         <span>{new Date(device.lastUpdate).toLocaleDateString()}<br>{new Date(device.lastUpdate).toLocaleTimeString()}</span>
