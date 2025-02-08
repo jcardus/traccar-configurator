@@ -32,17 +32,20 @@ const teltonika = ({uniqueId}, apn) => [
     `  flush ${uniqueId},${apn},,,${host},5027,0`,
 ]
 
+const mobilogix = ({attributes}) => [`SET NTW=${attributes.apn}:::${host}:5216`]
+
 const messages = {
-    huabao: ({attributes}) => ['IP=0,gps.rastreosat.com.br,5015', `APN=${attributes.apn}`],
     easytrack,
     gt06,
-    upro,
-    topin,
-    teltonika,
+    huabao: ({attributes}) => [`IP=0,${host},5015`, `APN=${attributes.apn}`],
+    mobilogix,
     suntech: ({model, uniqueId, attributes}) => [
         `PRG;${uniqueId};10;00#01;01#${attributes.apn};02#;03#`,
         `PRG;${uniqueId};10;05#${host};06#5011;08#${host};09#5011`
-    ]
+    ],
+    teltonika,
+    topin,
+    upro
 }
 
 export const getData = (device) => {
