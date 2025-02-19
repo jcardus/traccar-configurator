@@ -2987,6 +2987,12 @@
     "Port":"5004"
   },
   {
+    "Device":"GV20",
+    "Protocol":"gt06",
+    "Port": "5023",
+    "Brand": "concox"
+  },
+  {
     "Device":"GV300",
     "Protocol":"gl200",
     "Port":"5004"
