@@ -72,6 +72,20 @@
             _data.devices.forEach(detail => handleUpdateDevice({detail}))
         }
     }
+    let sortColumn = 'name'
+    let sortAsc = true
+    const sort = (a,b) => {
+        switch (sortColumn) {
+            case 'id':
+                return sortAsc ? b.id - a.id : a.id - b.id
+            default:
+                return sortAsc ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name)
+        }
+    }
+    function sortBy(column) {
+        sortColumn = column
+        sortAsc = !sortAsc
+    }
 </script>
 
 <main class="relative h-full w-full overflow-y-auto bg-white dark:bg-gray-800">
@@ -125,9 +139,10 @@
                     selected = selected.length === data.devices.length ? [] : data.devices.map(d => d.id)
                 }} />
             </TableHeadCell>
-            <TableHeadCell class="font-medium">Name</TableHeadCell>
-            <TableHeadCell class="text-center font-medium hidden sm:table-cell">Phone</TableHeadCell>
-            <TableHeadCell class="text-center font-medium hidden sm:table-cell">Model</TableHeadCell>
+            <TableHeadCell class="w-16 text-center font-medium hidden sm:table-cell" on:click={() => sortBy('id')}>Id</TableHeadCell>
+            <TableHeadCell class="font-medium" on:click={() => sortBy('name')}>Name</TableHeadCell>
+            <TableHeadCell class="text-center font-medium hidden sm:table-cell" on:click={() => sortBy('phone')}>Phone</TableHeadCell>
+            <TableHeadCell class="text-center font-medium hidden sm:table-cell" on:click={() => sortBy('model')}>Model</TableHeadCell>
             <TableHeadCell class="text-center font-medium hidden sm:table-cell">APN</TableHeadCell>
             <TableHeadCell class="text-center font-medium hidden sm:table-cell">Protocol</TableHeadCell>
             <TableHeadCell class="text-center font-medium">Last Update</TableHeadCell>
@@ -140,10 +155,14 @@
                     d.name.toLowerCase().includes(filter.toLowerCase()) ||
                     (d.phone && d.phone.includes(filter)) ||
                     (d.uniqueId && d.uniqueId.includes(filter))
-                ).sort((a,b)=>a.name.localeCompare(b.name)) as device}
+                ).sort(sort) as device}
                 <TableBodyRow class="text-base" on:click={() => deviceSelected(device)}>
                     <TableBodyCell class="w-4 p-4 hidden sm:table-cell">
                         <Checkbox checked="{selected.includes(device.id)}"/>
+                    </TableBodyCell>
+                    <TableBodyCell class="hidden sm:table-cell text-center max-w-sm overflow-hidden truncate p-4 text-base font-normal text-gray-500 dark:text-gray-400 xl:max-w-xs">
+                        <span>{device.id}</span>
+                        <Tooltip class="lg:hidden">{device.id}</Tooltip>
                     </TableBodyCell>
                     <TableBodyCell class="space-x-6 p-4">
                         <div class="text-sm font-normal text-gray-500 dark:text-gray-400">
@@ -159,7 +178,8 @@
                         <Tooltip class="lg:hidden">{device.phone}</Tooltip>
                     </TableBodyCell>
                     <TableBodyCell class="text-center p-4 text-gray-500 dark:text-gray-400 hidden sm:table-cell">
-                        <span>{device.model}</span>
+                        <span class="whitespace-normal text-base font-semibold text-gray-900 dark:text-white">{device.model || ''}</span><br>
+                        <span>{data.positions.find(p => p.deviceId === device.id)?.protocol || ''}</span>
                         <Tooltip class="lg:hidden">{device.model}</Tooltip>
                     </TableBodyCell>
                     <TableBodyCell class="text-center p-4 text-gray-500 dark:text-gray-400 hidden sm:table-cell">
