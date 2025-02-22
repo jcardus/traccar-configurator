@@ -153,7 +153,8 @@
                     !filter ||
                     d.name.toLowerCase().includes(filter.toLowerCase()) ||
                     (d.phone && d.phone.includes(filter)) ||
-                    (d.uniqueId && d.uniqueId.includes(filter))
+                    (d.uniqueId && d.uniqueId.includes(filter)) ||
+                    (d.position && d.position.protocol.includes(filter))
                 ).sort(sort) as device}
                 <TableBodyRow class="text-base" on:click={() => deviceSelected(device)}>
                     <TableBodyCell class="w-4 p-4 hidden sm:table-cell">
