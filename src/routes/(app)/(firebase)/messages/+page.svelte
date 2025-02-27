@@ -28,7 +28,7 @@
     </div>
     <Table>
         <TableHead class="border-y border-gray-200 bg-gray-100 dark:border-gray-700">
-            {#each ['Date', 'Phone', 'Message', 'State', 'Last update'] as title}
+            {#each ['Date', 'Phone', 'Message', 'State', 'Sender', 'Last update'] as title}
                 <TableHeadCell class="text-center p-4 font-medium">{title}</TableHeadCell>
             {/each}
         </TableHead>
@@ -48,6 +48,9 @@
                     </TableBodyCell>
                     <TableBodyCell class="text-center p-4">
                         {message.state || ''}
+                    </TableBodyCell>
+                    <TableBodyCell class="text-center p-4">
+                        {message.sender || ''}
                     </TableBodyCell>
                     <TableBodyCell class="text-center p-4">
                         {message['last-update'] && new Date(message['last-update']).toLocaleString()}
