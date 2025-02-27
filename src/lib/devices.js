@@ -41,7 +41,7 @@ const messages = {
     mobilogix,
     suntech: ({model, uniqueId, attributes}) => [
         `PRG;${uniqueId};10;00#01;01#${attributes.apn};02#;03#`,
-        `PRG;${uniqueId};10;05#${host};06#5011;08#${host};09#5011`
+        `PRG;${uniqueId};10;05#${host};06#5011;08#${ip};09#5011`
     ],
     teltonika,
     topin,
