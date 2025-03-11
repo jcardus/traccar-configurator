@@ -39,10 +39,12 @@ const messages = {
     gt06,
     huabao: ({attributes}) => [`IP=0,${host},5015`, `APN=${attributes.apn}`],
     mobilogix,
-    suntech: ({model, uniqueId, attributes}) => [
-        `PRG;${uniqueId};10;00#01;01#${attributes.apn};02#;03#`,
-        `PRG;${uniqueId};10;05#${host};06#5011;08#${ip};09#5011`
-    ],
+    suntech: ({model, uniqueId, attributes}) => model && model.startsWith('ST3') ?
+        [`ST300NTW;${uniqueId};02;1;${attributes.apn};;;${host};5011;;;;`] :
+        [
+            `PRG;${uniqueId};10;00#01;01#${attributes.apn};02#;03#`,
+            `PRG;${uniqueId};10;05#${host};06#5011;08#${ip};09#5011`
+        ],
     teltonika,
     topin,
     upro
