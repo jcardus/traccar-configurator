@@ -41,6 +41,8 @@
             url += `/${id}`;
         }
 
+        delete data.position
+
         const response = await fetch(url, {
             method: !id ? 'POST' : 'PUT',
             headers: { 'Content-Type': 'application/json' },
