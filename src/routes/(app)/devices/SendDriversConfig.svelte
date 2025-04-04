@@ -1,0 +1,42 @@
+<script>
+    import {Button, Modal, Spinner} from "flowbite-svelte";
+import {sendCommand} from "$lib";
+import {setError, setAlert} from "$lib/store.js";
+export let open = false
+export let selected = [];
+export let devices = [];
+
+async function sendConfiguration() {
+    try {
+        sending = true
+        for (const deviceId of selected) {
+            const device = devices.find(device => device.id === deviceId)
+            if (!device.model) {
+                setAlert('Please select model for ' + device.name)
+            } else {
+                await sendCommand({
+                    type: 'custom',
+                    attributes: {data: ''},
+                    textChannel: true,
+                    deviceId
+                })
+                await new Promise(res => setTimeout(res, 3000))
+            }
+        }
+    } catch (e) {
+        setError(e)
+    }
+    open = false
+    sending = false
+}
+</script>
+
+<Modal bind:open title="Send drivers configuration" class="w-96">
+    <div>Send to {selected.length} device{selected.length>1?'s':''}?</div>
+    <div class="flex items-center justify-center">
+        <Button color="red" class="m-2" on:click={sendConfiguration} disabled="{sending}">
+            <Spinner class="{sending || 'hidden'}" size="{4}"></Spinner>
+            <span class="pl-1">{sending?'Sending...':'Yes'}</span></Button>
+        <Button color="alternative" on:click={() => open = false}>No, cancel</Button>
+    </div>
+</Modal>
