@@ -9,6 +9,10 @@ export let drivers = [];
 let sending=false
 
 async function sendConfiguration() {
+    if (!drivers.length) {
+        setAlert('Please register at least one driver.')
+        return
+    }
     try {
         sending = true
         for (const driver of drivers) {
