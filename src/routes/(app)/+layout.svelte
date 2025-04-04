@@ -7,10 +7,19 @@
     import {onMount} from "svelte";
     let drawerHidden = false;
 
-    onMount(() => {
+    onMount(async () => {
         let email = $session.email;
         if (!email) {
-            goto('/login');
+            const response = await fetch('/api/session', {
+                method: 'POST',
+                body
+            });
+            if (response.ok) {
+                session.set(await response.json());
+                await goto('/')
+            } else {
+                setError(await response.text());
+            }
         }
     })
 </script>
