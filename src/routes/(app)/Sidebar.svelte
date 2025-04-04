@@ -7,7 +7,7 @@
         SidebarWrapper,
         Tooltip
     } from "flowbite-svelte";
-    import { page } from '$app/stores';
+    import { page } from '$app/state';
     import { afterNavigate } from '$app/navigation';
     import {
         AngleDownOutline, AngleLeftOutline, AngleRightOutline, AngleUpOutline, GridPlusOutline,
@@ -18,7 +18,7 @@
 
 
     export let drawerHidden = false;
-    $: mainSidebarUrl = $page.url.pathname;
+    $: mainSidebarUrl = page.url.pathname;
     let activeMainSidebar;
 
     afterNavigate((navigation) => {
