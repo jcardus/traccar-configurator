@@ -5,6 +5,7 @@ import {setError, setAlert} from "$lib/store.js";
 export let open = false
 export let selected = [];
 export let devices = [];
+let sending=false
 
 async function sendConfiguration() {
     try {
