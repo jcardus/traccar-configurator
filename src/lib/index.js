@@ -26,7 +26,7 @@ export async function sendCommand(command) {
     });
 
     if (response.ok) {
-        setAlert(`${command.attributes.data} sent to device ${command.deviceId}`)
+//        setAlert(`${command.attributes.data} sent to device ${command.deviceId}`)
     } else {
         throw Error(await response.text());
     }

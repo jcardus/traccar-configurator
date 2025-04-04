@@ -4,7 +4,7 @@ import {goto} from "$app/navigation";
 export const ssr = false
 
 export async function load({fetch}) {
-    let devices, users, positions
+    let devices, users, positions, drivers
     try {
         let response = await fetch('/api/devices?all=true');
         if (response.ok) {
@@ -29,8 +29,15 @@ export async function load({fetch}) {
             if (response.status === 401) { await goto('/login') }
             else { setError(await response.text()) }
         }
+        response = await fetch('/api/drivers');
+        if (response.ok) {
+            drivers = await response.json()
+        } else {
+            if (response.status === 401) { await goto('/login') }
+            else { setError(await response.text()) }
+        }
     } catch (e) {
         setError(e.message)
     }
-    return {devices, users, positions}
+    return {devices, users, positions, drivers}
 }

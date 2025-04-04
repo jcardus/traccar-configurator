@@ -241,5 +241,5 @@
 <Device bind:open={openDevice} data={current_device} on:deleteDevice={handleDeleteDevice} on:updateDevice={handleUpdateDevice} devices={data.devices}/>
 <Delete bind:open={openDelete} data={current_device} on:deleteDevice={handleDeleteDevice}/>
 <SendConfig bind:open={sendConfig} selected="{selected}" devices="{data.devices}"/>
-<SendDriversConfig bind:open={sendDriversConfig} selected="{selected}" devices="{data.devices}"/>
+<SendDriversConfig bind:open={sendDriversConfig} selected="{selected}" devices="{data.devices}" drivers="{data.drivers}"/>
 <LinkUser bind:open={linkUser} selected="{selected}" users="{data.users}" devices="{data.devices}"/>

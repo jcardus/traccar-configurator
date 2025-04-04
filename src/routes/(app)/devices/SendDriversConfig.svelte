@@ -5,23 +5,27 @@ import {setError, setAlert} from "$lib/store.js";
 export let open = false
 export let selected = [];
 export let devices = [];
+export let drivers = [];
 let sending=false
 
 async function sendConfiguration() {
     try {
         sending = true
-        for (const deviceId of selected) {
-            const device = devices.find(device => device.id === deviceId)
-            if (!device.model) {
-                setAlert('Please select model for ' + device.name)
-            } else {
-                await sendCommand({
-                    type: 'custom',
-                    attributes: {data: ''},
-                    textChannel: true,
-                    deviceId
-                })
-                await new Promise(res => setTimeout(res, 3000))
+        for (const driver of drivers) {
+            for (const deviceId of selected) {
+                const device = devices.find(device => device.id === deviceId)
+                if (!device.model) {
+                    setAlert('Please select model for ' + device.name)
+                } else {
+                    await sendCommand({
+                        type: 'custom',
+                        attributes: {data: ''},
+                        textChannel: true,
+                        deviceId
+                    })
+                    await new Promise(res => setTimeout(res, 3000))
+                    setAlert(`Sent auth: ${driver.name} -> ${device.name}`)
+                }
             }
         }
     } catch (e) {
