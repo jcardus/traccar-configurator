@@ -19,6 +19,7 @@
     import Delete from "./Delete.svelte";
     import Device from "./Device.svelte";
     import SendConfig from "./SendConfig.svelte";
+    // noinspection JSFileReferences
     import config from "tailwindcss/defaultTheme.js";
     import LinkUser from "../../lib/components/LinkUser.svelte";
     import SendDriversConfig from "./SendDriversConfig.svelte";
