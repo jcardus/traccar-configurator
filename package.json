@@ -25,7 +25,6 @@
 	"type": "module",
 	"dependencies": {
 		"@sentry/sveltekit": "latest",
-		"firebase": "latest",
 		"flowbite": "latest",
 		"flowbite-svelte": "latest",
 		"flowbite-svelte-icons": "latest"

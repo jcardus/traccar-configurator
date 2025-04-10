@@ -61,7 +61,7 @@
                                     color="red"
                                     size="sm"
                                     class="gap-2 px-3"
-                                    onclick={() => ((current_phone = phone), (defaultModal = true))}
+                                    onclick={() => {current_phone = phone; defaultModal = true}}
                             >
                                 <TrashBinSolid size="sm" /> Delete
                             </Button>

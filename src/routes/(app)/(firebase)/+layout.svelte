@@ -1,5 +1,5 @@
-<script lang="ts">
-    import { initializeApp } from 'firebase/app';
+<script>
+    /*import { initializeApp } from 'firebase/app';
     import { getFirestore } from 'firebase/firestore';
     import { getAuth } from 'firebase/auth';
 
@@ -14,7 +14,7 @@
         measurementId: "G-Y5RHHJJLGM"
     });
     const firestore = getFirestore(app);
-    const auth = getAuth(app);
+    const auth = getAuth(app);*/
 </script>
 
 <slot>
