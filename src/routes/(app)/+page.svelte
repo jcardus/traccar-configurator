@@ -146,12 +146,12 @@
                 </Button>
             </div>
         </Toolbar>
-        <span class="text-gray-900 dark:text-white">Selected {selected.length} of {data.devices.length} devices.</span>
+        <span class="text-gray-900 dark:text-white">Selected {selected.length} of {(data.devices || []).length} devices.</span>
     </div>
     <Table hoverable="true" class="table-auto sm:table-fixed">
         <TableHead class="border-y border-gray-200 bg-gray-100 dark:border-gray-700">
             <TableHeadCell class="w-4 p-4 hidden sm:table-cell">
-                <Checkbox checked={selected.length === data.devices.length} on:change={() => {
+                <Checkbox checked={data.devices && selected.length === data.devices.length} onchange={() => {
                     selected = selected.length === data.devices.length ? [] : data.devices.map(d => d.id)
                 }} />
             </TableHeadCell>
@@ -165,7 +165,7 @@
             <TableHeadCell class="text-center font-medium w-40 hidden sm:table-cell">Actions</TableHeadCell>
         </TableHead>
         <TableBody>
-            {#each data.devices.filter(d =>
+            {#each (data.devices || []).filter(d =>
                     !filter ||
                     d.name.toLowerCase().includes(filter.toLowerCase()) ||
                     (d.phone && d.phone.includes(filter)) ||
