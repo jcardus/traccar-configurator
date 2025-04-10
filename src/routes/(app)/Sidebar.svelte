@@ -70,7 +70,7 @@
                         <SidebarDropdownWrapper label={collapsed&&sm ? '' : name} class="pr-3">
                             <AngleDownOutline slot="arrowdown" strokeWidth="3.3" size="sm" />
                             <AngleUpOutline slot="arrowup" strokeWidth="3.3" size="sm" />
-                            <icon slot="icon" class={iconClass} />
+                            <icon slot="icon" class={iconClass}></icon>
 
                             {#each Object.entries(children) as [title, href]}
                                 <SidebarItem
