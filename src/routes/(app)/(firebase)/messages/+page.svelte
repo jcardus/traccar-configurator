@@ -39,7 +39,7 @@
                         {message.phone}
                     </TableBodyCell>
                     <TableBodyCell class="text-center p-4 max-w-40 truncate" >
-                        <button on:click={() => copyToClipboard(message.message)}
+                        <button onclick={() => copyToClipboard(message.message)}
                                 title="{message.message || ''}">{message.message || ''}
                         </button>
                     </TableBodyCell>

@@ -52,12 +52,12 @@ async function sendConfiguration() {
 <Modal bind:open title="Send drivers configuration" class="w-max">
     <div>Send to {selected.length} device{selected.length>1?'s':''} with {drivers.length} drivers ({drivers.length*selected.length} commands)?</div>
     <div class="flex items-center justify-center">
-        <Button color="red" class="m-2" on:click={sendConfiguration} disabled={sending}>
+        <Button color="red" class="m-2" onclick={sendConfiguration} disabled={sending}>
             <Spinner class={sending || 'hidden'} size={4}></Spinner>
             <span class="pl-1">{sending ?
                 `Sending ${commandsSent} / ${drivers.length*selected.length}`
                 :'Yes'}
             </span></Button>
-        <Button color="alternative" on:click={() => open = false}>No, cancel</Button>
+        <Button color="alternative" onclick={() => open = false}>No, cancel</Button>
     </div>
 </Modal>

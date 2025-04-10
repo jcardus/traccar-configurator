@@ -33,7 +33,7 @@
     </h3>
 
     <div class="flex items-center justify-center">
-        <Button color="red" class="mr-2" on:click={deleteDevice} disabled="{loading}">
+        <Button color="red" class="mr-2" onclick={deleteDevice} disabled="{loading}">
             {#if loading}
                 <Spinner size={5} class="mr-2"></Spinner>
                 Deleting...
@@ -41,6 +41,6 @@
                 Yes, delete {data.name}
             {/if}
         </Button>
-        <Button color="alternative" on:click={() => (open = false)}>No, cancel</Button>
+        <Button color="alternative" onclick={() => (open = false)}>No, cancel</Button>
     </div>
 </Modal>

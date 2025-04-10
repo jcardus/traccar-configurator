@@ -36,9 +36,9 @@ async function link() {
     </Label>
     <div>to {devices.filter(d => selected.includes(d.id)).map(d => d.name).join(', ')}?</div>
     <div class="flex items-center justify-center">
-        <Button color="red" class="m-2" on:click={link} disabled="{linking}">
+        <Button color="red" class="m-2" onclick={link} disabled="{linking}">
             <Spinner class="{linking || 'hidden'}" size="{4}"></Spinner>
             <span class="pl-1">{linking?'Linking...':'Yes'}</span></Button>
-        <Button color="alternative" on:click={() => open = false}>No, cancel</Button>
+        <Button color="alternative" onclick={() => open = false}>No, cancel</Button>
     </div>
 </Modal>

@@ -28,7 +28,7 @@
 </script>
 
 <div class="flex">
-    <Button color="alternative" sixe="xs" on:click={getUrl} class="{url && 'hidden'}">
+    <Button color="alternative" sixe="xs" onclick={getUrl} class="{url && 'hidden'}">
         <Spinner size="{4}" class="{sharingLocation || 'hidden'}"></Spinner>
         <MapPinAltOutline/>
         Location
@@ -37,5 +37,5 @@
     <a target="_blank" href="{url}">
         {url ? 'Open' : ''}
     </a></span>
-    <Button size='xs' class="{url || 'hidden'}" on:click={share}>Share</Button>
+    <Button size='xs' class="{url || 'hidden'}" onclick={share}>Share</Button>
 </div>

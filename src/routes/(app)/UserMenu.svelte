@@ -21,5 +21,5 @@
     </DropdownHeader>
     <DropdownItem>Settings</DropdownItem>
     <DropdownDivider />
-    <DropdownItem on:click={logout}>Sign out</DropdownItem>
+    <DropdownItem onclick={logout}>Sign out</DropdownItem>
 </Dropdown>

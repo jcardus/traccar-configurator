@@ -104,14 +104,14 @@
         <!-- Modal footer -->
         <div slot="footer" class="w-full">
             <div class="flex justify-between ">
-                <Button color="alternative" size="sm" on:click="{()=>{sendConfig = true}}" class="{data.id?'':'hidden'}">
+                <Button color="alternative" size="sm" onclick="{()=>{sendConfig = true}}" class="{data.id?'':'hidden'}">
                     <ArrowUpRightFromSquareOutline/>
                     Send config
                 </Button>
                 <ShareLocation bind:open={openShareLocation} {url} {data} />
             </div>
             <div class="flex justify-between py-4">
-                <Button color="red" on:click={() => openDelete=true}>
+                <Button color="red" onclick={() => openDelete=true}>
                     <TrashBinSolid size="sm" />
                     Delete
                 </Button>

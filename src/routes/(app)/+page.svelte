@@ -99,7 +99,7 @@
         <Toolbar embedded class="w-full py-4 text-gray-500  dark:text-gray-400">
             <Input placeholder="Search for devices" class="me-4 w-40 border xl:w-96" bind:value={filter}  />
             <div class="border-l border-gray-100 pl-2 dark:border-gray-700">
-                <ToolbarButton on:click={() => {
+                <ToolbarButton onclick={() => {
                     selected.length ?
                     sendConfig = true : alert('Please select a device')
                 }}
@@ -109,7 +109,7 @@
                     <CogSolid size="lg" />
                     <Tooltip>Send config</Tooltip>
                 </ToolbarButton>
-                <ToolbarButton on:click={() => {
+                <ToolbarButton onclick={() => {
                     if (selected.length) {
                         sendDriverConfigOpened.set(true)
                     } else {
@@ -127,14 +127,14 @@
                 <Button disabled={!selected.length}
                         size="sm"
                         class="gap-2 whitespace-nowrap px-3"
-                        on:click={() => (linkUser = true)}
+                        onclick={() => (linkUser = true)}
                 >
                     Link user
                 </Button>
                 <Button
                         size="sm"
                         class="gap-2 whitespace-nowrap px-3"
-                        on:click={() => {
+                        onclick={() => {
                             current_device = {attributes: {apn: ''}}
                             openDevice = true
                         }}
@@ -155,10 +155,10 @@
                     selected = selected.length === data.devices.length ? [] : data.devices.map(d => d.id)
                 }} />
             </TableHeadCell>
-            <TableHeadCell class="w-16 text-center font-medium hidden sm:table-cell" on:click={() => sortBy('id')}>Id</TableHeadCell>
-            <TableHeadCell class="font-medium" on:click={() => sortBy('name')}>Name</TableHeadCell>
-            <TableHeadCell class="text-center font-medium hidden sm:table-cell" on:click={() => sortBy('phone')}>Phone</TableHeadCell>
-            <TableHeadCell class="text-center font-medium hidden sm:table-cell" on:click={() => sortBy('model')}>Model<br>Protocol</TableHeadCell>
+            <TableHeadCell class="w-16 text-center font-medium hidden sm:table-cell" onclick={() => sortBy('id')}>Id</TableHeadCell>
+            <TableHeadCell class="font-medium" onclick={() => sortBy('name')}>Name</TableHeadCell>
+            <TableHeadCell class="text-center font-medium hidden sm:table-cell" onclick={() => sortBy('phone')}>Phone</TableHeadCell>
+            <TableHeadCell class="text-center font-medium hidden sm:table-cell" onclick={() => sortBy('model')}>Model<br>Protocol</TableHeadCell>
             <TableHeadCell class="text-center font-medium hidden sm:table-cell">APN</TableHeadCell>
             <TableHeadCell class="text-center font-medium">Last Update</TableHeadCell>
             <TableHeadCell class="text-center font-medium w-24">Status</TableHeadCell>
@@ -172,7 +172,7 @@
                     (d.uniqueId && d.uniqueId.includes(filter)) ||
                     (d.position && d.position.protocol.includes(filter))
                 ).sort(sort) as device}
-                <TableBodyRow class="text-base" on:click={() => deviceSelected(device)}>
+                <TableBodyRow class="text-base" onclick={() => deviceSelected(device)}>
                     <TableBodyCell class="w-4 p-4 hidden sm:table-cell">
                         <Checkbox checked={selected.includes(device.id)}/>
                     </TableBodyCell>
@@ -216,7 +216,7 @@
                         <div class="flex justify-center gap-2 ">
                         <Button
                                 size="xs"
-                                on:click={() => {
+                                onclick={() => {
                                     current_device = device
                                     openDevice = true
                                 }}
@@ -226,7 +226,7 @@
                         <Button
                                 color="red"
                                 size="xs"
-                                on:click={() => {
+                                onclick={() => {
                                     current_device = device
                                     openDelete = true
                                 }}

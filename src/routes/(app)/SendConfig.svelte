@@ -38,9 +38,9 @@ async function sendConfiguration() {
 <Modal bind:open title="Send configuration" class="w-96">
     <div>Send to {selected.length} device{selected.length>1?'s':''}?</div>
     <div class="flex items-center justify-center">
-        <Button color="red" class="m-2" on:click={sendConfiguration} disabled="{sending}">
+        <Button color="red" class="m-2" onclick={sendConfiguration} disabled="{sending}">
             <Spinner class="{sending || 'hidden'}" size="{4}"></Spinner>
             <span class="pl-1">{sending?'Sending...':'Yes'}</span></Button>
-        <Button color="alternative" on:click={() => open = false}>No, cancel</Button>
+        <Button color="alternative" onclick={() => open = false}>No, cancel</Button>
     </div>
 </Modal>

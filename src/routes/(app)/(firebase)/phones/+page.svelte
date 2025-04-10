@@ -9,17 +9,17 @@
     // import {collectionStore, docStore, getFirebaseContext} from 'firebase';
     import {TrashBinSolid} from "flowbite-svelte-icons";
     import {copyToClipboard} from "$lib";
-    import { deleteDoc } from "firebase/firestore";
+    // import { deleteDoc } from "firebase/firestore";
     const {href} = $props()
 
     // const {firestore} = getFirebaseContext();
     const phones = [] /*collectionStore(firestore, 'phones');*/
-    let defaultModal = false;
+    let defaultModal = $state(false);
     const handleDelete = async () => {
         // await deleteDoc(docStore(firestore, "phones/" + current_phone.id).ref);
         setAlert(current_phone.brand + " deleted.")
     };
-    let current_phone;
+    let current_phone = $state('');
 </script>
 
 
@@ -51,7 +51,7 @@
                         </div>
                     </TableBodyCell>
                     <TableBodyCell class="text-center p-4 max-w-40 truncate" >
-                        <button on:click={() => copyToClipboard(phone['last-message'])}
+                        <button onclick={() => copyToClipboard(phone['last-message'])}
                                 title="{phone['last-message'] || ''}">{phone['last-message'] || ''}
                         </button>
                     </TableBodyCell>
@@ -61,7 +61,7 @@
                                     color="red"
                                     size="sm"
                                     class="gap-2 px-3"
-                                    on:click={() => ((current_phone = phone), (defaultModal = true))}
+                                    onclick={() => ((current_phone = phone), (defaultModal = true))}
                             >
                                 <TrashBinSolid size="sm" /> Delete
                             </Button>
@@ -78,6 +78,6 @@
     <p class="mb-4 text-gray-500 dark:text-gray-300 text-center">Are you sure you want to delete {current_phone.brand} phone?</p>
     <div class="flex justify-center items-center space-x-4">
         <Button color="light">No, cancel</Button>
-        <Button color="red" on:click={handleDelete}>Yes, I'm sure</Button>
+        <Button color="red" onclick={handleDelete}>Yes, I'm sure</Button>
     </div>
 </Modal>
