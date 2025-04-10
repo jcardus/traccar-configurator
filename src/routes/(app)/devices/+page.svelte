@@ -22,17 +22,17 @@
     import config from "tailwindcss/defaultTheme.js";
     import LinkUser from "../../../lib/components/LinkUser.svelte";
     import SendDriversConfig from "./SendDriversConfig.svelte";
+    import {sendDriverConfigOpened} from "../../../lib/dialogsOpened.js";
 
-    let openDevice = false; // modal control
-    let openDelete = false; // modal control
-    let sendConfig = false; // modal control
-    let sendDriversConfig = false; // modal control
-    let linkUser = false; // modal control
-    let filter = ''
-    let selected = []
+    let openDevice = $state(false)
+    let openDelete = $state(false)
+    let sendConfig = $state(false)
+    let linkUser = $state(false)
+    let filter = $state('')
+    let selected = $state([])
 
-    let current_device = {};
-    export let data;
+    let current_device = $state({});
+    let {data} = $props();
     function handleUpdateDevice(event) {
         const updatedDevice = event.detail;
         let {devices} = data
@@ -109,11 +109,14 @@
                     <Tooltip>Send config</Tooltip>
                 </ToolbarButton>
                 <ToolbarButton on:click={() => {
-                    selected.length ?
-                    sendDriversConfig = true : alert('Please select a device')
+                    if (selected.length) {
+                        sendDriverConfigOpened.set(true)
+                    } else {
+                        alert('Please select a device')
+                    }
                 }}
-                               color="dark"
-                               class="m-0 rounded p-1 hover:bg-gray-100 focus:ring-0 dark:hover:bg-gray-700"
+                   color="dark"
+                   class="m-0 rounded p-1 hover:bg-gray-100 focus:ring-0 dark:hover:bg-gray-700"
                 >
                     <UserSolid size="lg" />
                     <Tooltip>Send authorized drivers config</Tooltip>
@@ -241,5 +244,5 @@
 <Device bind:open={openDevice} data={current_device} on:deleteDevice={handleDeleteDevice} on:updateDevice={handleUpdateDevice} devices={data.devices}/>
 <Delete bind:open={openDelete} data={current_device} on:deleteDevice={handleDeleteDevice}/>
 <SendConfig bind:open={sendConfig} selected="{selected}" devices="{data.devices}"/>
-<SendDriversConfig bind:open={sendDriversConfig} selected="{selected}" devices="{data.devices}" drivers="{data.drivers}"/>
+<SendDriversConfig selected="{selected}" devices="{data.devices}" drivers="{data.drivers}"/>
 <LinkUser bind:open={linkUser} selected="{selected}" users="{data.users}" devices="{data.devices}"/>

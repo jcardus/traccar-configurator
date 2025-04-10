@@ -27,7 +27,7 @@ export async function load({fetch}) {
             users = await response.json()
             for (const user of users) {
                 response = await('/api/devices?userId=' + user.id)
-                if (reponse.ok) {
+                if (response.ok) {
                     console.log(user.id, await response.json())
                 }
             }
