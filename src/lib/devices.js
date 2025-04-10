@@ -34,6 +34,11 @@ const teltonika = ({uniqueId}, apn) => [
 
 const mobilogix = ({attributes}) => [`SET NTW=${attributes.apn}:::${host}:5216`]
 
+const ruptela = () => [
+    //activate driver registrarion
+    'setcfg 255 2, 271 1'
+]
+
 const messages = {
     easytrack,
     gt06,
