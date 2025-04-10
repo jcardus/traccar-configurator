@@ -1,6 +1,6 @@
 {
 	"name": "traccar-configurator",
-	"version": "1.0.7",
+	"version": "1.0.8",
 	"private": true,
 	"scripts": {
 		"dev": "vite dev --host",
@@ -19,7 +19,7 @@
 		"autoprefixer": "latest",
 		"postcss": "latest",
 		"svelte": "^5.25.10",
-		"tailwindcss": "latest",
+		"tailwindcss": "^3.4.4",
 		"vite": "latest"
 	},
 	"type": "module",

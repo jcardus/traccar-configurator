@@ -1,7 +1,6 @@
 <script>
-    import {Button, Input, Modal, Spinner} from "flowbite-svelte";
+    import {Button, Spinner} from "flowbite-svelte";
     import {MapPinAltOutline} from "flowbite-svelte-icons";
-    export let open = false
     export let data
     let sharingLocation;
     async function share() {

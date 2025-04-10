@@ -37,7 +37,7 @@
         }
     ];
 
-    let lg,sm;
+    let lg = $state(false),sm=$state(false);
     const checkWidth = () => {
         lg = window.matchMedia(`(min-width: ${config.screens.lg})`).matches
         sm = window.matchMedia(`(min-width: ${config.screens.sm})`).matches
@@ -70,7 +70,7 @@
                         <SidebarDropdownWrapper label={collapsed&&sm ? '' : name} class="pr-3">
                             <AngleDownOutline slot="arrowdown" strokeWidth="3.3" size="sm" />
                             <AngleUpOutline slot="arrowup" strokeWidth="3.3" size="sm" />
-                            <svelte:component this={icon} slot="icon" class={iconClass} />
+                            <icon slot="icon" class={iconClass} />
 
                             {#each Object.entries(children) as [title, href]}
                                 <SidebarItem
@@ -89,8 +89,7 @@
                                 spanClass="ml-3"
                                 class={itemClass}
                         >
-
-                            <svelte:component this={icon} slot="icon" class={iconClass} />
+                            <icon slot="icon" class={iconClass}></icon>
                         </SidebarItem>
                         {#if (!lg)}
                             <Tooltip placement="right" arrow={false}>{name}</Tooltip>
@@ -103,7 +102,7 @@
                     divClass="grid justify-items-end"
                     spanClass=""
             >
-                    <button slot="icon" on:click={() => (collapsed = !collapsed)} type="button">
+                    <button slot="icon" onclick={() => (collapsed = !collapsed)} type="button">
                         {#if (collapsed)}
                             <AngleRightOutline class={iconClass}/>
                         {:else}

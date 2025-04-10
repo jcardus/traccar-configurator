@@ -123,7 +123,7 @@
                 </ToolbarButton>
             </div>
             <div slot="end" class="flex items-center space-x-2">
-                <Button disabled="{!selected.length}"
+                <Button disabled={!selected.length}
                         size="sm"
                         class="gap-2 whitespace-nowrap px-3"
                         on:click={() => (linkUser = true)}
@@ -150,7 +150,7 @@
     <Table hoverable="true" class="table-auto sm:table-fixed">
         <TableHead class="border-y border-gray-200 bg-gray-100 dark:border-gray-700">
             <TableHeadCell class="w-4 p-4 hidden sm:table-cell">
-                <Checkbox checked="{selected.length === data.devices.length}" on:change={() => {
+                <Checkbox checked={selected.length === data.devices.length} on:change={() => {
                     selected = selected.length === data.devices.length ? [] : data.devices.map(d => d.id)
                 }} />
             </TableHeadCell>
@@ -173,7 +173,7 @@
                 ).sort(sort) as device}
                 <TableBodyRow class="text-base" on:click={() => deviceSelected(device)}>
                     <TableBodyCell class="w-4 p-4 hidden sm:table-cell">
-                        <Checkbox checked="{selected.includes(device.id)}"/>
+                        <Checkbox checked={selected.includes(device.id)}/>
                     </TableBodyCell>
                     <TableBodyCell class="hidden sm:table-cell text-center max-w-sm overflow-hidden truncate p-4 text-base font-normal text-gray-500 dark:text-gray-400 xl:max-w-xs">
                         <span>{device.id}</span>
@@ -184,7 +184,7 @@
                             <div class="whitespace-normal text-base font-semibold text-gray-900 dark:text-white">{device.name}</div>
                             <div class="text-sm font-normal text-gray-500 dark:text-gray-400">{device.uniqueId}</div>
                         </div>
-                        <Tooltip class="lg:hidden" placement="top" arrow="{false}">
+                        <Tooltip class="lg:hidden" placement="top" arrow={false}>
                             {device.name} - {device.uniqueId}
                         </Tooltip>
                     </TableBodyCell>
@@ -243,6 +243,6 @@
 
 <Device bind:open={openDevice} data={current_device} on:deleteDevice={handleDeleteDevice} on:updateDevice={handleUpdateDevice} devices={data.devices}/>
 <Delete bind:open={openDelete} data={current_device} on:deleteDevice={handleDeleteDevice}/>
-<SendConfig bind:open={sendConfig} selected="{selected}" devices="{data.devices}"/>
-<SendDriversConfig selected="{selected}" devices="{data.devices}" drivers="{data.drivers}"/>
-<LinkUser bind:open={linkUser} selected="{selected}" users="{data.users}" devices="{data.devices}"/>
+<SendConfig bind:open={sendConfig} selected={selected} devices={data.devices}/>
+<SendDriversConfig devices={data.devices} drivers={data.drivers} selected={selected}/>
+<LinkUser bind:open={linkUser} selected={selected} users={data.users} devices={data.devices}/>
