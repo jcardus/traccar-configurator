@@ -9,13 +9,10 @@
         TableHeadCell
     } from "flowbite-svelte";
 
-    import {collectionStore, getFirebaseContext} from 'sveltefire';
     import {copyToClipboard} from "$lib";
 
-    const {firestore} = getFirebaseContext();
-    const messages = collectionStore(firestore, 'messages');
-
-
+    // const {firestore} = getFirebaseContext();
+    const messages = [] // collectionStore(firestore, 'messages');
 
 </script>
 
@@ -33,7 +30,7 @@
             {/each}
         </TableHead>
         <TableBody>
-            {#each $messages.sort((a, b) => b.timestamp - a.timestamp) as message}
+            {#each messages.sort((a, b) => b.timestamp - a.timestamp) as message}
                 <TableBodyRow class="text-base">
                     <TableBodyCell class="text-center p-4">
                         {new Date(message.timestamp).toLocaleString()}

@@ -9,26 +9,25 @@
 		"prebuild": "./prebuild.sh"
 	},
 	"devDependencies": {
-		"@sveltejs/adapter-auto": "^3.0.0",
-		"@sveltejs/adapter-cloudflare": "^4.7.0",
-		"@sveltejs/adapter-static": "^3.0.4",
+		"@sveltejs/adapter-auto": "latest",
+		"@sveltejs/adapter-cloudflare": "latest",
+		"@sveltejs/adapter-static": "latest",
 		"@sveltejs/kit": "latest",
-		"@sveltejs/vite-plugin-svelte": "^3.0.0",
-		"@vite-pwa/assets-generator": "^0.2.6",
-		"@vite-pwa/sveltekit": "^0.6.5",
-		"autoprefixer": "^10.4.19",
-		"postcss": "^8.4.38",
+		"@sveltejs/vite-plugin-svelte": "latest",
+		"@vite-pwa/assets-generator": "latest",
+		"@vite-pwa/sveltekit": "latest",
+		"autoprefixer": "latest",
+		"postcss": "latest",
 		"svelte": "^5.25.10",
-		"tailwindcss": "^3.4.4",
-		"vite": "^5.4.18"
+		"tailwindcss": "latest",
+		"vite": "latest"
 	},
 	"type": "module",
 	"dependencies": {
-		"@sentry/sveltekit": "^9.11.0",
-		"firebase": "^9.23.0",
-		"flowbite": "^2.4.1",
-		"flowbite-svelte": "^0.46.15",
-		"flowbite-svelte-icons": "^1.6.1",
-		"sveltefire": "^0.4.5"
+		"@sentry/sveltekit": "latest",
+		"firebase": "latest",
+		"flowbite": "latest",
+		"flowbite-svelte": "latest",
+		"flowbite-svelte-icons": "latest"
 	}
 }

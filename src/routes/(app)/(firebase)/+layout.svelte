@@ -1,5 +1,4 @@
 <script lang="ts">
-    import { FirebaseApp } from 'sveltefire';
     import { initializeApp } from 'firebase/app';
     import { getFirestore } from 'firebase/firestore';
     import { getAuth } from 'firebase/auth';
@@ -18,6 +17,5 @@
     const auth = getAuth(app);
 </script>
 
-<FirebaseApp {auth} {firestore}>
-    <slot />
-</FirebaseApp>
+<slot>
+</slot>

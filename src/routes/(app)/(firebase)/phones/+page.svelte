@@ -6,17 +6,17 @@
         TableHeadCell,
     } from "flowbite-svelte";
 
-    import {collectionStore, docStore, getFirebaseContext} from 'sveltefire';
+    // import {collectionStore, docStore, getFirebaseContext} from 'firebase';
     import {TrashBinSolid} from "flowbite-svelte-icons";
     import {copyToClipboard} from "$lib";
     import { deleteDoc } from "firebase/firestore";
+    const {href} = $props()
 
-
-    const {firestore} = getFirebaseContext();
-    const phones = collectionStore(firestore, 'phones');
+    // const {firestore} = getFirebaseContext();
+    const phones = [] /*collectionStore(firestore, 'phones');*/
     let defaultModal = false;
     const handleDelete = async () => {
-        await deleteDoc(docStore(firestore, "phones/" + current_phone.id).ref);
+        // await deleteDoc(docStore(firestore, "phones/" + current_phone.id).ref);
         setAlert(current_phone.brand + " deleted.")
     };
     let current_phone;
@@ -26,7 +26,7 @@
 <main class="relative h-full w-full overflow-y-auto bg-white dark:bg-gray-800">
     <div class="p-4">
         <Heading tag="h1" class="text-xl font-semibold text-gray-900 dark:text-white sm:text-2xl">
-            Phones
+            Phones {JSON.stringify(href)}
         </Heading>
     </div>
     <Table>
@@ -36,7 +36,7 @@
             {/each}
         </TableHead>
         <TableBody>
-            {#each $phones as phone}
+            {#each phones as phone}
                 <TableBodyRow class="text-base">
                     <TableBodyCell class="flex items-center space-x-6 whitespace-nowrap p-4">
                         <div class="text-sm font-normal text-gray-500 dark:text-gray-400">

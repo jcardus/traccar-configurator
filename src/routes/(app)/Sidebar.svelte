@@ -8,7 +8,6 @@
         Tooltip
     } from "flowbite-svelte";
     import { page } from '$app/state';
-    import { afterNavigate } from '$app/navigation';
     import {
         AngleDownOutline, AngleLeftOutline, AngleRightOutline, AngleUpOutline, GridPlusOutline,
         MessagesOutline,
@@ -17,20 +16,9 @@
     import {onMount} from "svelte";
 
 
-    export let drawerHidden = false;
-    $: mainSidebarUrl = page.url.pathname;
-    let activeMainSidebar;
-
-    afterNavigate((navigation) => {
-        // this fixes https://github.com/themesberg/flowbite-svelte/issues/364
-        document.getElementById('svelte')?.scrollTo({ top: 0 });
-        closeDrawer();
-        activeMainSidebar = navigation.to?.url.pathname ?? '';
-    });
-
-    const closeDrawer = () => {
-        drawerHidden = true;
-    };
+    let drawerHidden = $state(false);
+    let collapsed=$state(false);
+    let activeUrl = $derived(page.url.pathname);
 
     let iconClass =
         'flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white';
@@ -40,10 +28,11 @@
 
 
     let items = [
-        { name: 'Devices', icon: GridPlusOutline, href: '/config/devices' },
-        { name: 'SMS', icon: MessagesOutline, href: '/config/sms', children: {
-                Phones: '/phones',
-                Messages: '/messages'
+        { name: 'Devices', icon: GridPlusOutline, href: '/config/' },
+        { name: 'SMS', icon: MessagesOutline, href: '/',
+            children: {
+                Phones: '/config/phones',
+                Messages: '/config/messages'
             }
         }
     ];
@@ -61,13 +50,13 @@
         };
     })
 
-    let collapsed=false;
+
 
 </script>
 
 <Sidebar
         class={drawerHidden ? 'hidden' : ''}
-        activeUrl={mainSidebarUrl}
+        {activeUrl}
         activeClass="bg-gray-100 dark:bg-gray-700"
         asideClass={`fixed sm:static inset-0 z-30 min-h-full w-auto ${collapsed?'':'lg:w-64'} lg:h-auto border-e border-gray-200 dark:border-gray-600 lg:overflow-y-visible lg:block`}
 >
@@ -86,10 +75,9 @@
                             {#each Object.entries(children) as [title, href]}
                                 <SidebarItem
                                         label={title}
-                                        {href}
+                                        href={href}
                                         spanClass="ml-9"
                                         class={itemClass}
-                                        active={activeMainSidebar === href}
                                 />
                             {/each}
                         </SidebarDropdownWrapper>
@@ -97,10 +85,11 @@
                         <SidebarItem
                                 label={collapsed&&sm ? '' : name}
                                 {href}
+                                activeUrl={href}
                                 spanClass="ml-3"
                                 class={itemClass}
-                                active={activeMainSidebar === href}
                         >
+
                             <svelte:component this={icon} slot="icon" class={iconClass} />
                         </SidebarItem>
                         {#if (!lg)}
