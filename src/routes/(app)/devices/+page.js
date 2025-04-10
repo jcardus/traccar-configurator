@@ -25,6 +25,12 @@ export async function load({fetch}) {
         response = await fetch('/api/users');
         if (response.ok) {
             users = await response.json()
+            for (const user of users) {
+                response = await('/api/devices?userId=' + user.id)
+                if (reponse.ok) {
+                    console.log(user.id, await response.json())
+                }
+            }
         } else {
             if (response.status === 401) { await goto('/login') }
             else { setError(await response.text()) }

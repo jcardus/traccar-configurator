@@ -52,7 +52,8 @@ const messages = {
         ],
     teltonika,
     topin,
-    upro
+    upro,
+    ruptela
 }
 
 export const getData = (device) => {
