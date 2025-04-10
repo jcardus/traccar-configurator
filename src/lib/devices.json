@@ -1,5 +1,11 @@
 [
   {
+    "Device": "Pro5Lite",
+    "Protocol": "ruptela",
+    "Brand": "Ruptela",
+    "Port": "5046"
+  },
+  {
     "Device": "G51",
     "Protocol": "topin",
     "Port": "5199"
