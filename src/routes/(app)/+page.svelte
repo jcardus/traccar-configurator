@@ -81,8 +81,8 @@
             })
         }
     }
-    let sortColumn = 'name'
-    let sortAsc = true
+    let sortColumn = $state('name')
+    let sortAsc = $state(true)
     const sort = (a,b) => {
         switch (sortColumn) {
             case 'id':
@@ -94,8 +94,12 @@
         }
     }
     function sortBy(column) {
-        sortColumn = column
-        sortAsc = !sortAsc
+        if (sortColumn === column) {
+            sortAsc = !sortAsc;
+        } else {
+            sortColumn = column;
+            sortAsc = true;
+        }
     }
 </script>
 
@@ -164,12 +168,12 @@
                 }} />
             </TableHeadCell>
             <TableHeadCell class="w-20 text-center font-medium hidden sm:table-cell" onclick={() => sortBy('id')}>Id</TableHeadCell>
-            <TableHeadCell class="font-medium" onclick={() => sortBy('name')}>Name</TableHeadCell>
-            <TableHeadCell class="text-center font-medium hidden sm:table-cell" onclick={() => sortBy('phone')}>Phone</TableHeadCell>
-            <TableHeadCell class="text-center font-medium hidden sm:table-cell" onclick={() => sortBy('model')}>Model<br>Protocol</TableHeadCell>
-            <TableHeadCell class="text-center font-medium hidden sm:table-cell">APN</TableHeadCell>
-            <TableHeadCell class="text-center font-medium" onclick={() => sortBy('lastUpdate')}>Last Update</TableHeadCell>
-            <TableHeadCell class="text-center font-medium w-24">Status</TableHeadCell>
+            <TableHeadCell class="font-medium {sortColumn === 'name' ? 'font-bold' : ''}" onclick={() => sortBy('name')}>Name</TableHeadCell>
+            <TableHeadCell class="text-center {sortColumn === 'phone' ? 'font-bold' : ''}font-medium hidden sm:table-cell" onclick={() => sortBy('phone')}>Phone</TableHeadCell>
+            <TableHeadCell class="text-center {sortColumn === 'model' ? 'font-bold' : ''}font-medium hidden sm:table-cell" onclick={() => sortBy('model')}>Model<br>Protocol</TableHeadCell>
+            <TableHeadCell class="text-center {sortColumn === 'apn' ? 'font-bold' : ''}font-medium hidden sm:table-cell">APN</TableHeadCell>
+            <TableHeadCell class="text-center {sortColumn === 'lastUpdate' ? 'font-bold' : ''} font-medium" onclick={() => sortBy('lastUpdate')}>Last Update</TableHeadCell>
+            <TableHeadCell class="text-center {sortColumn === 'status' ? 'font-bold' : ''} font-medium w-24">Status</TableHeadCell>
             <TableHeadCell class="text-center font-medium w-40 hidden sm:table-cell">Actions</TableHeadCell>
         </TableHead>
         <TableBody>
