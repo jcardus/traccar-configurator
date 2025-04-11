@@ -28,14 +28,14 @@
 
 
     let items = [
-        { name: 'Devices', icon: GridPlusOutline, href: '/config/' },
-        { name: 'SMS', icon: MessagesOutline, href: '/',
+        { name: 'Devices', icon: { icon: GridPlusOutline }, href: '/config/' },
+        { name: 'SMS', icon: { icon: MessagesOutline }, href: '/',
             children: {
                 Phones: '/config/phones',
                 Messages: '/config/messages'
             }
         },
-        { name: 'Settings', icon: CogOutline, href: '/config/settings' }
+        { name: 'Settings', icon: { icon: CogOutline }, href: '/config/settings' }
     ];
 
     let lg = $state(false),sm=$state(false);
@@ -90,7 +90,7 @@
                                 spanClass="ml-3"
                                 class={itemClass}
                         >
-                            <icon slot="icon" class={iconClass}></icon>
+                            <icon.icon slot="icon" class={iconClass}></icon.icon>
                         </SidebarItem>
                         {#if (!lg)}
                             <Tooltip placement="right" arrow={false}>{name}</Tooltip>

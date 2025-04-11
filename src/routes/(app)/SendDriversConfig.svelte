@@ -12,7 +12,11 @@ let commandsSent = $state(1)
 let open = $state(false)
 sendDriverConfigOpened.subscribe(value => (open = value))
 
-async function sendConfiguration() {
+    function convertUniqueId(uniqueId) {
+        return uniqueId
+    }
+
+    async function sendConfiguration() {
     sendDriverConfigOpened.set(false)
     if (!drivers || !drivers.length) {
         setAlert('Please register at least one driver.')
@@ -29,12 +33,18 @@ async function sendConfiguration() {
         sendDriverConfigOpened.set(true)
         commandsSent = 1
         sending = true
-        for (const driver of drivers) {
-            for (const deviceId of selected) {
+        for (const deviceId of selected) {
+            await sendCommand({
+                type: 'custom',
+                attributes: {data: 'setcfg 255 2, 271 1'},
+                textChannel: false,
+                deviceId
+            })
+            for (const driver of drivers) {
                 const device = devices.find(device => device.id === deviceId)
                 await sendCommand({
                     type: 'custom',
-                    attributes: {data: ''},
+                    attributes: {data: `auth ${convertUniqueId(driver.uniqueId)}`},
                     textChannel: false,
                     deviceId
                 })
