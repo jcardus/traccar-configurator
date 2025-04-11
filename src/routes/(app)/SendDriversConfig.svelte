@@ -38,14 +38,15 @@ async function sendConfiguration() {
                     textChannel: false,
                     deviceId
                 })
-                await new Promise(res => setTimeout(res, 3000))
-                setAlert(`${commandsSent++} Sent auth: ${driver.name} -> ${device.name}`)
+                setAlert(`${commandsSent++} - ${driver.name} -> ${device.name}`)
             }
         }
     } catch (e) {
         setError(e)
     }
     sending = false
+    sendDriverConfigOpened.set(false)
+    setAlert(`${commandsSent++} commands sent successfully`)
 }
 </script>
 

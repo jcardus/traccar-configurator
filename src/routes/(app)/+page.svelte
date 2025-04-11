@@ -34,25 +34,23 @@
 
     let current_device = $state({});
     let {data} = $props();
+    let devices = $state(data.devices || [])
+
     function handleUpdateDevice(event) {
         const updatedDevice = event.detail;
-        let {devices} = data
         const index = devices.findIndex(device => device.id === updatedDevice.id);
         if (index !== -1) {
-            devices[index] = updatedDevice;
+            devices.splice(index, 1, updatedDevice);
         } else {
             devices.push(updatedDevice)
         }
-        data.devices = devices
     }
 
     function handleDeleteDevice(event) {
         const {id} = event.detail;
-        let {devices} = data
         const index = devices.findIndex(device => device.id === id);
         if (index !== -1) {
             devices.splice(index, 1)
-            data = {devices}
         }
         else {
             console.error('deviceId', id, 'not found:', index)
@@ -74,6 +72,14 @@
         if (_data.devices) {
             _data.devices.forEach(detail => handleUpdateDevice({detail}))
         }
+        if (_data.positions) {
+            _data.positions.forEach(p => {
+                const index = devices.findIndex(device => device.id === p.deviceId);
+                if (index !== -1) {
+                    devices[index].position = p
+                }
+            })
+        }
     }
     let sortColumn = 'name'
     let sortAsc = true
@@ -81,6 +87,8 @@
         switch (sortColumn) {
             case 'id':
                 return sortAsc ? b.id - a.id : a.id - b.id
+            case 'lastUpdate':
+                return sortAsc ? new Date(b.lastUpdate) - new Date(a.lastUpdate) : new Date(a.lastUpdate) - new Date(b.lastUpdate)
             default:
                 return sortAsc ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name)
         }
@@ -151,8 +159,8 @@
     <Table hoverable="true" class="table-auto sm:table-fixed">
         <TableHead class="border-y border-gray-200 bg-gray-100 dark:border-gray-700">
             <TableHeadCell class="w-4 p-4 hidden sm:table-cell">
-                <Checkbox checked={data.devices && selected.length === data.devices.length} onchange={() => {
-                    selected = selected.length === data.devices.length ? [] : data.devices.map(d => d.id)
+                <Checkbox checked={devices && selected.length === devices.length} onchange={() => {
+                    selected = selected.length === devices.length ? [] : devices.map(d => d.id)
                 }} />
             </TableHeadCell>
             <TableHeadCell class="w-20 text-center font-medium hidden sm:table-cell" onclick={() => sortBy('id')}>Id</TableHeadCell>
@@ -160,12 +168,12 @@
             <TableHeadCell class="text-center font-medium hidden sm:table-cell" onclick={() => sortBy('phone')}>Phone</TableHeadCell>
             <TableHeadCell class="text-center font-medium hidden sm:table-cell" onclick={() => sortBy('model')}>Model<br>Protocol</TableHeadCell>
             <TableHeadCell class="text-center font-medium hidden sm:table-cell">APN</TableHeadCell>
-            <TableHeadCell class="text-center font-medium">Last Update</TableHeadCell>
+            <TableHeadCell class="text-center font-medium" onclick={() => sortBy('lastUpdate')}>Last Update</TableHeadCell>
             <TableHeadCell class="text-center font-medium w-24">Status</TableHeadCell>
             <TableHeadCell class="text-center font-medium w-40 hidden sm:table-cell">Actions</TableHeadCell>
         </TableHead>
         <TableBody>
-            {#each (data.devices || []).filter(d =>
+            {#each devices.filter(d =>
                     !filter ||
                     d.name.toLowerCase().includes(filter.toLowerCase()) ||
                     (d.phone && d.phone.includes(filter)) ||
@@ -195,7 +203,7 @@
                     </TableBodyCell>
                     <TableBodyCell class="text-center p-4 text-gray-500 dark:text-gray-400 hidden sm:table-cell">
                         <span class="whitespace-normal text-base font-semibold text-gray-900 dark:text-white">{device.model || ''}</span><br>
-                        <span>{data.positions.find(p => p.deviceId === device.id)?.protocol || ''}</span>
+                        <span>{device.position?.protocol || ''}</span>
                         <Tooltip class="lg:hidden">{device.model}</Tooltip>
                     </TableBodyCell>
                     <TableBodyCell class="text-center p-4 text-gray-500 dark:text-gray-400 hidden sm:table-cell">
@@ -244,6 +252,6 @@
 
 <Device bind:open={openDevice} data={current_device} on:deleteDevice={handleDeleteDevice} on:updateDevice={handleUpdateDevice} devices={data.devices}/>
 <Delete bind:open={openDelete} data={current_device} on:deleteDevice={handleDeleteDevice}/>
-<SendConfig bind:open={sendConfig} selected={selected} devices={data.devices}/>
-<SendDriversConfig devices={data.devices} drivers={data.drivers} selected={selected}/>
+<SendConfig bind:open={sendConfig} selected={selected} {devices}/>
+<SendDriversConfig {devices} drivers={data.drivers} selected={selected}/>
 <LinkUser bind:open={linkUser} selected={selected} users={data.users} devices={data.devices}/>
