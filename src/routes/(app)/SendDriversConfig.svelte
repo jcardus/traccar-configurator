@@ -46,7 +46,7 @@ async function sendConfiguration() {
     }
     sending = false
     sendDriverConfigOpened.set(false)
-    setAlert(`${commandsSent++} commands sent successfully`)
+    setAlert(`${--commandsSent} commands sent successfully`)
 }
 </script>
 
