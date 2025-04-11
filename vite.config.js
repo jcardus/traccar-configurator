@@ -40,6 +40,5 @@ export default defineConfig({
 			'/api/socket': 'ws://' + process.env.VITE_TRACCAR_SERVER,
 			'/api': 'http://' + process.env.VITE_TRACCAR_SERVER
 		}
-	},
-    publicDir: '/config'
+	}
 });
