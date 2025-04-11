@@ -44,7 +44,8 @@ sendDriverConfigOpened.subscribe(value => (open = value))
                 const device = devices.find(device => device.id === deviceId)
                 await sendCommand({
                     type: 'custom',
-                    attributes: {data: `auth ${convertUniqueId(driver.uniqueId)}`},
+                    // todo: authid del
+                    attributes: {data: `authid add ${convertUniqueId(driver.uniqueId)}`},
                     textChannel: false,
                     deviceId
                 })
