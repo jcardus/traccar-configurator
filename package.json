@@ -3,7 +3,7 @@
 	"version": "1.0.8",
 	"private": true,
 	"scripts": {
-		"dev": "vite dev --host",
+		"dev": "VITE_APP_VERSION=$npm_package_version vite dev --host",
 		"build": "VITE_APP_VERSION=$npm_package_version vite build",
 		"preview": "vite preview",
 		"prebuild": "./prebuild.sh"
@@ -13,7 +13,7 @@
 		"@sveltejs/adapter-cloudflare": "4.7.4",
 		"@sveltejs/adapter-static": "3.0.8",
 		"@sveltejs/kit": "latest",
-		"@sveltejs/vite-plugin-svelte": "3.1.2",
+		"@sveltejs/vite-plugin-svelte": "4.0.4",
 		"@vite-pwa/assets-generator": "0.2.6",
 		"@vite-pwa/sveltekit": "0.6.8",
 		"autoprefixer": "10.4.21",

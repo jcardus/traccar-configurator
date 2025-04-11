@@ -9,7 +9,7 @@
     } from "flowbite-svelte";
     import { page } from '$app/state';
     import {
-        AngleDownOutline, AngleLeftOutline, AngleRightOutline, AngleUpOutline, GridPlusOutline,
+        AngleDownOutline, AngleLeftOutline, AngleRightOutline, AngleUpOutline, CogOutline, GridPlusOutline,
         MessagesOutline,
     } from "flowbite-svelte-icons";
     import config from 'tailwindcss/defaultTheme';
@@ -34,7 +34,8 @@
                 Phones: '/config/phones',
                 Messages: '/config/messages'
             }
-        }
+        },
+        { name: 'Settings', icon: CogOutline, href: '/config/settings' }
     ];
 
     let lg = $state(false),sm=$state(false);
