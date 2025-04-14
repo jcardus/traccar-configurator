@@ -104,6 +104,7 @@
     }
 
     function exportData() {
+        console.log('export')
         const worksheet = XLSX.utils.json_to_sheet(devices)
         const workbook = XLSX.utils.book_new()
         XLSX.utils.book_append_sheet(workbook, worksheet, 'devices')
@@ -161,8 +162,8 @@
                 >
                     <PlusOutline size="sm" />Add device
                 </Button>
-                <Button size="sm" color="alternative" class="hidden sm:block gap-2 px-3">
-                    <DownloadSolid size="md" class="-ml-1" onclick={exportData} />Export
+                <Button size="sm" color="alternative" class="hidden sm:block gap-2 px-3" onclick={exportData}>
+                    <DownloadSolid size="md" class="-ml-1" />Export
                 </Button>
             </div>
         </Toolbar>
