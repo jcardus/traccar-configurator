@@ -36,6 +36,13 @@
     let current_device = $state({});
     let {data} = $props();
     let devices = $state(data.devices || [])
+    let filtered = $derived(devices.filter(d =>
+        !filter ||
+        d.name.toLowerCase().includes(filter.toLowerCase()) ||
+        (d.phone && d.phone.includes(filter)) ||
+        (d.uniqueId && d.uniqueId.includes(filter)) ||
+        (d.position && d.position.protocol.includes(filter))
+    ))
 
     function handleUpdateDevice(event) {
         const updatedDevice = event.detail;
@@ -104,8 +111,7 @@
     }
 
     function exportData() {
-        console.log('export')
-        const worksheet = XLSX.utils.json_to_sheet(devices)
+        const worksheet = XLSX.utils.json_to_sheet(filtered)
         const workbook = XLSX.utils.book_new()
         XLSX.utils.book_append_sheet(workbook, worksheet, 'devices')
         XLSX.writeFile(workbook, 'devices.xlsx', { compression: true })
@@ -186,13 +192,7 @@
             <TableHeadCell class="text-center font-medium w-40 hidden sm:table-cell">Actions</TableHeadCell>
         </TableHead>
         <TableBody>
-            {#each devices.filter(d =>
-                    !filter ||
-                    d.name.toLowerCase().includes(filter.toLowerCase()) ||
-                    (d.phone && d.phone.includes(filter)) ||
-                    (d.uniqueId && d.uniqueId.includes(filter)) ||
-                    (d.position && d.position.protocol.includes(filter))
-                ).sort(sort) as device}
+            {#each filtered.sort(sort) as device}
                 <TableBodyRow class="text-base" onclick={() => deviceSelected(device)}>
                     <TableBodyCell class="w-4 p-4 hidden sm:table-cell">
                         <Checkbox checked={selected.includes(device.id)}/>
