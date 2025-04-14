@@ -24,6 +24,7 @@
     import LinkUser from "../../lib/components/LinkUser.svelte";
     import SendDriversConfig from "./SendDriversConfig.svelte";
     import {sendDriverConfigOpened} from "../../lib/dialogsOpened.js";
+    import * as XLSX from "xlsx";
 
     let openDevice = $state(false)
     let openDelete = $state(false)
@@ -101,6 +102,13 @@
             sortAsc = true;
         }
     }
+
+    function exportData() {
+        const worksheet = XLSX.utils.json_to_sheet(devices)
+        const workbook = XLSX.utils.book_new()
+        XLSX.utils.book_append_sheet(workbook, worksheet, 'devices')
+        XLSX.writeFile(workbook, 'devices.xlsx', { compression: true })
+    }
 </script>
 
 <main class="relative h-full w-full overflow-y-auto bg-white dark:bg-gray-800">
@@ -154,7 +162,7 @@
                     <PlusOutline size="sm" />Add device
                 </Button>
                 <Button size="sm" color="alternative" class="hidden sm:block gap-2 px-3">
-                    <DownloadSolid size="md" class="-ml-1" />Export
+                    <DownloadSolid size="md" class="-ml-1" onclick={exportData} />Export
                 </Button>
             </div>
         </Toolbar>

@@ -1,6 +1,6 @@
 {
 	"name": "traccar-configurator",
-	"version": "1.0.8",
+	"version": "1.0.9",
 	"private": true,
 	"scripts": {
 		"dev": "VITE_APP_VERSION=$npm_package_version vite dev --host",
@@ -27,6 +27,7 @@
 		"@sentry/sveltekit": "latest",
 		"flowbite": "latest",
 		"flowbite-svelte": "latest",
-		"flowbite-svelte-icons": "latest"
+		"flowbite-svelte-icons": "latest",
+		"xlsx": "^0.18.5"
 	}
 }
