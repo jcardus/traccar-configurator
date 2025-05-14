@@ -1,6 +1,6 @@
 {
 	"name": "traccar-configurator",
-	"version": "1.0.11",
+	"version": "1.0.12",
 	"private": true,
 	"scripts": {
 		"dev": "VITE_APP_VERSION=$npm_package_version vite dev --host",
@@ -8,11 +8,12 @@
 		"preview": "vite preview",
 		"prebuild": "./prebuild.sh"
 	},
+	"packageManager": "pnpm@9.1.4",
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "3.0.0",
 		"@sveltejs/adapter-cloudflare": "4.7.4",
 		"@sveltejs/adapter-static": "3.0.8",
-		"@sveltejs/kit": "latest",
+		"@sveltejs/kit": "2.20.6",
 		"@sveltejs/vite-plugin-svelte": "4.0.4",
 		"@vite-pwa/assets-generator": "0.2.6",
 		"@vite-pwa/sveltekit": "0.6.8",

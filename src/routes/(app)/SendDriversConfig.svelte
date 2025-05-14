@@ -22,13 +22,13 @@ sendDriverConfigOpened.subscribe(value => (open = value))
         setAlert('Please register at least one driver.')
         return
     }
-    for (const deviceId of selected) {
+    /*for (const deviceId of selected) {
         const device = devices.find(device => device.id === deviceId)
         if (!device.model) {
             setAlert('Please select model for ' + device.name)
             return
         }
-    }
+    }*/
     try {
         sendDriverConfigOpened.set(true)
         commandsSent = 1
