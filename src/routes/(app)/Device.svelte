@@ -125,4 +125,4 @@
 </form>
 
 <SendConfig bind:open={sendConfig} selected="{[data.id]}" devices="{devices}"/>
-<Delete bind:open={openDelete} data={data} on:deleteDevice={handleDeleteDevice}/>
+<!--Delete bind:open={openDelete} data={data} on:deleteDevice={handleDeleteDevice}/-->
