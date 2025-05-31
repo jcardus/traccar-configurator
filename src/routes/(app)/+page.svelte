@@ -25,6 +25,7 @@
     import SendDriversConfig from "./SendDriversConfig.svelte";
     import {sendDriverConfigOpened} from "../../lib/dialogsOpened.js";
     import * as XLSX from "xlsx";
+    import {goto} from "$app/navigation";
 
     let openDevice = $state(false)
     let openDelete = $state(false)
@@ -167,6 +168,13 @@
                         }}
                 >
                     <PlusOutline size="sm" />Add device
+                </Button>
+                <Button
+                        size="sm"
+                        class="gap-2 whitespace-nowrap px-3"
+                        onclick={goto('/config/import-devices')}
+                >
+                    <PlusOutline size="sm"/>Import devices
                 </Button>
                 <Button size="sm" color="alternative" class="hidden sm:block gap-2 px-3" onclick={exportData}>
                     <DownloadSolid size="md" class="-ml-1" />Export
