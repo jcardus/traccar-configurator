@@ -1,5 +1,5 @@
 <script>
-    import {Button, Modal, Spinner, Textarea} from "flowbite-svelte";
+    import {Button, Textarea} from "flowbite-svelte";
     let value
 </script>
 <div class="p-4">
