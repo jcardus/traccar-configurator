@@ -172,7 +172,7 @@
                 <Button
                         size="sm"
                         class="gap-2 whitespace-nowrap px-3"
-                        onclick={goto('/config/import-devices')}
+                        onclick={() => goto('/config/import-devices')}
                 >
                     <PlusOutline size="sm"/>Import devices
                 </Button>
