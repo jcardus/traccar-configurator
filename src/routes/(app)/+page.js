@@ -9,7 +9,7 @@ export async function load({fetch}) {
         let response = await fetch('/api/devices?all=true');
         if (response.ok) {
             const _devices = await response.json()
-            devices = _devices.slice(0, 500)
+            devices = _devices.slice(0, 1000)
         } else {
             if (response.status === 401) { await goto('/login') }
             else { setError(await response.text()) }
