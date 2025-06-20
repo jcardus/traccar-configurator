@@ -29,6 +29,7 @@
 		"flowbite": "latest",
 		"flowbite-svelte": "latest",
 		"flowbite-svelte-icons": "latest",
+		"maplibre-gl": "^5.6.0",
 		"xlsx": "https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz"
 	}
 }

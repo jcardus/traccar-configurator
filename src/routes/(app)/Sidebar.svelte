@@ -9,7 +9,13 @@
     } from "flowbite-svelte";
     import { page } from '$app/state';
     import {
-        AngleDownOutline, AngleLeftOutline, AngleRightOutline, AngleUpOutline, CogOutline, GridPlusOutline,
+        AngleDownOutline,
+        AngleLeftOutline,
+        AngleRightOutline,
+        AngleUpOutline,
+        CogOutline,
+        GridPlusOutline,
+        MapPinAltOutline,
         MessagesOutline,
     } from "flowbite-svelte-icons";
     import config from 'tailwindcss/defaultTheme';
@@ -28,8 +34,22 @@
 
 
     let items = [
-        { name: 'Devices', icon: { icon: GridPlusOutline }, href: '/config/' },
-        { name: 'SMS', icon: { icon: MessagesOutline }, href: '/',
+        {
+            name: 'Devices',
+            icon: { icon: GridPlusOutline },
+            href: '/config/'
+        },
+        {
+            name: 'Map',
+            icon: { icon: MapPinAltOutline },
+            href: '/config/map'
+        },
+        {
+            name: 'SMS',
+            icon: {
+                icon: MessagesOutline
+            },
+            href: '/',
             children: {
                 Phones: '/config/phones',
                 Messages: '/config/messages'
