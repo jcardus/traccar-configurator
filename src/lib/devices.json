@@ -5675,6 +5675,11 @@
     "Port":"5011"
   },
   {
+    "Device":"ST-4410G",
+    "Protocol":"suntech",
+    "Port":"5011"
+  },
+  {
     "Device":"ST-940",
     "Protocol":"suntech",
     "Port":"5011"
