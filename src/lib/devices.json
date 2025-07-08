@@ -19,8 +19,8 @@
   {
     "Brand": "aovx",
     "Device":"VL100",
-    "Protocol":"huabao",
-    "Port":"5015"
+    "Protocol":"gt06",
+    "Port":"5023"
   },
   {
     "Brand": "aovx",
