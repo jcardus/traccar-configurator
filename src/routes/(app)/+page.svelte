@@ -201,11 +201,11 @@
         </TableHead>
         <TableBody>
             {#each filtered.sort(sort) as device}
-                <TableBodyRow class="text-base" onclick={() => deviceSelected(device)}>
+                <TableBodyRow class="text-sm" onclick={() => deviceSelected(device)}>
                     <TableBodyCell class="w-4 p-4 hidden sm:table-cell">
                         <Checkbox checked={selected.includes(device.id)}/>
                     </TableBodyCell>
-                    <TableBodyCell class="hidden sm:table-cell text-center max-w-sm overflow-hidden truncate p-4 text-base font-normal text-gray-500 dark:text-gray-400 xl:max-w-xs">
+                    <TableBodyCell class="hidden sm:table-cell text-center max-w-sm overflow-hidden truncate font-normal text-gray-500 dark:text-gray-400 xl:max-w-xs">
                         <span>{device.id}</span>
                         <Tooltip class="lg:hidden">{device.id}</Tooltip>
                     </TableBodyCell>
@@ -218,12 +218,12 @@
                             {device.name} - {device.uniqueId}
                         </Tooltip>
                     </TableBodyCell>
-                    <TableBodyCell class="hidden sm:table-cell text-center max-w-sm overflow-hidden truncate p-4 text-base font-normal text-gray-500 dark:text-gray-400 xl:max-w-xs">
+                    <TableBodyCell class="hidden sm:table-cell text-center max-w-sm overflow-hidden truncate p-4 font-normal text-gray-500 dark:text-gray-400 xl:max-w-xs">
                         <span>{device.phone}</span>
                         <Tooltip class="lg:hidden">{device.phone}</Tooltip>
                     </TableBodyCell>
-                    <TableBodyCell class="text-center p-4 text-gray-500 dark:text-gray-400 hidden sm:table-cell">
-                        <span class="whitespace-normal text-base font-semibold text-gray-900 dark:text-white">{device.model || ''}</span><br>
+                    <TableBodyCell class="text-center text-gray-500 dark:text-gray-400 hidden sm:table-cell">
+                        <span class="whitespace-normal font-semibold text-gray-900 dark:text-white">{device.model || ''}</span><br>
                         <span>{device.position?.protocol || ''}</span>
                         <Tooltip class="lg:hidden">{device.model}</Tooltip>
                     </TableBodyCell>
@@ -231,9 +231,11 @@
                         <span>{device.attributes.apn || ''}</span>
                         <Tooltip class="lg:hidden">{device.attributes.apn || ''}</Tooltip>
                     </TableBodyCell>
-                    <TableBodyCell class="p-1 overflow-ellipsis overflow-hidden text-center">
-                        <span>{new Date(device.lastUpdate).toLocaleDateString()}<br>{new Date(device.lastUpdate).toLocaleTimeString()}</span>
-                        <Tooltip class="lg:hidden">{new Date(device.lastUpdate).toLocaleString()}</Tooltip>
+                    <TableBodyCell class="overflow-ellipsis overflow-hidden text-center">
+                        <span>{new Date(device.lastUpdate).toLocaleString()}</span>
+                        <Tooltip>{new Date(device.lastUpdate).toLocaleString()}</Tooltip>
+                        <br><span>{device.position && device.position.address}</span>
+                        <Tooltip>{device.position && device.position.address}</Tooltip>
                     </TableBodyCell>
                     <TableBodyCell class="p-1 font-normal">
                         <div class="flex items-center gap-2">
