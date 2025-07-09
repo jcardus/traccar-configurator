@@ -191,10 +191,10 @@
                 }} />
             </TableHeadCell>
             <TableHeadCell class="w-20 text-center font-medium hidden sm:table-cell" onclick={() => sortBy('id')}>Id</TableHeadCell>
-            <TableHeadCell class="font-medium {sortColumn === 'name' ? 'font-bold' : ''}" onclick={() => sortBy('name')}>Name</TableHeadCell>
-            <TableHeadCell class="text-center {sortColumn === 'phone' ? 'font-bold' : ''}font-medium hidden sm:table-cell" onclick={() => sortBy('phone')}>Phone</TableHeadCell>
-            <TableHeadCell class="text-center {sortColumn === 'model' ? 'font-bold' : ''}font-medium hidden sm:table-cell" onclick={() => sortBy('model')}>Model<br>Protocol</TableHeadCell>
-            <TableHeadCell class="text-center {sortColumn === 'apn' ? 'font-bold' : ''}font-medium hidden sm:table-cell">APN</TableHeadCell>
+            <TableHeadCell class="w-40 {sortColumn === 'name' ? 'font-bold' : ''}" onclick={() => sortBy('name')}>Name</TableHeadCell>
+            <TableHeadCell class="text-center w-36 === 'phone' ? 'font-bold' : ''}font-medium hidden sm:table-cell" onclick={() => sortBy('phone')}>Phone</TableHeadCell>
+            <TableHeadCell class="w-40 text-center {sortColumn === 'model' ? 'font-bold' : ''}font-medium hidden sm:table-cell" onclick={() => sortBy('model')}>Model<br>Protocol</TableHeadCell>
+            <TableHeadCell class="w-32 text-center {sortColumn === 'apn' ? 'font-bold' : ''}font-medium hidden sm:table-cell">APN</TableHeadCell>
             <TableHeadCell class="text-center {sortColumn === 'lastUpdate' ? 'font-bold' : ''} font-medium" onclick={() => sortBy('lastUpdate')}>Last Update</TableHeadCell>
             <TableHeadCell class="text-center {sortColumn === 'status' ? 'font-bold' : ''} font-medium w-24">Status</TableHeadCell>
             <TableHeadCell class="text-center font-medium w-40 hidden sm:table-cell">Actions</TableHeadCell>
@@ -209,7 +209,7 @@
                         <span>{device.id}</span>
                         <Tooltip class="lg:hidden">{device.id}</Tooltip>
                     </TableBodyCell>
-                    <TableBodyCell class="space-x-6 p-4">
+                    <TableBodyCell class="space-x-6 p-4 w-96">
                         <div class="text-sm font-normal text-gray-500 dark:text-gray-400">
                             <div class="whitespace-normal text-base font-semibold text-gray-900 dark:text-white">{device.name}</div>
                             <div class="text-sm font-normal text-gray-500 dark:text-gray-400">{device.uniqueId}</div>
