@@ -13,8 +13,8 @@ async function sendConfiguration() {
         sending = true
         for (const deviceId of selected) {
             const device = devices.find(device => device.id === deviceId)
-            if (!device.model) {
-                setAlert('Please select model for ' + device.name)
+            if (!device || !device.model) {
+                setAlert('Please select model for ' + (device && device.name || deviceId))
             } else {
                 for (const data of getData(device)) {
                     await sendCommand({
@@ -28,6 +28,7 @@ async function sendConfiguration() {
             }
         }
     } catch (e) {
+        console.error(e)
         setError(e)
     }
     open = false
