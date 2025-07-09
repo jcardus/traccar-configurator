@@ -104,7 +104,7 @@
         <!-- Modal footer -->
         <div slot="footer" class="w-full">
             <div class="flex justify-between ">
-                <Button color="alternative" size="sm" onclick="{()=>{sendConfig = true}}" class="{data.id?'':'hidden'}">
+                <Button  type="submit" color="alternative" size="sm" onclick="{()=>{sendConfig = true}}" class="{data.id?'':'hidden'}">
                     <ArrowUpRightFromSquareOutline/>
                     Send config
                 </Button>

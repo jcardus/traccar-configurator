@@ -14,18 +14,26 @@ async function sendConfiguration() {
         for (const deviceId of selected) {
             const device = devices.find(device => device.id === deviceId)
             if (!device || !device.model) {
-                setAlert('Please select model for ' + (device && device.name || deviceId))
-            } else {
-                for (const data of getData(device)) {
-                    await sendCommand({
-                        type: 'custom',
-                        attributes: {data},
-                        textChannel: true,
-                        deviceId
-                    })
-                    await new Promise(res => setTimeout(res, 3000))
-                }
+                setAlert('Please save model for ' + (device && device.name || deviceId))
+                continue
             }
+            if (!device.attributes.apn) {
+                setAlert('Please save apn for ' + (device && device.name || deviceId))
+                continue
+            }
+            if (!device.phone) {
+                setError('Please save phone for ' + (device && device.name || deviceId))
+                continue
+            }
+            for (const data of getData(device)) {
+                await sendCommand({
+                    type: 'custom',
+                    attributes: {data},
+                    textChannel: true,
+                    deviceId
+                })
+            }
+            setAlert('Commands sent successfully')
         }
     } catch (e) {
         console.error(e)
