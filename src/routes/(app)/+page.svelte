@@ -190,7 +190,7 @@
                     selected = selected.length === devices.length ? [] : devices.map(d => d.id)
                 }} />
             </TableHeadCell>
-            <TableHeadCell class="w-20 text-center font-medium hidden sm:table-cell" onclick={() => sortBy('id')}>Id</TableHeadCell>
+            <TableHeadCell class="w-24 text-center font-medium hidden sm:table-cell" onclick={() => sortBy('id')}>Id</TableHeadCell>
             <TableHeadCell class="w-40 {sortColumn === 'name' ? 'font-bold' : ''}" onclick={() => sortBy('name')}>Name</TableHeadCell>
             <TableHeadCell class="text-center w-36 === 'phone' ? 'font-bold' : ''}font-medium hidden sm:table-cell" onclick={() => sortBy('phone')}>Phone</TableHeadCell>
             <TableHeadCell class="w-40 text-center {sortColumn === 'model' ? 'font-bold' : ''}font-medium hidden sm:table-cell" onclick={() => sortBy('model')}>Model<br>Protocol</TableHeadCell>
