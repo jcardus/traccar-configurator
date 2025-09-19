@@ -1,6 +1,6 @@
 {
 	"name": "traccar-configurator",
-	"version": "1.0.15",
+	"version": "1.0.16",
 	"private": true,
 	"scripts": {
 		"dev": "VITE_APP_VERSION=$npm_package_version vite dev --host",

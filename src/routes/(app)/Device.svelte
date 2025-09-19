@@ -10,12 +10,14 @@
     } from "flowbite-svelte-icons";
     import Delete from "./Delete.svelte";
     import ShareLocation from "./ShareLocation.svelte";
+    import SendCommand from "./SendCommand.svelte";
     let url
     export let open = false; // Modal control
     export let data = {}; // Default empty object
     export let devices
     let sendConfig = false
     let openDelete = false
+    let sendCommand = false
     const dispatch = createEventDispatcher();
     function handleDeleteDevice(event) {
         open=false
@@ -108,6 +110,10 @@
                     <ArrowUpRightFromSquareOutline/>
                     Send config
                 </Button>
+                <Button  type="submit" color="alternative" size="sm" onclick="{()=>{sendCommand = true}}" class="{data.id?'':'hidden'}">
+                    <ArrowUpRightFromSquareOutline/>
+                    Send command
+                </Button>
                 <ShareLocation bind:open={openShareLocation} {url} {data} />
             </div>
             <div class="flex justify-between py-4">
@@ -124,5 +130,6 @@
     </Modal>
 </form>
 
+<SendCommand bind:open={sendCommand} selected="{[data.id]}" devices="{devices}"/>
 <SendConfig bind:open={sendConfig} selected="{[data.id]}" devices="{devices}"/>
 <!--Delete bind:open={openDelete} data={data} on:deleteDevice={handleDeleteDevice}/-->
