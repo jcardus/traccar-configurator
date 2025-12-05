@@ -37,8 +37,8 @@ export default defineConfig({
     })],
 	server: {
 		proxy: {
-			'/api/socket': 'ws://' + process.env.VITE_TRACCAR_SERVER,
-			'/api': 'http://' + process.env.VITE_TRACCAR_SERVER
+			'/api/socket': 'ws://' + (process.env.VITE_TRACCAR_SERVER || 'gps.frotaweb.com'),
+			'/api': 'http://' + (process.env.VITE_TRACCAR_SERVER || 'gps.frotaweb.com')
 		}
 	}
 });

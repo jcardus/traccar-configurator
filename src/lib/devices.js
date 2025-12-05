@@ -39,7 +39,13 @@ const ruptela = () => [
     'setcfg 255 2, 271 1'
 ]
 
+const gl200 = () => [
+    //activate driver registrarion
+    'AT+GTSRI=gv55,3,,2,gps.pinme.io,5004,gps.pinme.io,5004,+351912381488,0,0,0,0,,,FFF3$'
+]
+
 const messages = {
+    gl200,
     easytrack,
     gt06,
     huabao: ({attributes}) => [`IP=0,${host},5015`, `APN=${attributes.apn}`],
