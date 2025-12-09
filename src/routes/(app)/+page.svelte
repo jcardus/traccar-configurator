@@ -232,7 +232,7 @@
                         <Tooltip class="lg:hidden">{device.attributes.apn || ''}</Tooltip>
                     </TableBodyCell>
                     <TableBodyCell class="overflow-ellipsis overflow-hidden text-center">
-                        <span>{new Date(device.lastUpdate).toLocaleString()}</span>
+                        <span>{device.lastUpdate && new Date(device.lastUpdate).toLocaleString()}</span>
                         <Tooltip>{new Date(device.lastUpdate).toLocaleString()}</Tooltip>
                         <br><span>{device.position && device.position.address}</span>
                         <Tooltip>{device.position && device.position.address}</Tooltip>
