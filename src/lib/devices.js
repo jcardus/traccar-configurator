@@ -56,6 +56,10 @@ const messages = {
             `PRG;${uniqueId};10;00#01;01#${attributes.apn};02#;03#`,
             `PRG;${uniqueId};10;05#${host};06#5011;08#${ip};09#5011`
         ],
+    pst: ({uniqueId}) => [
+        `PST01;${uniqueId};smsmtconfig;5511992095892`,
+        `PST01;${uniqueId};networkconfig;localizems.algar.br;algar;1212;${ip};5207`
+        ],
     teltonika,
     topin,
     upro,
