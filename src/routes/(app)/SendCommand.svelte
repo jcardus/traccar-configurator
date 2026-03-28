@@ -1,12 +1,12 @@
 <script>
-    import {Button, Input, Modal, Spinner} from "flowbite-svelte";
+    import {Button, Input, Modal, Spinner, Toggle} from "flowbite-svelte";
 import {sendCommand} from "$lib";
 import {setError, setAlert} from "$lib/store.js";
 
 export let open = false
 export let selected = [];
 
-let data = '', sending=false
+let data = '', sending=false, sms=false
 
 async function sendConfiguration() {
     try {
@@ -15,7 +15,7 @@ async function sendConfiguration() {
             await sendCommand({
                 type: 'custom',
                 attributes: {data},
-                textChannel: false,
+                textChannel: sms,
                 deviceId
             })
             setAlert('Commands sent successfully')
@@ -33,6 +33,9 @@ async function sendConfiguration() {
 <Modal bind:open title="Send command" class="w-96">
     <div>Send to {selected.length} device{selected.length>1?'s':''}?</div>
     <Input placeholder="command" class="me-4 border xl:w-96" bind:value={data}  />
+    <div class="flex items-center mt-2">
+        <Toggle bind:checked={sms}>Send via SMS</Toggle>
+    </div>
     <div class="flex items-center justify-center">
         <Button color="red" class="m-2" onclick={sendConfiguration} disabled="{sending}">
             <Spinner class="{sending || 'hidden'}" size="{4}"></Spinner>
